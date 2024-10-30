@@ -1,4 +1,5 @@
 import { appointments } from "../../constants/data.js"
+import icon from "../../constants/icon.js"
 import { COLORS, FONT_SIZE } from "../../constants/theme.js"
 
 export const styles = {
@@ -24,5 +25,34 @@ export const styles = {
     fontSize: FONT_SIZE.md,
     color: COLORS.gray2,
     marginBottom: 4,
+  }, 
+  icon: {
+    width: 25, 
+    height: 25,
+    marginRight: 5,
+  },
+  bookingDate: {
+    fontSize: FONT_SIZE.sm,
+    color: COLORS.gray2,
+    marginTop:3,
+  }, 
+  bookingHour: {
+    fontSize: FONT_SIZE.sm,
+    color: COLORS.gray2,
+    marginTop:3,
+  }, 
+  booking: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  containerBooking: {
+    flex: 1,
+  },
+  containerButton: {
+    marginTop: 5,
+  },
+  container: {
+    flexDirection: 'row',
+    
   }
 }

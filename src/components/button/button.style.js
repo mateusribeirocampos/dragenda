@@ -7,7 +7,12 @@ export const styles = {
       borderRadius: 6,
       padding: 12,
   },
-
+  primary: {
+    backgroundColor: COLORS.blue,
+  },
+  danger: {
+    backgroundColor: COLORS.red,
+  },
   text: {
     color: COLORS.white,
     fontSize: FONT_SIZE.md,
