@@ -8,7 +8,8 @@ function Service(props) {
       <View style={styles.containerText}>
         <Text style={styles.description}>{props.description}</Text>
         <Text style={styles.price}>
-          {new Intl.NumberFormat("pt-BR", {
+          {
+            new Intl.NumberFormat("pt-BR", {
             style: "currency",
             currency: "BRL",
           }).format(props.price)}

@@ -5,13 +5,14 @@ import Login from "./src/screens/login/login.jsx";
 import AbaProfile from "./src/screens/abaProfile/abaprofile.jsx";
 import Main from "./src/screens/main/main.jsx";
 import Services from "./src/screens/services/services.jsx";
+import Schedule from "./src/screens/schedule/schedule.jsx";
 
 function App() {
 
   return <>
 
 
-      <Services/>
+      <Schedule/>
 
     </>;
 }
