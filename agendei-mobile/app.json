@@ -1,5 +1,6 @@
 {
   "expo": {
+    "sdkVersion": "52.0.0",
     "name": "agendei-mobile",
     "slug": "agendei-mobile",
     "version": "1.0.0",
