@@ -20,4 +20,12 @@ async function Login(req, res) {
   }
 }
 
-export default { Inserir, Login };
+async function Profile(req, res) {
+
+  const id_user = req.id_user;
+  const profile = await serviceUser.Profile(id_user);
+
+  res.status(201).json(profile);
+}
+
+export default { Inserir, Login, Profile };

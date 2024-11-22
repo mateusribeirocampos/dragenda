@@ -18,4 +18,12 @@ async function ListarByEmail(email) {
   else return user[0];
 }
 
-export default { Inserir, ListarByEmail };
+async function Profile(id_user) {
+  let sql = `select id_user, name, email from users where id_user = ?`;
+
+  const user = await query(sql, [id_user]);
+
+  return user[0];
+}
+
+export default { Inserir, ListarByEmail, Profile };

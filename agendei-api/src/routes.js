@@ -1,6 +1,7 @@
 import { Router } from "express";
 import controllerDoctor from "./controllers/controller.doctor.js";
 import controllerUser from "./controllers/controller.user.js";
+import controllerAppointment from "./controllers/controller.appointment.js";
 import jwt from "./token.js";
 
 const router = Router();
@@ -14,14 +15,15 @@ router.delete("/doctors/:id_doctors", jwt.ValidateToken, controllerDoctor.Exclui
 // Services (serviços prestados)...
 router.get("/doctors/:id_doctors/services", jwt.ValidateToken, controllerDoctor.ListarServicos);
 
-
-// Users
 // register
 router.post("/users/register", controllerUser.Inserir);
 //login
 router.post("/users/login", controllerUser.Login);
+router.get("/users/profile", jwt.ValidateToken, controllerUser.Profile);
 
-// Reservas (appintments)...
+// Reservas (appointments)...
+router.get("/appointments", jwt.ValidateToken, controllerAppointment.ListarByUser);
+router.post("/appointments", jwt.ValidateToken, controllerAppointment.Inserir);
 
 
 export default router;
