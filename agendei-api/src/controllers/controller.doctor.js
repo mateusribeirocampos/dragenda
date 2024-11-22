@@ -44,7 +44,7 @@ async function Excluir(req, res) {
 
 async function ListarServicos(req, res) {
 
-  const id_doctor = req.query.id_doctors;
+  const id_doctor = req.params.id_doctors;
   const servDoc = await serviceDoctor.ListarServicos(id_doctor);
 
   res.status(200).json(servDoc);
