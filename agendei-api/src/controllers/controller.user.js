@@ -1,11 +1,22 @@
 import serviceUser from "../services/service.user.js";
 
 async function Inserir(req, res) {
-  const { name, email, password } = req.body;
+  try {
+    const { name, email, password } = req.body;
+    
+    // Check for existing user
+    const existingUser = await serviceUser.findByEmail(email);
+    if (existingUser) {
+      return res.status(400).json({ error: "Email already registered" });
+    }
 
-  const user = await serviceUser.Inserir(name, email, password);
-
-  res.status(201).json(user);
+    // Create new user
+    const user = await serviceUser.Inserir(name, email, password);
+    return res.status(201).json(user);
+  } catch (error) {
+    console.error('Registration error:', error);
+    return res.status(500).json({ error: error.message });
+  }
 }
 
 async function Login(req, res) {
@@ -21,11 +32,13 @@ async function Login(req, res) {
 }
 
 async function Profile(req, res) {
-
-  const id_user = req.id_user;
-  const profile = await serviceUser.Profile(id_user);
-
-  res.status(201).json(profile);
+  try {
+    const id_user = req.id_user;
+    const profile = await serviceUser.Profile(id_user);
+    res.status(200).json(profile);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }
 
 export default { Inserir, Login, Profile };

@@ -3,12 +3,22 @@ import repoUser from "../repositories/repository.user.js";
 import jwt from "../token.js";
 
 async function Inserir(name, email, password) {
-  const hashPassword = await bcrypt.hash(password, 10);
-  const user = await repoUser.Inserir(name, email, hashPassword);
+  try {
+    // Check for required fields
+    if (!name || !email || !password) {
+      throw new Error('Missing required fields');
+    }
 
-  user.token = jwt.CreateToken(user.id_user);
-  
-  return user;
+    const hashPassword = await bcrypt.hash(password, 10);
+    const user = await repoUser.Inserir(name, email, hashPassword);
+
+    // Generate token
+    user.token = jwt.CreateToken(user.id_user);
+    
+    return user;
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function Login(email, password) {
@@ -36,4 +46,9 @@ async function Profile(id_user) {
   return user;
 }
 
-export default { Inserir, Login, Profile };
+async function findByEmail(email) {
+  const user = await repoUser.findByEmail(email);
+  return user;
+}
+
+export default { Inserir, Login, Profile, findByEmail };
