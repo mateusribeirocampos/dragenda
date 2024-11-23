@@ -3,7 +3,7 @@ import serviceUser from "../services/service.user.js";
 async function Inserir(req, res) {
   try {
     const { name, email, password } = req.body;
-    
+
     // Check for existing user
     const existingUser = await serviceUser.findByEmail(email);
     if (existingUser) {
@@ -14,7 +14,7 @@ async function Inserir(req, res) {
     const user = await serviceUser.Inserir(name, email, password);
     return res.status(201).json(user);
   } catch (error) {
-    console.error('Registration error:', error);
+    console.error("Registration error:", error);
     return res.status(500).json({ error: error.message });
   }
 }

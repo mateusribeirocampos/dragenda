@@ -6,7 +6,7 @@ async function Inserir(name, email, password) {
   try {
     // Check for required fields
     if (!name || !email || !password) {
-      throw new Error('Missing required fields');
+      throw new Error("Missing required fields");
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
@@ -14,7 +14,7 @@ async function Inserir(name, email, password) {
 
     // Generate token
     user.token = jwt.CreateToken(user.id_user);
-    
+
     return user;
   } catch (error) {
     throw error;
@@ -40,7 +40,6 @@ async function Login(email, password) {
 }
 
 async function Profile(id_user) {
-
   const user = await repoUser.Profile(id_user);
 
   return user;
