@@ -17,7 +17,7 @@ function Service(props) {
       </View>
 
       <View>
-        <Button text="Agendar" />
+        <Button text="Agendar" onPress={() => props.onPress(props.id_service)} />
       </View>
     </View>
   );

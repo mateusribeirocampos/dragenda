@@ -6,16 +6,18 @@ import Appointment from "../../components/appointment/appointment.jsx";
 function AbaCalendar() {
   return (
     <View style={styles.container}>
-
       <FlatList
         data={appointments}
         keyExtractor={(appoint) => appoint.id_appointment}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
-          return <Appointment service={item.service} 
-                              doctor={item.doctor}
-                              specialty={item.specialty}
-                    />
+          return (
+            <Appointment
+              service={item.service}
+              doctor={item.doctor}
+              specialty={item.specialty}
+            />
+          );
         }}
       />
     </View>
