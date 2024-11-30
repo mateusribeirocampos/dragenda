@@ -7,7 +7,6 @@ export const styles = {
     paddingLeft: 20,
     paddingRight: 20,
     justifyContent: 'Space-between',
-    marginBottom: 20
   },
   theme: {
     todayTextColor: COLORS.red,
@@ -19,6 +18,8 @@ export const styles = {
     fontSize: FONT_SIZE.lg,
     fontWeight: 'bold',
     color: COLORS.gray2,
-    marginTop: 20,
+    height: 18,
+    marginTop: 10,
+    marginBottom: 0,  
   }
 }

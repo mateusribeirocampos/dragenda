@@ -1,8 +1,7 @@
-import { Alert, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { styles } from "./button.style.js";
 
 function Button(props) {
-
   return (
     <TouchableOpacity
       style={[
