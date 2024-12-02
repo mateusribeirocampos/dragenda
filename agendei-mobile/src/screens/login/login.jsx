@@ -12,7 +12,7 @@ import Button from "../../components/button/button.jsx";
 import { useState } from "react";
 import api from "../../constants/api.js";
 
-function Login() {
+function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -63,7 +63,7 @@ function Login() {
 
       <View style={styles.footer}>
         <Text>Não tenho conta.</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.navigate("account")}>
           <Text style={styles.footerLink}>Criar conta agora.</Text>
         </TouchableOpacity>
       </View>

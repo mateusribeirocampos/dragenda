@@ -3,18 +3,19 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: "./src/.env" });
 
-const secretToken = process.env.SECRET_TOKEN;
+// Carrega as variáveis de ambiente do arquivo .env
+const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
 
-// Verifica se a variável de ambiente SECRET_TOKEN está definida
-if (!secretToken) {
-  // Lança um erro se SECRET_TOKEN não estiver definido
-  throw new Error("SECRET_TOKEN não definido. Verifique o arquivo .env");
+// Verifica se a variável de ambiente EXPO_PUBLIC_API_KEY está definida
+if (!API_KEY) {
+  // Lança um erro se EXPO_PUBLIC_API_KEY    não estiver definido
+  throw new Error("API_KEY não definido. Verifique o arquivo .env");
 }
 
 // Função para criar um token JWT
 function CreateToken(id_user) {
   // Cria um token JWT com o ID do usuário e uma data de expiração
-  const token = jwt.sign({ id_user }, secretToken, {
+  const token = jwt.sign({ id_user }, API_KEY, {
     expiresIn: 9999999, // Tempo de expiração do token
   });
   // Retorna o token gerado
@@ -33,7 +34,7 @@ function ValidateToken(req, res, next) {
   const [bearer, token] = authToken.split(" "); // "Bearer" "xxxxxx"
 
   // Verifica a validade do token
-  jwt.verify(token, secretToken, (err, tokenDecoded) => {
+  jwt.verify(token, API_KEY, (err, tokenDecoded) => {
     // Se o token for inválido, retorna um erro 401
     if (err) return res.status(401).json({ error: "Token inválido!" });
 
