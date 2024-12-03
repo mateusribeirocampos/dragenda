@@ -9,10 +9,12 @@ import {
 import icon from "../../constants/icon.js";
 import { styles } from "./login.style.js";
 import Button from "../../components/button/button.jsx";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import api from "../../constants/api.js";
+import { AuthContext } from "../../contexts/auth.js";
 
 function Login(props) {
+  const { setUser } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,12 +24,12 @@ function Login(props) {
         email,
         password,
       });
-
       if (response.data) {
-        console.log(response.data);
+        api.defaults.headers.common['Authorization'] =
+          "Bearer " + response.data.token;
+        setUser(response.data);
       }
     } catch (error) {
-      console.log(error);
       console.log(error.response.data.error);
       if (error.response?.data.error) Alert.alert(error.response.data.error);
       else Alert.alert("Ocorreu um erro. Tente novamente mais tarde!");

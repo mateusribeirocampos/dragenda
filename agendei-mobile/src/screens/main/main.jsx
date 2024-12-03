@@ -46,6 +46,8 @@ function Main() {
               <Image source={icon.logo} style={{ width: 125, height: 29 }} />
             );
           },
+          tabBarShowLabel: false,
+          unmountOnBlur: true,
           tabBarIcon: ({ focused }) => {
             return (
               <Image
@@ -58,7 +60,6 @@ function Main() {
               />
             );
           },
-          tabBarShowLabel: false,
         }}
       />
       <Tab.Screen
@@ -71,6 +72,8 @@ function Main() {
               <Image source={icon.logo} style={{ width: 125, height: 29 }} />
             );
           },
+          tabBarShowLabel: false,
+          unmountOnBlur: true,
           tabBarIcon: ({ focused }) => {
             return (
               <Image
@@ -83,7 +86,6 @@ function Main() {
               />
             );
           },
-          tabBarShowLabel: false,
         }}
       />
     </Tab.Navigator>

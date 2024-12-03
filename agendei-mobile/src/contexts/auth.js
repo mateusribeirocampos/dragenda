@@ -1,20 +1,15 @@
 import { createContext, useState } from "react";
 
-const authContext = createContext({});
+const AuthContext = createContext({});
 
 function AuthProvider(props) {
-  const [user, setUser] = useState({
-    id_user: 5,
-    name: "Hellen Campos",
-    email: "hellen@gmail.com",
-    token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo1LCJpYXQiOjE3MzMxNzE0MzUsImV4cCI6MTc0MzE3MTQzNH0.3a97dXB78oNU0dkQip1OlbBx5TcGx0cI8gUcr1Mya_U",
-  }); // {} objeto vazio
+  const [user, setUser] = useState({}); // {} objeto vazio
 
-  return <authContext.Provider value={{ user, setUser }}>
-
-
-  </authContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, setUser }}>
+      {props.children}
+    </AuthContext.Provider>
+  );
 }
 
-export { AuthProvider, authContext };
+export { AuthProvider, AuthContext };
