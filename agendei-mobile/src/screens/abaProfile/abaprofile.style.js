@@ -26,5 +26,9 @@ export const styles = {
     fontSize: FONT_SIZE.md,
     color: COLORS.gray1,
     marginLeft: 8,
-  }
+  },
+  button: {
+    marginTop: 250,
+    padding: 50,
+  },
 }

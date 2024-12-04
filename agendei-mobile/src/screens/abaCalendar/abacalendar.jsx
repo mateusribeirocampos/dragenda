@@ -1,7 +1,7 @@
 import { Alert, View, FlatList } from "react-native";
 import { styles } from "./abacalendar.style.js";
 import Appointment from "../../components/appointment/appointment.jsx";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import api from "../../constants/api.js";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -36,7 +36,7 @@ function AbaCalendar() {
 
 useFocusEffect(
   useCallback(() => {
-    LoadAppointments();
+    LoadAppointments(); // Carrega os dados toda vez que a aba é focada
   }, [])
 );
 
@@ -49,9 +49,11 @@ useFocusEffect(
         renderItem={({ item }) => {
           return (
             <Appointment id_appointment={item.id_appointment}
-              service={item.service}
               doctor={item.doctor}
+              service={item.service}
               specialty={item.specialty}
+              bookingDate={item.booking_date}
+              bookingHour={item.booking_hour}
               onPress={DeleteAppointments}
             />
           );
