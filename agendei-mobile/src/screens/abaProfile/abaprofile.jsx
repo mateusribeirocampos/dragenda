@@ -1,13 +1,13 @@
-import { Alert, View, Text } from "react-native";
-import { styles } from "./abaprofile.style";
-import { useContext, useState, useEffect } from "react";
-import api from "../../constants/api";
+import { useContext, useEffect, useState } from "react";
+import { Alert, Text, View } from "react-native";
 import Button from "../../components/button/button.jsx";
+import api from "../../constants/api";
 import { AuthContext } from "../../contexts/auth.js";
+import { clearProfile } from "../../utils/clearProfile.js";
+import { styles } from "./abaprofile.style.js";
 
 function AbaProfile() {
-
-  const {setUser} = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
   const [name, setName] = useState([]);
   const [email, setEmail] = useState([]);
 
@@ -26,14 +26,37 @@ function AbaProfile() {
   }
 
   function logout() {
-    Alert.alert("Logout");
-    setUser({});
+    Alert.alert(
+      "Logout",
+      "Deseja realmente sair?",
+      [
+        {
+          text: "Sim",
+          onPress: async () => {
+            const result = await clearProfile();
+            if(result) {
+            setUser({});
+            navigation.navigate('choose');
+            } else {
+              Alert.alert('Erro', 'Não foi possível sair.', 'Tente novamente');
+            }
+          },
+        },
+        {
+          text: "Não",
+          style: "cancel",
+        },
+      ],
+      {
+        cancelable: false,
+      }
+    );
   }
 
   useEffect(() => {
     LoadProfiles();
   }, []);
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.item}>
@@ -46,8 +69,7 @@ function AbaProfile() {
         <Text style={styles.text}>{email}</Text>
       </View>
       <View style={styles.button}>
-          <Button text="Desconectar" theme="danger" 
-          onPress={logout} />
+        <Button text="Desconectar" theme="danger" onPress={logout} />
       </View>
     </View>
   );
