@@ -4,13 +4,11 @@ import fundo from "../../assets/fundo.png";
 import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
-
   const navigate = useNavigate();
 
   function ExecuteLogin() {
-    navigate('/appointments');
+    navigate("/appointments");
   }
-
 
   return (
     <div className="row">
@@ -33,7 +31,13 @@ function Login() {
             />
           </div>
           <div className="mt-3 mb-5">
-            <button onClick={ExecuteLogin} className="btn btn-primary w-100" type="button">Login</button>
+            <button
+              onClick={ExecuteLogin}
+              className="btn btn-primary w-100"
+              type="button"
+            >
+              Login
+            </button>
           </div>
 
           <div>
