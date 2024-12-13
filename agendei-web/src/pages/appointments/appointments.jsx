@@ -1,3 +1,4 @@
+import "./appointments.css";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/navbar/navbar";
 import { doctors, appointments } from "../../constants/data.js";
@@ -21,7 +22,7 @@ function Appointments() {
         <div>
           <h2 className="d-inline">Agendamentos</h2>
           <Link
-            to="appointments/add"
+            to="/appointments/add"
             className="btn btn-outline-primary ms-5 mb-2"
           >
             Novo agendamento
