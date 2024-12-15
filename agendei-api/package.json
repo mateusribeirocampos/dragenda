@@ -6,7 +6,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check": "npm audit && npm ls"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
     "jsonwebtoken": "^9.0.2",
     "sqlite3": "^5.1.7"
   }
