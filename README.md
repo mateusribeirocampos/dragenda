@@ -29,7 +29,6 @@ Agendei é um aplicativo móvel desenvolvido para simplificar o processo de agen
 - Axios
 - Styled Components
 
-
 ## Gerenciamento de Estado
 
 - Context API
@@ -75,7 +74,7 @@ Sincronização de agendamentos em tempo real
 Criação de interface responsiva e intuitiva
 Integração com backend RESTful
 
-🤝 Como Contribuir
+## Como Contribuir 🤝  
 
 Faça um fork do projeto
 Crie sua branch de feature (git checkout -b feature/NovaFeature)
@@ -83,16 +82,11 @@ Commit suas mudanças (git commit -m 'Adiciona NovaFeature')
 Faça um push para a branch (git push origin feature/NovaFeature)
 Abra um Pull Request
 
-📝 Próximas Implementações
+### Status do Projeto 📌  
 
- Notificações de agendamento
- Integração com calendários externos
- Sistema de avaliação de serviços
- Suporte a múltiplos idiomas
+### 🚧 Em desenvolvimento contínuo 🚧
 
-📌 Status do Projeto
-🚧 Em desenvolvimento contínuo 🚧
+### Licença📄  
 
-
-📄 Licença
-Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+Este projeto está sob a licença GNU AFFERO GENERAL PUBLIC LICENSE.
+Veja o arquivo LICENSE para mais detalhes.
