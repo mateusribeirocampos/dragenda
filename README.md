@@ -1,66 +1,74 @@
-#Agendei Mobile 📱⏰
-Descrição do Projeto
+# Agendei Mobile 📱⏰
+
+## Descrição do Projeto
+
 Agendei é um aplicativo móvel desenvolvido para simplificar o processo de agendamento de serviços, oferecendo uma solução prática e intuitiva para usuários e prestadores de serviço.
 🚀 Funcionalidades Principais
 
-Agendamento de serviços
-Gerenciamento de horários
-Perfil de usuário
-Autenticação e autorização
-Interface responsiva e amigável
+## Agendamento de serviços
 
-🛠 Tecnologias Utilizadas
+- Gerenciamento de horários
+- Perfil de usuário
+- Autenticação e autorização
+- Interface responsiva e amigável
 
-Frontend:
+## Tecnologias Utilizadas 🛠
 
-React Native
-Expo
+## Frontend
+
+- React Native
+- Expo
+
+## Backend
+
+- Node.js
+
+## Bibliotecas Principais
+
+- React Navigation
+- Axios
+- Styled Components
 
 
-Backend:
+## Gerenciamento de Estado
 
-Node.js
+- Context API
 
+## Autenticação
 
-Bibliotecas Principais:
+- JWT (JSON Web Tokens)
 
-React Navigation
-Axios
-Styled Components
+## Pré-requisitos  📦
 
+- Node.js (versão 14 ou superior)
+- npm ou Yarn
+- Expo CLI
+- Dispositivo móvel ou emulador (Android/iOS)
 
-Gerenciamento de Estado:
-
-Context API
-
-Autenticação:
-
-JWT (JSON Web Tokens)
-
-📦 Pré-requisitos
-
-Node.js (versão 14 ou superior)
-npm ou Yarn
-Expo CLI
-Dispositivo móvel ou emulador (Android/iOS)
-
-🔧 Instalação
+## Instalação  🔧
 
 Clone o repositório
 
-bashCopygit clone https://github.com/mateusribeirocampos/agendei-mobile.git
+```bash
+ clone https://github.com/mateusribeirocampos/agendei-mobile.git
+```
 
-Instale as dependências
+## Instale as dependências
 
-bashCopycd agendei-mobile
+```bash
+cd agendei-mobile
 npm install
 # ou
 yarn install
+```
 
-Inicie o projeto
+## Inicie o projeto
 
-bashCopyexpo start
-🌟 Principais Desafios Superados
+```bash
+npm expo start
+```
+
+## Principais Desafios Superados🌟
 
 Implementação de autenticação segura
 Sincronização de agendamentos em tempo real
