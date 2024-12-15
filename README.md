@@ -1,4 +1,4 @@
-Agendei Mobile 📱⏰
+#Agendei Mobile 📱⏰
 Descrição do Projeto
 Agendei é um aplicativo móvel desenvolvido para simplificar o processo de agendamento de serviços, oferecendo uma solução prática e intuitiva para usuários e prestadores de serviço.
 🚀 Funcionalidades Principais
@@ -33,12 +33,9 @@ Gerenciamento de Estado:
 
 Context API
 
-
 Autenticação:
 
 JWT (JSON Web Tokens)
-
-
 
 📦 Pré-requisitos
 
@@ -87,12 +84,7 @@ Abra um Pull Request
 
 📌 Status do Projeto
 🚧 Em desenvolvimento contínuo 🚧
-👨‍💻 Autor
-Mateus Ribeiro de Campos
 
-LinkedIn: [Link do seu LinkedIn]
-Email: mateusrcampos@gmail.com
-Portfólio: [Link do seu portfólio]
 
 📄 Licença
 Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
