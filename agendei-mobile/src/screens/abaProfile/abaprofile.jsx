@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { Alert, Text, View } from "react-native";
+import { Alert, Platform, Text, View } from "react-native";
 import Button from "../../components/button/button.jsx";
 import api from "../../constants/api";
 import { AuthContext } from "../../contexts/auth.js";
-import { clearProfile } from "../../utils/clearProfile.js";
+import { clearProfile } from "../../contexts/clearProfile.js";
 import { styles } from "./abaprofile.style.js";
 
 function AbaProfile() {
@@ -34,11 +34,14 @@ function AbaProfile() {
           text: "Sim",
           onPress: async () => {
             const result = await clearProfile();
-            if(result) {
-            setUser({});
-            navigation.navigate('choose');
+            if (result) {
+              setUser({});
+              navigation.navigate("choose");
+              if (Platform.OS === "web") {
+                window.location.reload();
+              }
             } else {
-              Alert.alert('Erro', 'Não foi possível sair.', 'Tente novamente');
+              Alert.alert("Erro", "Não foi possível sair.", "Tente novamente");
             }
           },
         },
