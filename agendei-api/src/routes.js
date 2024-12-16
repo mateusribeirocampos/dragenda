@@ -8,19 +8,17 @@ import jwt from "./token.js";
 const router = Router();
 
 const generalLimiter = rateLimit ({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
+  windowMs: process.env.RATE_LIMIT_WINDOW_MS,
+  max: process.env.GENERAL_RATE_LIMIT_MAX,
   message: {error: "Muitas requisições. Tente novamente mais tarde."},
 
 });
 
 const loginLimiter = rateLimit ({
-  windowMs: 15 * 60 * 1000,
-  max: 3,
+  windowMs: process.env.RATE_LIMIT_WINDOW_MS,
+  max: process.env.LOGIN_RATE_LIMIT_MAX,
   message: { error: "Muitas tentativas de login. Tente novamente mais tarde."},
 });
-
-router.use(generalLimiter);
 
 // Doctors
 router.get("/doctors", jwt.ValidateToken, controllerDoctor.Listar);

@@ -32,6 +32,9 @@ function ValidateToken(req, res, next) {
 
   // Divide o cabeçalho em "Bearer" e o token
   const [bearer, token] = authToken.split(" "); // "Bearer" "xxxxxx"
+  if (!token || bearer !== "Bearer") {
+    return res.status(401).json({ error: "Token mal formatado" });
+  }
 
   // Verifica a validade do token
   jwt.verify(token, API_KEY, (err, tokenDecoded) => {
