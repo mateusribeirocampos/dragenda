@@ -9,7 +9,7 @@ export const styles = {
 
   item:{
     borderWidth: 1,
-    borderColor: COLORS.gray4,
+    borderColor: COLORS.white,
     paddingLeft: 8,
     paddingTop: 15,
     paddingBottom: 15,
@@ -17,7 +17,7 @@ export const styles = {
   title: {
     fontFamily: 'Roboto',
     fontWeight: 'bold',
-    fontSize: FONT_SIZE.sm,
+    fontSize: FONT_SIZE.md,
     color: COLORS.gray3,
     marginBottom: 8,
   },
@@ -26,5 +26,9 @@ export const styles = {
     fontSize: FONT_SIZE.md,
     color: COLORS.gray1,
     marginLeft: 8,
-  }
+  },
+  button: {
+    marginTop: 250,
+    padding: 50,
+  },
 }

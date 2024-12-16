@@ -1,10 +1,26 @@
 import { Router } from "express";
+import rateLimit from "express-rate-limit";
 import controllerDoctor from "./controllers/controller.doctor.js";
 import controllerUser from "./controllers/controller.user.js";
 import controllerAppointment from "./controllers/controller.appointment.js";
 import jwt from "./token.js";
 
 const router = Router();
+
+const generalLimiter = rateLimit ({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: {error: "Muitas requisições. Tente novamente mais tarde."},
+
+});
+
+const loginLimiter = rateLimit ({
+  windowMs: 15 * 60 * 1000,
+  max: 3,
+  message: { error: "Muitas tentativas de login. Tente novamente mais tarde."},
+});
+
+router.use(generalLimiter);
 
 // Doctors
 router.get("/doctors", jwt.ValidateToken, controllerDoctor.Listar);
@@ -24,6 +40,7 @@ router.get("/users/profile", jwt.ValidateToken, controllerUser.Profile);
 // Reservas (appointments)...
 router.get("/appointments", jwt.ValidateToken, controllerAppointment.ListarByUser);
 router.post("/appointments", jwt.ValidateToken, controllerAppointment.Inserir);
+router.delete("/appointments/:id_appointment", jwt.ValidateToken, controllerAppointment.Excluir);
 
 
 export default router;

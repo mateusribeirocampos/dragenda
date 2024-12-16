@@ -11,7 +11,7 @@ export const styles = {
   text: {
     fontFamily: 'Roboto',
     fontWeight: 'bold',
-    fontSize: FONT_SIZE.md,
+    fontSize: FONT_SIZE.lg,
     color: COLORS.gray1,
     margin: 20,
   }
