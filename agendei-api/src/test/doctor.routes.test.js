@@ -13,7 +13,7 @@ describe('Doctor Routes', () => {
   let token;
 
   before(async () => {
-    token = jwt.sign({ id: 1 }, process.env.SECRET_TOKEN, { expiresIn: '1h' });
+    token = jwt.sign({ id: 1 }, process.env.EXPO_PUBLIC_API_KEY, { expiresIn: '1h' });
   });
 
   describe('GET /doctors', () => {

@@ -6,7 +6,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha src/test/**/*.test.js"
   },
   "author": "",
   "license": "ISC",
@@ -24,7 +24,7 @@
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "@babel/register": "^7.25.9",
-    "chai": "^4.3.7",
+    "chai": "^4.5.0",
     "chai-http": "^4.4.0",
     "mocha": "^10.8.2",
     "supertest": "^7.0.0"
