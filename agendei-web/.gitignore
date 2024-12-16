@@ -1,0 +1,41 @@
+# Node modules e logs
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Diretórios de build
+dist/
+build/
+out/
+
+# Coverage e relatórios de teste
+coverage/
+*.lcov
+
+# Ambientes específicos e variáveis
+.env
+.env.local
+.env.*.local
+
+# Compilados e caches do npm e Yarn
+.pnpm-store/
+.cache/
+.cache-loader/
+
+# Expo e React Native (para mobile)
+.expo/
+.expo-shared/
+ios/
+android/
+*.keystore
+*.jks
+
+# Arquivos do Editor (VS Code, etc.)
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
