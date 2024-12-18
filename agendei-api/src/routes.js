@@ -6,7 +6,7 @@ import controllerAppointment from "./controllers/controller.appointment.js";
 import jwt from "./token.js";
 import dotenv from 'dotenv';
 
-dotenv.config({ path: "./src/.env" });
+dotenv.config ({ path: "./src/.env" });
 const router = Router();
 
 const generalLimiter = rateLimit ({
