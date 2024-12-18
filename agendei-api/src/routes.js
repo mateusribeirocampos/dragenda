@@ -4,19 +4,21 @@ import controllerDoctor from "./controllers/controller.doctor.js";
 import controllerUser from "./controllers/controller.user.js";
 import controllerAppointment from "./controllers/controller.appointment.js";
 import jwt from "./token.js";
+import dotenv from 'dotenv';
 
+dotenv.config({ path: "./src/.env" });
 const router = Router();
 
 const generalLimiter = rateLimit ({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
+  windowMs: Number(process.env.RATE_LIMIT_WINDOW),
+  max: Number(process.env.GENERAL_RATE_LIMIT_MAX),
   message: {error: "Muitas requisições. Tente novamente mais tarde."},
 
 });
 
 const loginLimiter = rateLimit ({
-  windowMs: 15 * 60 * 1000,
-  max: 3,
+  windowMs: Number(process.env.RATE_LIMIT_WINDOW),
+  max: Number(process.env.LOGIN_RATE_LIMIT_MAX),
   message: { error: "Muitas tentativas de login. Tente novamente mais tarde."},
 });
 
@@ -34,7 +36,7 @@ router.get("/doctors/:id_doctors/services", jwt.ValidateToken, controllerDoctor.
 // register
 router.post("/users/register", controllerUser.Inserir);
 //login
-router.post("/users/login", controllerUser.Login);
+router.post("/users/login", loginLimiter, controllerUser.Login);
 router.get("/users/profile", jwt.ValidateToken, controllerUser.Profile);
 
 // Reservas (appointments)...

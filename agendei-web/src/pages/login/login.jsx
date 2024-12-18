@@ -31,7 +31,7 @@ function Login() {
         console.log(error.response?.data.error);
         setMsg(error.response?.data.error);
       } else {
-      setMsg("Erro ao efetuar o login. Tente mais tarde. 😕");
+      setMsg("Erro ao efetuar o login. Tente mais tarde.");
       }
     }
     // navigate("/appointments");
