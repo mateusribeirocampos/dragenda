@@ -1,19 +1,18 @@
 import "./login.css";
 import logo from "../../assets/logo.png";
 import fundo from "../../assets/fundo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import api from "../../constants/api.js";
 import ErrorMessage from "../../components/error/errorMessage.jsx";
 
 function Login() {
-  // const navigate = useNavigate(); // tem que importar o useNavigate
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
 
   async function ExecuteLogin() {
-
     setMsg("");
 
     try {
@@ -22,19 +21,22 @@ function Login() {
         password,
       });
       if (response.data) {
-        console.log(response.data);
+        localStorage.setItem("sessionToken", response.data.token);
+        localStorage.setItem("sessionId", response.data.id_user);
+        localStorage.setItem("sessionEmail", response.data.email);
+        localStorage.setItem("sessionName", response.data.name);
+        navigate("/appointments");
       } else {
-        console.log(response);
+        setMsg("Erro ao efetuar o login. Tente mais tarde.");
       }
     } catch (error) {
-      if(error.response?.data.error) {
+      if (error.response?.data.error) {
         console.log(error.response?.data.error);
         setMsg(error.response?.data.error);
       } else {
-      setMsg("Erro ao efetuar o login. Tente mais tarde.");
+        setMsg("Erro ao efetuar o login. Tente mais tarde.");
       }
     }
-    // navigate("/appointments");
   }
 
   return (
