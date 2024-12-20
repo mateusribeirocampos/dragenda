@@ -51,17 +51,21 @@ function Login() {
 
           <div className="mt-4">
             <input
+              name="email"
               type="email"
               placeholder="E-mail"
               className="form-control"
+              autoComplete="email"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="mt-2">
             <input
+              name="password"
               type="password"
               placeholder="Senha"
               className="form-control"
+              autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>

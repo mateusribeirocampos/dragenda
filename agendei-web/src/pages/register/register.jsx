@@ -36,7 +36,12 @@ function Register() {
         localStorage.setItem("sessionId", response.data.id_user);
         localStorage.setItem("sessionEmail", email);
         localStorage.setItem("sessionName", name);
-        navigate("/appointments");
+
+        setSucessMsg("Conta criada com sucesso!");
+
+        setTimeout(() => {
+          navigate("/appointments");
+        }, 3000);
       } else {
         setMsg("Erro ao criar conta. Tente mais tarde.");
       }
@@ -48,7 +53,6 @@ function Register() {
         setMsg("Erro ao criar conta. Tente mais tarde.");
       }
     }
-    setSucessMsg("Conta criada com sucesso!");
   }
 
   return (
@@ -61,33 +65,41 @@ function Register() {
 
           <div className="mt-4">
             <input
+              name="nome"
               type="nome"
-              placeholder="Nome"
+              placeholder="nome"
               className="form-control"
+              autoComplete="username"
               onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="mt-2">
             <input
+              name="email"
               type="email"
               placeholder="E-mail"
               className="form-control"
+              autoComplete="email"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="mt-2">
             <input
+              name="password"
               type="password"
               placeholder="Senha"
               className="form-control"
+              autoComplete="new-password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="mt-2">
             <input
+              name="password"
               type="password"
               placeholder="Confirme a senha"
               className="form-control"
+              autoComplete="new-password"
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>

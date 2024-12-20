@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: "./src/.env" });
 
-const loginAttempts = new Map();
+const loginAttempts = new Map(); // Mapa para armazenar tentativas de login
 
 const RATE_LIMIT_WINDOW = Number(process.env.RATE_LIMIT_WINDOW);
 const LOGIN_RATE_LIMIT_MAX = Number(process.env.LOGIN_RATE_LIMIT_MAX);
@@ -20,6 +20,7 @@ const loginLimiter = rateLimit({
   keyGenerator: (req) => req.ip,
 });
 
+// Middleware para rastrear tentativas de login
 const trackLoginAttempts = async (req, res, next) => {
   const ip = req.ip;
   const currentTime = Date.now();
@@ -65,7 +66,7 @@ const trackLoginAttempts = async (req, res, next) => {
   loginAttempts.set(ip, attempts);
   next();
 };
-
+// Middleware para resetar tentativas de login
 const resetLoginAttempts = (req, res, next) => {
   const ip = req.ip;
   loginAttempts.delete(ip);

@@ -20,7 +20,7 @@ function AppointmentAdd() {
           </div>
 
           <div className="col-12 mt-4">
-            <label htmlFor="doctor" className="form-label">
+            <label htmlFor="doctors" className="form-label">
               Médicos
             </label>
             <div className="form-control mb-2">

@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Ambientes específicos e variáveis
+.env
+.env.local
+.env.*.local
