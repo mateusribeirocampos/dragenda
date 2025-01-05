@@ -8,13 +8,13 @@ import ErrorMessage from "../../components/error/errorMessage";
 import SucessMessage from "../../components/sucess/sucessMessage";
 
 function Register() {
-  const navigate = useNavigate();
-  const [name, setName] = useState();
+  const navigate = useNavigate("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [msg, setMsg] = useState("");
-  const [sucessMsg, setSucessMsg] = useState();
+  const [sucessMsg, setSucessMsg] = useState("");
 
   async function ExecuteAccount() {
     setMsg("");
@@ -25,6 +25,7 @@ function Register() {
     }
 
     try {
+      console.log({ name, email, password }); // Verifique se 'name' está correto
       const response = await api.post("/users/register", {
         name,
         email,
@@ -65,9 +66,9 @@ function Register() {
 
           <div className="mt-4">
             <input
-              name="nome"
-              type="nome"
-              placeholder="nome"
+              name="name"
+              type="text"
+              placeholder="name"
               className="form-control"
               autoComplete="username"
               onChange={(e) => setName(e.target.value)}

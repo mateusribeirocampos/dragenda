@@ -20,6 +20,8 @@ function Login() {
         email,
         password,
       });
+      console.log("Response.data: ", response.data);
+
       if (response.data) {
         localStorage.setItem("sessionToken", response.data.token);
         localStorage.setItem("sessionId", response.data.id_user);
