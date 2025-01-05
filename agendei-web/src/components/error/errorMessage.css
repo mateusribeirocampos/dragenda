@@ -1,0 +1,26 @@
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  border-radius: 4px;
+  padding: 0.9rem;
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  max-width: 100%;
+  box-sizing: border-box;
+  z-index: -1;
+}
+
+@media (min-width: 576px) {
+  .alert-danger {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .alert-danger {
+    font-size: 1.125rem;
+    padding: 1.125rem;
+  }
+}

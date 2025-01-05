@@ -4,21 +4,11 @@ import controllerDoctor from "./controllers/controller.doctor.js";
 import controllerUser from "./controllers/controller.user.js";
 import controllerAppointment from "./controllers/controller.appointment.js";
 import jwt from "./token.js";
+import dotenv from 'dotenv';
+import { loginLimiter, trackLoginAttempts, resetLoginAttempts } from "./middlewares/rateLimit.js";
 
+dotenv.config({ path: "./src/.env" });
 const router = Router();
-
-const generalLimiter = rateLimit ({
-  windowMs: process.env.RATE_LIMIT_WINDOW_MS,
-  max: process.env.GENERAL_RATE_LIMIT_MAX,
-  message: {error: "Muitas requisições. Tente novamente mais tarde."},
-
-});
-
-const loginLimiter = rateLimit ({
-  windowMs: process.env.RATE_LIMIT_WINDOW_MS,
-  max: process.env.LOGIN_RATE_LIMIT_MAX,
-  message: { error: "Muitas tentativas de login. Tente novamente mais tarde."},
-});
 
 // Doctors
 router.get("/doctors", jwt.ValidateToken, controllerDoctor.Listar);
@@ -32,7 +22,7 @@ router.get("/doctors/:id_doctors/services", jwt.ValidateToken, controllerDoctor.
 // register
 router.post("/users/register", controllerUser.Inserir);
 //login
-router.post("/users/login", controllerUser.Login);
+router.post("/users/login", loginLimiter, resetLoginAttempts, trackLoginAttempts, controllerUser.Login);
 router.get("/users/profile", jwt.ValidateToken, controllerUser.Profile);
 
 // Reservas (appointments)...

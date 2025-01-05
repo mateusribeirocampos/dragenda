@@ -1,13 +1,24 @@
 import "./appointments.css";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
+=======
+import { Link, useNavigate } from "react-router-dom";
+>>>>>>> main
 import Navbar from "../../components/navbar/navbar";
 import { doctors, appointments } from "../../constants/data.js";
 import Appointment from "../../components/appointment/appoitment.jsx";
 
 function Appointments() {
 
+<<<<<<< HEAD
   function ClickEdit(id_appointment) {
     console.log("Editar " + id_appointment);
+=======
+  const navigate = useNavigate();
+
+  function ClickEdit(id_appointment) {
+    navigate('/appointments/edit/' + id_appointment);
+>>>>>>> main
   }
 
   function ClickDelete(id_appointment) {
