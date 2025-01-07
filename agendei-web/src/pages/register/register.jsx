@@ -41,7 +41,7 @@ function Register() {
 
         setTimeout(() => {
           navigate("/appointments");
-        }, 3000);
+        }, 2000);
       } else {
         setMsg("Erro ao criar conta. Tente mais tarde.");
       }
@@ -65,9 +65,9 @@ function Register() {
 
           <div className="mt-4">
             <input
-              name="nome"
-              type="nome"
-              placeholder="nome"
+              name="name"
+              type="text"
+              placeholder="Nome"
               className="form-control"
               autoComplete="username"
               onChange={(e) => setName(e.target.value)}
