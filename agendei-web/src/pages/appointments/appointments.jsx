@@ -1,20 +1,68 @@
 import "./appointments.css";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/navbar";
-import { doctors, appointments } from "../../constants/data.js";
 import Appointment from "../../components/appointment/appoitment.jsx";
+import { useEffect, useState } from "react";
+import api from "../../constants/api.js";
 
 function Appointments() {
-
   const navigate = useNavigate();
+  const [appointments, setAppointments] = useState([]);
+  const [doctors, setDoctors] = useState([]);
+  const [idDoctors, setIdDoctors] = useState("");
 
   function ClickEdit(id_appointment) {
-    navigate('/appointments/edit/' + id_appointment);
+    navigate("/appointments/edit/" + id_appointment);
   }
 
   function ClickDelete(id_appointment) {
     console.log("Excluir " + id_appointment);
   }
+
+  async function LoadDoctors() {
+    console.log("LoaDoctors...");
+    try {
+      const response = await api.get("/doctors");
+
+      if (response.data) {
+        console.log(response.data);
+        setDoctors(response.data);
+      }
+    } catch (error) {
+      if (error.response?.data.error) alert(error.response?.data.error);
+      else alert("Erro ao listar médicos.");
+    }
+  }
+
+  async function LoadAppointment() {
+    console.log("LoadAppointment...");
+    try {
+      const response = await api.get("/admin/appointments", {
+        params: {
+          id_doctor: idDoctors,
+        },
+      });
+
+      if (response.data) {
+        console.log(response.data);
+        setAppointments(response.data);
+      }
+    } catch (error) {
+      if (error.response?.data.error) alert(error.response?.data.error);
+      else alert("Erro ao efetuar o login. Tente novamente mais tarde.");
+    }
+  }
+
+  function ChangeDoctor(e) {
+    console.log(e.target.value);
+    setIdDoctors(e.target.value);
+  }
+
+  useEffect(() => {
+    LoadDoctors();
+    LoadAppointment();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="container-fluid mt-page">
@@ -37,7 +85,12 @@ function Appointments() {
           <input id="endDate" className="form-control" type="date" />
 
           <div className="form-control ms-3 me-3">
-            <select name="doctors" id="doctors">
+            <select
+              name="doctors"
+              id="doctors"
+              value={idDoctors}
+              onChange={ChangeDoctor}
+            >
               <option value="">Todos os médicos</option>
 
               {doctors.map((doc) => {
@@ -51,7 +104,13 @@ function Appointments() {
           </div>
 
           <div className="d-grid gap-2">
-            <button className="btn btn-primary me-2"> Filtrar</button>
+            <button
+              onClick={LoadAppointment}
+              className="btn btn-primary me-2"
+              type="button"
+            >
+              Filtrar
+            </button>
           </div>
         </div>
       </div>
@@ -71,9 +130,10 @@ function Appointments() {
             </tr>
           </thead>
           <tbody>
-              {
-                appointments.map((ap) => {
-                  return <Appointment key={ap.id_appointment} 
+            {appointments.map((ap) => {
+              return (
+                <Appointment
+                  key={ap.id_appointment}
                   id_appointment={ap.id_appointment}
                   user={ap.user}
                   doctor={ap.doctor}
@@ -83,9 +143,9 @@ function Appointments() {
                   price={ap.price}
                   clickEdit={ClickEdit}
                   clickDelete={ClickDelete}
-                  />
-                })
-              }
+                />
+              );
+            })}
           </tbody>
         </table>
       </div>
