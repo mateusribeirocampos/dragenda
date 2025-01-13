@@ -3,6 +3,8 @@ import rateLimit from "express-rate-limit";
 import controllerDoctor from "./controllers/controller.doctor.js";
 import controllerUser from "./controllers/controller.user.js";
 import controllerAppointment from "./controllers/controller.appointment.js";
+import controllerAdmin from "./controllers/controller.admin.js";
+import controllerAppointmentAdmin from "./controllers/controller.appointment.admin.js";
 import jwt from "./token.js";
 import dotenv from 'dotenv';
 import { loginLimiter, trackLoginAttempts, resetLoginAttempts } from "./middlewares/rateLimit.js";
@@ -10,6 +12,24 @@ import { loginLimiter, trackLoginAttempts, resetLoginAttempts } from "./middlewa
 dotenv.config({ path: "./src/.env" });
 const router = Router();
 
+<<<<<<< HEAD
+=======
+const generalLimiter = rateLimit ({
+  windowMs: Number(process.env.RATE_LIMIT_WINDOW),
+  max: Number(process.env.GENERAL_RATE_LIMIT_MAX),
+  message: {error: "Muitas requisições. Tente novamente mais tarde."},
+
+});
+
+router.use((req, res, next) => {
+  if (req.path.startsWith('/users/login') || req.path.startsWith('/users/register')) {
+    next();
+  } else {
+    generalLimiter(req, res, next);
+  }
+});
+
+>>>>>>> main
 // Doctors
 router.get("/doctors", jwt.ValidateToken, controllerDoctor.Listar);
 router.post("/doctors", jwt.ValidateToken, controllerDoctor.Inserir);
@@ -19,9 +39,9 @@ router.delete("/doctors/:id_doctors", jwt.ValidateToken, controllerDoctor.Exclui
 // Services (serviços prestados)...
 router.get("/doctors/:id_doctors/services", jwt.ValidateToken, controllerDoctor.ListarServicos);
 
-// register
+// users
+// register, login e profile
 router.post("/users/register", controllerUser.Inserir);
-//login
 router.post("/users/login", loginLimiter, resetLoginAttempts, trackLoginAttempts, controllerUser.Login);
 router.get("/users/profile", jwt.ValidateToken, controllerUser.Profile);
 
@@ -30,5 +50,9 @@ router.get("/appointments", jwt.ValidateToken, controllerAppointment.ListarByUse
 router.post("/appointments", jwt.ValidateToken, controllerAppointment.Inserir);
 router.delete("/appointments/:id_appointment", jwt.ValidateToken, controllerAppointment.Excluir);
 
+// Rotas do Admin
+router.post("/admin/register", controllerAdmin.InserirAdmin);
+router.post("/admin/login", loginLimiter, resetLoginAttempts, trackLoginAttempts, controllerAdmin.LoginAdmin);
+router.get("/admin/appointments", jwt.ValidateToken, controllerAppointmentAdmin.Listar);
 
 export default router;
