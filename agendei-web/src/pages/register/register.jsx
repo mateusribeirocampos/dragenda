@@ -20,13 +20,16 @@ function Register() {
     setMsg("");
 
     if (password != confirmPassword) {
-      setMsg("As senhas não conferem. Digite Novamente!");
-      return;
+      return setMsg("As senhas não conferem. Digite Novamente!");
     }
 
     try {
+<<<<<<< HEAD
       console.log({ name, email, password }); // Verifique se 'name' está correto
       const response = await api.post("/users/register", {
+=======
+      const response = await api.post("/admin/register", {
+>>>>>>> main
         name,
         email,
         password,
@@ -34,15 +37,15 @@ function Register() {
       if (response.data) {
         console.log(response.data);
         localStorage.setItem("sessionToken", response.data.token);
-        localStorage.setItem("sessionId", response.data.id_user);
+        localStorage.setItem("sessionId", response.data.id_admin);
         localStorage.setItem("sessionEmail", email);
         localStorage.setItem("sessionName", name);
-
+        api.defaults.headers.common['Authorization'] = "Bearer " + response.data.token;
         setSucessMsg("Conta criada com sucesso!");
 
         setTimeout(() => {
           navigate("/appointments");
-        }, 3000);
+        }, 2000);
       } else {
         setMsg("Erro ao criar conta. Tente mais tarde.");
       }
@@ -68,7 +71,11 @@ function Register() {
             <input
               name="name"
               type="text"
+<<<<<<< HEAD
               placeholder="name"
+=======
+              placeholder="Nome e sobrenome"
+>>>>>>> main
               className="form-control"
               autoComplete="username"
               onChange={(e) => setName(e.target.value)}
