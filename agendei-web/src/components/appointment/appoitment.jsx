@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 
 function Appointment(props) {
 
-  const dt = new Date(props.booking_date);
+  // const dt = new Date(props.booking_date);
+  // 2024-11-15T08:30:00
+  const dt = new Date(props.booking_date + "T" + props.booking_hour);
 
   return (
     <tr>
@@ -34,6 +36,7 @@ Appointment.propTypes = {
   doctor: PropTypes.string.isRequired,
   service: PropTypes.string.isRequired,
   booking_date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]).isRequired,
+  booking_hour: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   id_appointment: PropTypes.number.isRequired,
   clickEdit: PropTypes.func.isRequired,

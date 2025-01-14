@@ -28,6 +28,13 @@ router.use((req, res, next) => {
     generalLimiter(req, res, next);
   }
 });
+router.use((req, res, next) => {
+  if (req.path.startsWith('/admin/login') || req.path.startsWith('/admin/register')) {
+    next();
+  } else {
+    generalLimiter(req, res, next);
+  }
+});
 
 >>>>>>> main
 // Doctors
