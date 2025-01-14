@@ -9,6 +9,9 @@ function Appointments() {
   const navigate = useNavigate();
   const [appointments, setAppointments] = useState([]);
   const [doctors, setDoctors] = useState([]);
+
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [idDoctors, setIdDoctors] = useState("");
 
   function ClickEdit(id_appointment) {
@@ -29,8 +32,10 @@ function Appointments() {
         setDoctors(response.data);
       }
     } catch (error) {
-      if (error.response?.data.error) alert(error.response?.data.error);
-      else alert("Erro ao listar médicos.");
+      if (error.response?.data.error)
+        if (error.response.status === 401) {
+          return navigate("/");
+        } else alert("Erro ao listar os médicos.");
     }
   }
 
@@ -40,6 +45,8 @@ function Appointments() {
       const response = await api.get("/admin/appointments", {
         params: {
           id_doctor: idDoctors,
+          startDate: startDate,
+          endDate: endDate,
         },
       });
 
@@ -48,8 +55,10 @@ function Appointments() {
         setAppointments(response.data);
       }
     } catch (error) {
-      if (error.response?.data.error) alert(error.response?.data.error);
-      else alert("Erro ao efetuar o login. Tente novamente mais tarde.");
+      if (error.response?.data.error)
+        if (error.response.status === 401) {
+          return navigate("/");
+        } else alert("Erro ao listar os agendamentos.");
     }
   }
 
@@ -80,9 +89,19 @@ function Appointments() {
         </div>
 
         <div className="d-flex justify-content-end">
-          <input id="startDate" className="form-control" type="date" />
+          <input
+            id="startDate"
+            className="form-control"
+            type="date"
+            onChange={(e) => setStartDate(e.target.value)}
+          />
           <span className="m-2">Até</span>
-          <input id="endDate" className="form-control" type="date" />
+          <input
+            id="endDate"
+            className="form-control"
+            type="date"
+            onChange={(e) => setEndDate(e.target.value)}
+          />
 
           <div className="form-control ms-3 me-3">
             <select

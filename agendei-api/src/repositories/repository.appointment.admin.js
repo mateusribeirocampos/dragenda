@@ -1,6 +1,6 @@
 import { query } from "../database/sqlite.js";
 
-async function Listar(id_user, dt_start, dt_end, id_doctor) {
+async function Listar(id_user, startDate, endDate, id_doctor) {
 
   let filtro = [];
 
@@ -16,12 +16,12 @@ where a.id_appointment > 0`;
     filtro.push(id_user);
     sql += " and a.id_user = ? "
   }
-  if(dt_start) {
-    filtro.push(dt_start);
+  if(startDate) {
+    filtro.push(startDate);
     sql += " and a.booking_date >= ? "
   }
-  if(dt_end) {
-    filtro.push(dt_end);
+  if(endDate) {
+    filtro.push(endDate);
     sql += " and a.booking_date <= ? "
   }
   if(id_doctor) {
