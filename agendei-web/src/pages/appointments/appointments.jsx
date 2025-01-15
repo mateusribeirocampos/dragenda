@@ -1,6 +1,6 @@
 import "./appointments.css";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../../components/navbar/navbar";
+import Navbar from "../../components/navbar/navbar.jsx";
 import Appointment from "../../components/appointment/appoitment.jsx";
 import { useEffect, useState } from "react";
 import api from "../../constants/api.js";
@@ -19,7 +19,7 @@ function Appointments() {
   }
 
   function ClickDelete(id_appointment) {
-    console.log("Excluir " + id_appointment);
+    console.log("/appointments/delete/" + id_appointment);
   }
 
   async function LoadDoctors() {
