@@ -7,16 +7,16 @@ async function Listar(name) {
   return doctors;
 }
 
-async function Inserir(name, specialty, icon) {
+async function Inserir(name, specialty, icon, crm, telefone, ativo) {
 
-  const doctor = await repoDoctor.Inserir(name, specialty, icon);
+  const doctor = await repoDoctor.Inserir(name, specialty, icon, crm, telefone, ativo);
 
   return doctor;
 }
 
-async function Editar(id_doctor, name, specialty, icon) {
+async function Editar(id_doctor, name, specialty, icon, crm, telefone, ativo) {
   
-    const doctor = await repoDoctor.Editar(id_doctor, name, specialty, icon);
+    const doctor = await repoDoctor.Editar(id_doctor, name, specialty, icon, crm, telefone, ativo);
   
     return doctor;
 }

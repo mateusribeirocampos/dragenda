@@ -22,20 +22,20 @@ async function Listar(name) {
   return doctors;
 }
 
-async function Inserir(name, specialty, icon) {
-  let sql = `insert into doctors(name, specialty, icon) values(?, ?, ?)
+async function Inserir(name, specialty, icon, crm, telefone, ativo) {
+  let sql = `insert into doctors(name, specialty, icon, crm, telefone, ativo) values(?, ?, ?, ?, ?, ?)
   returning id_doctor`;
 
-  const doctor = await query(sql, [name, specialty, icon]);
+  const doctor = await query(sql, [name, specialty, icon, crm, telefone, ativo]);
 
   return doctor[0];
 }
 
-async function Editar(id_doctor, name, specialty, icon) {
-  let sql = `update doctors set name=?, specialty=?, icon=?
+async function Editar(id_doctor, name, specialty, icon, crm, telefone, ativo) {
+  let sql = `update doctors set name=?, specialty=?, icon=?, crm=?, telefone=?, ativo=?
 where id_doctor = ?`;
 
-  await query(sql, [name, specialty, icon, id_doctor]);
+  await query(sql, [name, specialty, icon, crm, telefone, ativo, id_doctor]);
 
   return { id_doctor };
 }
