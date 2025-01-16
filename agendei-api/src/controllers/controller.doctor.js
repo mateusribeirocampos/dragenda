@@ -15,9 +15,9 @@ async function Inserir(req, res) {
   const icon = req.body.icon;
   */
 
-  const {name, specialty, icon} = req.body;
+  const {name, specialty, icon, crm, telefone, ativo} = req.body;
 
-  const doctor = await serviceDoctor.Inserir(name, specialty, icon);
+  const doctor = await serviceDoctor.Inserir(name, specialty, icon, crm, telefone, ativo);
 
   res.status(201).json(doctor);
 }
@@ -26,9 +26,9 @@ async function Editar(req, res) {
 
   const id_doctor = req.params.id_doctors;
   
-  const {name, specialty, icon} = req.body;
+  const {name, specialty, icon, crm, telefone, ativo} = req.body;
 
-  const doctor = await serviceDoctor.Editar(id_doctor, name, specialty, icon);
+  const doctor = await serviceDoctor.Editar(id_doctor, name, specialty, icon, crm, telefone, ativo);
 
   res.status(200).json(doctor);
 }
