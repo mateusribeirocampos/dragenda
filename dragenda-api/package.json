@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "agendei-api",
+  "name": "dragenda-api",
   "version": "1.0.0",
-  "Description": "API para o projeto Agendei",
+  "Description": "API para o projeto DrAgenda",
   "type": "module",
   "main": "index.js",
   "scripts": {
