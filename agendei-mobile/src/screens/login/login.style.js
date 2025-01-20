@@ -1,4 +1,4 @@
-import { COLORS, FONT_SIZE } from "../../constants/theme.js"
+import { COLORS } from "../../constants/theme.js"
 
 export const styles = {
   container: {
@@ -14,8 +14,9 @@ export const styles = {
   },
 
   logo: {
-    width: 100,
-    height: 23,
+    marginTop: 100,
+    width: 250,
+    height: 100,
   }, 
 
   containerInput: {
