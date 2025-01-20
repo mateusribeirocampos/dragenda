@@ -18,7 +18,7 @@ function Main() {
           headerTitleAlign: "center",
           headerTitle: () => {
             return (
-              <Image source={icon.logo} style={{ width: 125, height: 29 }} />
+              <Image source={icon.logo} style={{ width: 125, height: 40 }} />
             );
           },
           tabBarIcon: ({ focused }) => {
@@ -43,7 +43,7 @@ function Main() {
           headerTitleAlign: "center",
           headerTitle: () => {
             return (
-              <Image source={icon.logo} style={{ width: 125, height: 29 }} />
+              <Image source={icon.logo} style={{ width: 125, height: 40 }} />
             );
           },
           tabBarShowLabel: false,
@@ -69,7 +69,7 @@ function Main() {
           headerTitleAlign: "center",
           headerTitle: () => {
             return (
-              <Image source={icon.logo} style={{ width: 125, height: 29 }} />
+              <Image source={icon.logo} style={{ width: 125, height: 40 }} />
             );
           },
           tabBarShowLabel: false,
