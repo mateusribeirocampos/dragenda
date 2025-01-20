@@ -1,8 +1,8 @@
-# Agendei Mobile 📱⏰
+# DrAgenda Mobile 📱⏰
 
 ## Descrição do Projeto
 
-Agendei é um aplicativo móvel desenvolvido para simplificar o processo de agendamento de serviços, oferecendo uma solução prática e intuitiva para usuários e prestadores de serviço.
+Dr.Agenda é um aplicativo móvel desenvolvido para simplificar o processo de agendamento de serviços, oferecendo uma solução prática e intuitiva para usuários e prestadores de serviço.
 
 ## Funcionalidades Principais 🚀
 
@@ -50,13 +50,13 @@ Agendei é um aplicativo móvel desenvolvido para simplificar o processo de agen
 Clone o repositório
 
 ```bash
-git clone https://github.com/mateusribeirocampos/agendei-mobile.git
+git clone https://github.com/mateusribeirocampos/dragenda.git
 ```
 
 ## Instale as dependências
 
 ```bash
-cd agendei-mobile
+cd dragenda
 npm install
 # ou
 yarn install
@@ -80,7 +80,7 @@ expo start
 1. Faça um fork do projeto:
 
    ```bash
-   git fork https://github.com/mateusribeirocampos/agendei-mobile.git
+   git fork https://github.com/mateusribeirocampos/dragenda.git
    ```
 
 2. Crie uma branch para sua nova funcionalidade ou correção:

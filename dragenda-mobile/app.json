@@ -1,8 +1,8 @@
 {
   "expo": {
     "sdkVersion": "52.0.0",
-    "name": "agendei-mobile",
-    "slug": "agendei-mobile",
+    "name": "dragenda-mobile",
+    "slug": "dragenda-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
