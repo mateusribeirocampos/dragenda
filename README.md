@@ -1,4 +1,4 @@
-# DrAgenda Mobile 📱⏰
+# Dr.Agenda Mobile 📱⏰
 
 ## Descrição do Projeto
 
@@ -38,14 +38,14 @@ Dr.Agenda é um aplicativo móvel desenvolvido para simplificar o processo de ag
 
 - JWT (JSON Web Tokens)
 
-## Pré-requisitos  📦
+## Pré-requisitos 📦
 
 - Node.js (versão 14 ou superior)
 - npm ou Yarn
 - Expo CLI
 - Dispositivo móvel ou emulador (Android/iOS)
 
-## Instalação  🔧
+## Instalação 🔧
 
 Clone o repositório
 
@@ -75,7 +75,7 @@ expo start
 - Criação de interface responsiva e intuitiva
 - Integração com backend RESTful
 
-## Como Contribuir 🤝  
+## Como Contribuir 🤝
 
 1. Faça um fork do projeto:
 
@@ -110,11 +110,11 @@ expo start
 
 7. Aguarde a revisão e feedback dos mantenedores do projeto.
 
-## Status do Projeto 📌  
+## Status do Projeto 📌
 
 ### 🚧 Em desenvolvimento contínuo 🚧
 
-## Licença📄  
+## Licença📄
 
 Este projeto está sob a licença GNU AFFERO GENERAL PUBLIC LICENSE.
 Veja o arquivo LICENSE para mais detalhes.
