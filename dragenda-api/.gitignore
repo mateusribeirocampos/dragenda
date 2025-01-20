@@ -39,3 +39,6 @@ android/
 # Sistema operacional
 .DS_Store
 Thumbs.db
+
+#database backup
+databaseBackup/
