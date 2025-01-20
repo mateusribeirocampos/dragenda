@@ -5,3 +5,7 @@
 .active:hover {
   text-decoration: underline;
 }
+
+.bg-primary {
+  background-color: #0092b2 !important;
+}
