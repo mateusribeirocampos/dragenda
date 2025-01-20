@@ -13,3 +13,23 @@
 .logo {
   width: 400px;
 }
+
+.btn-primary {
+  background-color: #0092b2 !important;
+  border-color: #0092b2 !important;
+}
+
+.btn-primary:hover {
+  background-color: #007a94 !important;
+  border-color: #007a94 !important;
+}
+
+a {
+  color: #0092b2;
+  text-decoration: none; 
+}
+
+a:hover {
+  color: #007a94; 
+  text-decoration: underline; 
+}

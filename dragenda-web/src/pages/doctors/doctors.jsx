@@ -29,6 +29,7 @@ function Doctors() {
 
   useEffect(() => {
     LoadDoctors();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -78,7 +79,7 @@ function Doctors() {
                     specialty={doc.specialty}
                     crm={doc.crm}
                     telefone={doc.telefone}
-                    ativo={doc.ativo}/>
+                    ativo={doc.ativo === 1 ? "sim" : "não"}/>
                 );
               })}
           </tbody>
