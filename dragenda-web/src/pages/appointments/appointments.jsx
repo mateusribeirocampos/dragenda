@@ -49,6 +49,7 @@ function Appointments() {
       const response = await api.get("/doctors");
 
       if (response.data) {
+        console.log("LoadDoctors...")
         console.log(response.data);
         setDoctors(response.data);
       }

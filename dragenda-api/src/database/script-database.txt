@@ -16,7 +16,10 @@ create table doctors (
     id_doctor  INTEGER PRIMARY KEY AUTOINCREMENT,
     name       VARCHAR (50),
     specialty  VARCHAR (50),
-    icon       VARCHAR (10) 
+    icon       VARCHAR (10),
+    crm        VARCHAR (10),
+	telefone   VARCHAR (10),
+    ativo      VARCHAR (10),
 );
 
 create table services (

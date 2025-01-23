@@ -5,6 +5,7 @@ import controllerUser from "./controllers/controller.user.js";
 import controllerAppointment from "./controllers/controller.appointment.js";
 import controllerAdmin from "./controllers/controller.admin.js";
 import controllerAppointmentAdmin from "./controllers/controller.appointment.admin.js";
+import controllerDoctorAdmin from "./controllers/controller.doctor.admin.js";
 import jwt from "./token.js";
 import dotenv from 'dotenv';
 import { loginLimiter, trackLoginAttempts, resetLoginAttempts } from "./middlewares/rateLimit.js";
@@ -61,5 +62,6 @@ router.delete("/appointments/:id_appointment", jwt.ValidateToken, controllerAppo
 router.post("/admin/register", controllerAdmin.InserirAdmin);
 router.post("/admin/login", loginLimiter, resetLoginAttempts, trackLoginAttempts, controllerAdmin.LoginAdmin);
 router.get("/admin/appointments", jwt.ValidateToken, controllerAppointmentAdmin.Listar);
+router.get("/admin/doctors", jwt.ValidateToken, controllerDoctorAdmin.Listar);
 
 export default router;
