@@ -1,11 +1,15 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from "../../components/navbar/navbar.jsx";
 import { doctors, doctors_services } from "../../constants/data.js";
 
-function AppointmentAdd() {
-  const { id_appointment } = useParams(); // id_appointment is a parameter
-  // Example of URL: http://localhost:3000/appointments/edit/1
-  // In this case, id_appointment is 1
+function DoctorEdit() {
+
+  async function LoadEdit() {
+    console.log("Load edition...");
+  }
+
+
+
   return (
     <div>
       <Navbar />
@@ -14,7 +18,7 @@ function AppointmentAdd() {
         <div className="row col-lg-4 offset-lg-4">
           <div className="col-12 mt-2">
             <h2>
-              {id_appointment > 0 ? "Editar Agendamento" : "Novo Agendamento"} {/*// If id_appointment is greater than 0, it will be displayed "Edit Appointment", otherwise "New Appointment" */}
+              Editar Médico
             </h2>
           </div>
 
@@ -54,39 +58,68 @@ function AppointmentAdd() {
             </div>
           </div>
 
-          <div className="col-6 mt-3">
-            <label htmlFor="bookingDate" className="form-label">
-              Data
-            </label>
-            <input
-              type="date"
-              className="form-control"
-              name="bookingDate"
-              id="bookingDate"
-            />
-          </div>
-          <div className="col-6 mt-3">
-            <label htmlFor="bookingDate" className="form-label">
-              Horário
+          <div className="col-12 mt-3">
+            <label htmlFor="service" className="form-label">
+              CRM
             </label>
             <div className="form-control mb-2">
-              <select name="bookingHour" id="bookingHour">
-                <option value="0">Horário</option>
-                <option value="09:00">09:00</option>
-                <option value="09:30">09:30</option>
-                <option value="10:00">10:00</option>
-                <option value="10:30">10:30</option>
-                <option value="11:00">11:00</option>
-                <option value="11:30">11:30</option>
+              <select name="service" id="service">
+                <option value="0">Selecione o CRM</option>
+                {doctors_services.map((d) => {
+                  return (
+                    <option key={d.id_service} value={d.id_service}>
+                      {d.description}
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </div>
+
+          <div className="col-12 mt-3">
+            <label htmlFor="service" className="form-label">
+              Telefone
+            </label>
+            <div className="form-control mb-2">
+              <select name="service" id="service">
+                <option value="0">Selecione telefone</option>
+                {doctors_services.map((d) => {
+                  return (
+                    <option key={d.id_service} value={d.id_service}>
+                      {d.description}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          </div>
+
+          <div className="col-12 mt-3">
+            <label htmlFor="service" className="form-label">
+              Ativo
+            </label>
+            <div className="form-control mb-2">
+              <select name="service" id="service">
+                <option value="0">Médico ativo ?</option>
+                {doctors_services.map((d) => {
+                  return (
+                    <option key={d.id_service} value={d.id_service}>
+                      {d.description}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          </div>
+
           <div className="col-12 mt-4">
             <div className="d-flex justify-content-end">
               <Link to="/appointments" className="btn btn-outline-primary me-2">
                 Cancelar
               </Link>
-              <button className="btn btn-primary">Salvar dados</button>
+              <button 
+              onClick={LoadEdit}
+              className="btn btn-primary">Salvar dados</button>
             </div>
           </div>
         </div>
@@ -95,4 +128,4 @@ function AppointmentAdd() {
   );
 }
 
-export default AppointmentAdd;
+export default DoctorEdit;

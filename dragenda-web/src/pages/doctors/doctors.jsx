@@ -9,6 +9,15 @@ import api from "../../constants/api.js";
 function Doctors() {
   const navigate = useNavigate();
   const [doctors, setDoctors] = useState([]);
+  const [nameDoctor, setNameDoctor] = useState("");
+
+  function ClickEdit(id_doctor) {
+    navigate("/doctors/edit/" + id_doctor);
+  }
+
+  function ClickDelete(id_doctor) {
+    console.log("/doctors/delete/" + id_doctor);
+  }
 
   async function LoadDoctors() {
     console.log("LoadDoctors...");
@@ -27,8 +36,39 @@ function Doctors() {
     }
   }
 
+  async function ListDoctor() {
+    console.log("ListDoctor...");
+    if(!nameDoctor) {
+      return LoadDoctors();
+    }
+    try {
+      const response = await api.get("/admin/doctors", {
+        params: {
+          name: nameDoctor
+        },
+      });
+
+      if (response.data){
+        console.log(response.data)
+        setDoctors(response.data);
+      }
+    } catch (error) {
+      if (error.response?.data.error)
+        if (error.response.status === 401) {
+          return navigate("/");
+        } else alert("Erro ao listar os médicos");
+    }
+  }
+
+  function ChangeDoctor(e) {
+    console.log(e.target.value);
+    setNameDoctor(e.target.value);
+
+  }
+
   useEffect(() => {
     LoadDoctors();
+    ListDoctor();
         // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -46,12 +86,28 @@ function Doctors() {
 
         <div className="d-flex justify-content-end ms-5 me-2">
           <div className="form-control justify-content-end ms-5 me-1">
-            <select name="doctors" id="doctors">
+            <select 
+            name="doctors" 
+            id="doctors"
+            value={nameDoctor}
+            onChange={ChangeDoctor}
+            >
               <option value="">Busca por nome do médico</option>
+
+              {doctors.map((docs) => {
+                return (
+                  <option key={docs.id_doctor} value={docs.name}>
+                    {docs.name}
+                  </option>
+                );
+              })};
             </select>
           </div>
           <div className="d-grid gap-2">
-            <button className="btn btn-primary ms-2 me-2" type="button">
+            <button
+            onClick={ListDoctor} 
+            className="btn btn-primary ms-2 me-2" 
+            type="button">
               Filtrar
             </button>
           </div>
@@ -79,7 +135,9 @@ function Doctors() {
                     specialty={doc.specialty}
                     crm={doc.crm}
                     telefone={doc.telefone}
-                    ativo={doc.ativo === 1 ? "sim" : "não"}/>
+                    ativo={doc.ativo ? "Sim" : "Não"}
+                    clickEdit={ClickEdit}
+                    clickDelete={ClickDelete}/>
                 );
               })}
           </tbody>

@@ -1,12 +1,11 @@
 import { useState } from "react";
 import Navbar from "../../components/navbar/navbar.jsx";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import api from "../../constants/api.js";
 import ErrorMessage from "../../components/error/errorMessage.jsx";
 import SucessMessage from "../../components/sucess/sucessMessage.jsx";
 
-function Doctoradd() {
-  const { id_doctor } = useParams();
+function DoctorNew() {
 
   const [nameDoctor, setNameDoctor] = useState("");
   const [specialtyDoc, setSpecialtyDoc] = useState("");
@@ -44,10 +43,7 @@ function Doctoradd() {
       <div className="container-fluid mt-page">
         <div className="row col-lg-4 offset-lg-4">
           <div className="col-12 mt-2">
-            <h2>
-              {id_doctor > 0 ? "Editar Médico" : "Novo Médico"}{" "}
-              {/*// If id_appointment is greater than 0, it will be displayed "Edit Appointment", otherwise "New Appointment" */}
-            </h2>
+            <h2>Novo Médico</h2>
           </div>
 
           <div className="col-12 mt-4">
@@ -179,4 +175,4 @@ function Doctoradd() {
   );
 }
 
-export default Doctoradd;
+export default DoctorNew;
