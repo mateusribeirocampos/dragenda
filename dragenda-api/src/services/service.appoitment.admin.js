@@ -6,4 +6,25 @@ async function Listar(id_user, startDate, endDate, id_doctor) {
   return appointments;
 }
 
-export default { Listar };
+async function ListarId(id_appointment) {
+
+  const appointments = await repoAppointmentAdmin.ListarId(id_appointment);
+
+  return appointments;
+}
+
+async function InserirAdmin(id_user, id_doctor, id_service, booking_date, booking_hour) {
+
+  const appointment = await repoAppointmentAdmin.InserirAdmin(id_user, id_doctor, id_service, booking_date, booking_hour);
+
+  return appointment;
+}
+
+async function EditarAdmin(id_appointment, id_user, id_doctor, id_service, booking_date, booking_hour) {
+
+  const appointment = await repoAppointmentAdmin.EditarAdmin(id_appointment, id_user, id_doctor, id_service, booking_date, booking_hour);
+
+  return appointment;
+}
+
+export default { Listar, ListarId, InserirAdmin, EditarAdmin };
