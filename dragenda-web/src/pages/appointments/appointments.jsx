@@ -22,6 +22,8 @@ function Appointments() {
     console.log("/appointments/delete/" + id_appointment);
   }
 
+  
+
   async function LoadDoctors() {
     console.log("LoaDoctors...");
     try {

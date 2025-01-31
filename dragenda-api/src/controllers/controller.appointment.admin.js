@@ -9,4 +9,32 @@ async function Listar(req, res) {
   res.status(200).json(appointments);
 }
 
-export default { Listar };
+async function ListarId(req, res) {
+
+  const id_appointment = req.params.id_appointment;
+  const appointments = await serviceAppointmentAdmin.ListarId(id_appointment);
+
+  res.status(200).json(appointments);
+
+}
+
+async function InserirAdmin(req, res) {
+
+  const {id_user, id_doctor, id_service, booking_date, booking_hour} = req.body;
+
+  const appointment = await serviceAppointmentAdmin.InserirAdmin(id_user, id_doctor, id_service, booking_date, booking_hour);
+
+  res.status(201).json(appointment);
+}
+
+async function EditarAdmin(req, res) {
+
+  const id_appointment = req.params.id_appointment;
+  const { id_user, id_doctor, id_service, booking_date, booking_hour } = req.body;
+
+  const appointment = await serviceAppointmentAdmin.EditarAdmin(id_appointment, id_user, id_doctor, id_service, booking_date, booking_hour);
+
+  res.status(200).json(appointment);
+
+}
+export default { Listar, ListarId, InserirAdmin, EditarAdmin };
