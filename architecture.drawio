@@ -1,0 +1,47 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36" version="26.0.10">
+  <diagram name="System Architecture" id="cpYRCfG9p_vg8DoqxbuE">
+    <mxGraphModel dx="1023" dy="964" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="uRSA0Eli72MOeJHG8qZt-1" value="Cloud Hosting (AWS)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="450" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="uRSA0Eli72MOeJHG8qZt-2" value="React Frontend" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#fff2cc;gradientColor=#ffd966;strokeColor=#d6b656;" vertex="1" parent="uRSA0Eli72MOeJHG8qZt-1">
+          <mxGeometry y="30" width="450" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uRSA0Eli72MOeJHG8qZt-3" value="React 18&#xa;React Router&#xa;Axios" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;" vertex="1" parent="uRSA0Eli72MOeJHG8qZt-2">
+          <mxGeometry y="30" width="450" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="uRSA0Eli72MOeJHG8qZt-4" value="Node.js Backend" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#b1ddf0;strokeColor=#10739e;" vertex="1" parent="uRSA0Eli72MOeJHG8qZt-1">
+          <mxGeometry y="150" width="450" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uRSA0Eli72MOeJHG8qZt-5" value="Express.js&#xa;JWT Authentication&#xa;SQLiteStudio Client" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;" vertex="1" parent="uRSA0Eli72MOeJHG8qZt-4">
+          <mxGeometry y="30" width="450" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="uRSA0Eli72MOeJHG8qZt-6" value="sqlitestudio Database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#bac8d3;strokeColor=#23445d;" vertex="1" parent="uRSA0Eli72MOeJHG8qZt-1">
+          <mxGeometry y="270" width="450" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="uRSA0Eli72MOeJHG8qZt-7" value="External Services" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="560" y="200" width="200" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="uRSA0Eli72MOeJHG8qZt-8" value="í ½í³§ Email Service&#xa;(SendGrid)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;" vertex="1" parent="uRSA0Eli72MOeJHG8qZt-7">
+          <mxGeometry y="30" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uRSA0Eli72MOeJHG8qZt-9" value="í ½í³± SMS Service&#xa;(Twilio)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;" vertex="1" parent="uRSA0Eli72MOeJHG8qZt-7">
+          <mxGeometry y="90" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uRSA0Eli72MOeJHG8qZt-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="uRSA0Eli72MOeJHG8qZt-2" target="uRSA0Eli72MOeJHG8qZt-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="530" y="250" />
+              <mxPoint x="550" y="250" />
+              <mxPoint x="550" y="330" />
+              <mxPoint x="305" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
