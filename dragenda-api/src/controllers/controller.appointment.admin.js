@@ -11,7 +11,7 @@ async function Listar(req, res) {
 
 async function ListarId(req, res) {
 
-  const id_appointment = req.query.id_appointment;
+  const { id_appointment } = req.body;
   const appointments = await serviceAppointmentAdmin.ListarId(id_appointment);
 
   res.status(200).json(appointments);
