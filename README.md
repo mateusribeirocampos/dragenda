@@ -1,120 +1,229 @@
-# Dr.Agenda Mobile 📱⏰
+# Dragenda - Medical Appointment Management System
 
-## Descrição do Projeto
+[![React](https://img.shields.io/badge/React-18.3.1-blue)](https://react.dev/)
+[![React Native](https://img.shields.io/badge/React%20Native-0.76.6-blue)](https://reactnative.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-18.17.1-green)](https://nodejs.org/)
+[![SQLite](https://img.shields.io/badge/SQLite-3.44.2-blue)](https://www.sqlite.org/)
+[![Expo](https://img.shields.io/badge/Expo-52.0.25-lightgrey)](https://expo.dev/)
 
-Dr.Agenda é um aplicativo móvel desenvolvido para simplificar o processo de agendamento de serviços, oferecendo uma solução prática e intuitiva para usuários e prestadores de serviço.
+## Architecture
 
-## Funcionalidades Principais 🚀
+```mermaid
+graph TD
+    A["API (Node.js)"] -- Commands --> B["Frontend (React)"]
+    A -- Commands --> C["Mobile App (React Native)"]
+    A -- "Interacts with" --> D["Database (SQLite Studio)"]
+```
 
-### Agendamento de serviços
+A modern cross-platform application for managing medical appointments, built with cutting-edge technologies to streamline healthcare scheduling.
 
-- Gerenciamento de horários
-- Perfil de usuário
-- Autenticação e autorização
-- Interface responsiva e amigável
+## ✨ Features
 
-### Tecnologias Utilizadas 🛠
+### Patient Features
 
-#### Frontend
+- 🗓️ Intuitive appointment scheduling
+- 👨⚕️ Doctor/service selection with real-time availability
+- 📱 Mobile-first responsive design (iOS/Android)
+- 🔐 JWT-based authentication
+- 📅 Interactive appointment calendar
 
-- React Native
-- Expo
+### Admin Features
 
-#### Backend
+- 📊 Comprehensive dashboard
+- 👥 User/doctor management
+- 📈 Appointment analytics
+- ⚙️ Service configuration
+- 🔔 Push notifications
 
-- Node.js
+## Components
 
-## Bibliotecas Principais
+```mermaid
 
-- React Navigation
-- Axios
-- Styled Components
+flowchart TD
+    A[Frontend Web] -->|Axios| B[API]
+    C[Mobile App] -->|HTTP| B
+    B -->|SQLite| D[(Database)]
+    B -->|JWT| E[Auth Service]
+    B -->|Rate Limiter| F[Security]
+```
 
-## Gerenciamento de Estado
+## 🛠️ Technical Stack
 
-- Context API
+### Frontend Applications
 
-## Autenticação
+| Component        | Technology       | Key Dependencies                      |
+|------------------|------------------|---------------------------------------|
+| Web Client       | React 18         | react-router-dom, axios, vite         |
+| Mobile Client    | React Native 0.76| expo, react-navigation, async-storage |
+| State Management | Context API      | react-native-calendars, moment        |
 
-- JWT (JSON Web Tokens)
+### Backend Services
 
-## Pré-requisitos 📦
+| Component        | Technology       | Key Dependencies               |
+|------------------|------------------|--------------------------------|
+| API Server       | Node.js/Express  | bcrypt, jsonwebtoken, sqlite3  |
+| Database         | SQLite           | express-rate-limit, cors       |
+| Authentication   | JWT              | dotenv                         |
 
-- Node.js (versão 14 ou superior)
-- npm ou Yarn
-- Expo CLI
-- Dispositivo móvel ou emulador (Android/iOS)
+## 🚀 Getting Started
 
-## Instalação 🔧
+### Prerequisites
 
-Clone o repositório
+- Node.js 18+
+- npm 9+
+- Expo CLI (for mobile)
+- SQLite Studio 3.4+
+
+### Installation
+
+1. Clone repository:
 
 ```bash
 git clone https://github.com/mateusribeirocampos/dragenda.git
-```
-
-## Instale as dependências
-
-```bash
 cd dragenda
-npm install
-# ou
-yarn install
 ```
 
-## Inicie o projeto
+Please read our Contribution Guidelines and Code of Conduct.
+
+### Dependencies for each component
 
 ```bash
-expo start
+# API
+cd dragenda-api && npm install
+
+# Web Client
+cd ../dragenda-web && npm install
+
+# Mobile Client
+cd ../dragenda-mobile && npm install
 ```
 
-## Principais Desafios Superados🌟
+### Configuration
 
-- Implementação de autenticação segura
-- Sincronização de agendamentos em tempo real
-- Criação de interface responsiva e intuitiva
-- Integração com backend RESTful
+API(.env)
 
-## Como Contribuir 🤝
+```env
+JWT_SECRET=your_secure_secret
+PORT=0000
+```
 
-1. Faça um fork do projeto:
+Web Client(.env)
 
-   ```bash
-   git fork https://github.com/mateusribeirocampos/dragenda.git
-   ```
+```env
+REACT_APP_API_URL=http://localhost:0000
+```
 
-2. Crie uma branch para sua nova funcionalidade ou correção:
+Mobile Clinet(app.config.js)
 
-   ```bash
-   git checkout -b feature/NovaFeature
-   ```
+```javascrit
+extra: {
+  API_URL: process.env.API_URL || 'http://localhost:3001',
+}
+```
 
-3. Faça as alterações desejadas no código.
+### Running the Application
 
-4. Commit suas mudanças com uma mensagem clara e descritiva:
+```bash
+cd dragenda-api && node --trace-warnings --watch src/index.js
+```
 
-   ```bash
-   git commit -m "Adiciona NovaFeature"
-   ```
+### Start Web Client
 
-5. Envie suas alterações para o repositório remoto:
+```bash
+cd dragenda-web && npm run dev
+```
 
-   ```bash
-   git push origin feature/NovaFeature
-   ```
+### Start Mobile Client
 
-6. Abra um Pull Request (PR) no repositório original:
+```bash
+cd dragenda-mobile && npx expo start
+```
 
-   - Inclua uma descrição detalhada das alterações feitas.
-   - Relacione quaisquer problemas ou melhorias relevantes.
+## Database Diagram
 
-7. Aguarde a revisão e feedback dos mantenedores do projeto.
+```mermaid
+erDiagram
+    USERS {
+        INTEGER id_user PK
+        VARCHAR name
+        VARCHAR email
+        VARCHAR password
+    }
 
-## Status do Projeto 📌
+    DOCTORS {
+        INTEGER id_doctor PK
+        VARCHAR name
+        VARCHAR specialty
+        VARCHAR crm
+    }
 
-### 🚧 Em desenvolvimento contínuo 🚧
+    SERVICES {
+        INTEGER id_service PK
+        VARCHAR description
+    }
 
-## Licença📄
+    DOCTOR_SERVICES {
+        INTEGER id_doctor_service PK
+        INTEGER id_doctor FK
+        INTEGER id_service FK
+        DECIMAL price
+    }
 
-Este projeto está sob a licença GNU AFFERO GENERAL PUBLIC LICENSE.
-Veja o arquivo LICENSE para mais detalhes.
+    APPOINTMENTS {
+        INTEGER id_appointment PK
+        INTEGER id_user FK
+        INTEGER id_doctor FK
+        INTEGER id_service FK
+        DATE booking_date
+        TIME booking_hour
+    }
+
+    ADMINS {
+        INTEGER id_admin PK
+        VARCHAR name
+        VARCHAR email
+        VARCHAR password
+    }
+
+    USERS ||--o{ APPOINTMENTS : "makes"
+    DOCTORS ||--o{ APPOINTMENTS : "has"
+    SERVICES ||--o{ APPOINTMENTS : "associated_with"
+    DOCTORS ||--o{ DOCTOR_SERVICES : "offers"
+    SERVICES ||--o{ DOCTOR_SERVICES : "available_in"
+    ADMINS ||--|| USERS : "manages"
+    ADMINS ||--|| DOCTORS : "manages" 
+    ADMINS ||--|| SERVICES : "manages"
+```
+
+### 🤝 Contributing
+
+#### Fork the repository
+
+#### Create feature branch
+
+```bash
+git checkout -b feature/amazing-feature
+Commit changes:
+````
+
+```bash
+git commit -m "feat: add amazing feature"
+Push to branch:
+````
+
+```bash
+git push origin feature/amazing-feature
+Open Pull Request
+```
+
+### 📄 License
+
+This project is licensed under the MIT License - see LICENSE file for details.
+
+### 🙏 Acknowledgments
+
+Inspired by real-world healthcare management systems
+
+UI components powered by React Bootstrap
+
+Authentication system based on JWT best practices
