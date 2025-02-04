@@ -1,4 +1,6 @@
-# Dragenda - Medical Appointment Management System
+# Dragenda - Doctor agenda - Medical Appointment Management 
+
+Digital healthcare revolutionizes the way we deliver and experience healthcare with a paradigm shift to more accessible, personalized and efficient approaches for all. **Dragenda** is an online version of the medical appointment management system, allowing patients to schedule, modify or cancel medical appointments effortlessly. By eliminating the need for in-person visits to schedule appointments, these patient appointment system platforms enable patients to conveniently book and manage their appointments online. 
 
 [![React](https://img.shields.io/badge/React-18.3.1-blue)](https://react.dev/)
 [![React Native](https://img.shields.io/badge/React%20Native-0.76.6-blue)](https://reactnative.dev/)
@@ -216,14 +218,13 @@ git push origin feature/amazing-feature
 Open Pull Request
 ```
 
-### 📄 License
+## 📄 License
 
-This project is licensed under the MIT License - see LICENSE file for details.
+This project is licensed under GNU AFFERO GENERAL PUBLIC LICENSE -
+see [LICENSE](https://github.com/mateusribeirocampos/dragenda/tree/main?tab=AGPL-3.0-1-ov-file) file for details.
 
-### 🙏 Acknowledgments
+## 🙏 Acknowledgments
 
-Inspired by real-world healthcare management systems
+UI components powered by [React Bootstrap](https://react-bootstrap.netlify.app/)
 
-UI components powered by React Bootstrap
-
-Authentication system based on JWT best practices
+Authentication system based on [JWT](https://jwt.io/introduction) best practices

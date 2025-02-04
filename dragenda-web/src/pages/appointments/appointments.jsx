@@ -2,14 +2,14 @@ import "./appointments.css";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/navbar.jsx";
 import Appointment from "../../components/appointment/appoitment.jsx";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import api from "../../constants/api.js";
+import { useDoctors } from "../../hooks/useDoctors.js";
 
 function Appointments() {
   const navigate = useNavigate();
   const [appointments, setAppointments] = useState([]);
-  const [doctors, setDoctors] = useState([]);
-
+  const { doctors, LoadDoctors } = useDoctors();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [idDoctors, setIdDoctors] = useState("");
@@ -22,48 +22,31 @@ function Appointments() {
     console.log("/appointments/delete/" + id_appointment);
   }
 
-  
+  const LoadAppointment = useCallback(
+    async () => {
+      console.log("LoadAppointment...");
+      try {
+        const response = await api.get("/admin/appointments", {
+          params: {
+            id_doctor: idDoctors,
+            startDate: startDate,
+            endDate: endDate,
+          },
+        });
 
-  async function LoadDoctors() {
-    console.log("LoaDoctors...");
-    try {
-      const response = await api.get("/doctors");
-
-      if (response.data) {
-        console.log("LoadDoctors...")
-        console.log(response.data);
-        setDoctors(response.data);
+        if (response.data) {
+          console.log(response.data);
+          setAppointments(response.data);
+        }
+      } catch (error) {
+        if (error.response?.data.error)
+          if (error.response.status === 401) {
+            return navigate("/");
+          } else alert("Erro ao listar os agendamentos.");
       }
-    } catch (error) {
-      if (error.response?.data.error)
-        if (error.response.status === 401) {
-          return navigate("/");
-        } else alert("Erro ao listar os médicos.");
-    }
-  }
-
-  async function LoadAppointment() {
-    console.log("LoadAppointment...");
-    try {
-      const response = await api.get("/admin/appointments", {
-        params: {
-          id_doctor: idDoctors,
-          startDate: startDate,
-          endDate: endDate,
-        },
-      });
-
-      if (response.data) {
-        console.log(response.data);
-        setAppointments(response.data);
-      }
-    } catch (error) {
-      if (error.response?.data.error)
-        if (error.response.status === 401) {
-          return navigate("/");
-        } else alert("Erro ao listar os agendamentos.");
-    }
-  }
+    },
+    [navigate, endDate, idDoctors, startDate]
+  );
 
   function ChangeDoctor(e) {
     console.log(e.target.value);
@@ -73,8 +56,7 @@ function Appointments() {
   useEffect(() => {
     LoadDoctors();
     LoadAppointment();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [LoadDoctors, LoadAppointment]);
 
   return (
     <div className="container-fluid mt-page">
@@ -83,7 +65,10 @@ function Appointments() {
       <div className="d-flex justify-content-between align-items-center">
         <div>
           <h2 className="d-inline">Agendamentos</h2>
-          <Link to="/appointments/add" className="btn btn-outline-primary ms-3 mb-2">
+          <Link
+            to="/appointments/add"
+            className="btn btn-outline-primary ms-3 mb-2"
+          >
             Novo agendamento
           </Link>
         </div>
