@@ -1,6 +1,6 @@
 # Dragenda - Doctor agenda - Medical Appointment Management 
 
-Digital healthcare revolutionizes the way we deliver and experience healthcare with a paradigm shift to more accessible, personalized and efficient approaches for all. **Dragenda** is system online version of medical appointment management system, allowing patients to schedule, modify or cancel medical appointments effortlessly. By eliminating the need for in-person visits to schedule appointments, these patient appointment system platforms enable patients to conveniently book and manage their appointments online. 
+Digital healthcare revolutionizes the way we deliver and experience healthcare with a paradigm shift to more accessible, personalized and efficient approaches for all. **Dragenda** is an online version of the medical appointment management system, allowing patients to schedule, modify or cancel medical appointments effortlessly. By eliminating the need for in-person visits to schedule appointments, these patient appointment system platforms enable patients to conveniently book and manage their appointments online. 
 
 [![React](https://img.shields.io/badge/React-18.3.1-blue)](https://react.dev/)
 [![React Native](https://img.shields.io/badge/React%20Native-0.76.6-blue)](https://reactnative.dev/)
