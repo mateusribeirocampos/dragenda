@@ -6,23 +6,26 @@ import { Link, useParams } from "react-router-dom";
 import { Link, useNavigate, useParams } from "react-router-dom";
 >>>>>>> main
 import Navbar from "../../components/navbar/navbar.jsx";
-import { doctors, doctors_services } from "../../constants/data.js";
 import { useCallback, useEffect, useState } from "react";
 import api from "../../constants/api.js";
+import { useDoctors } from "../../hooks/useDoctors.js";
 
 function AppointmentAdd() {
   const navigate = useNavigate();
   const { id_appointment } = useParams(); // id_appointment is a parameter
   // Example of URL: http://localhost:3000/appointments/edit/1
   // In this case, id_appointment is 1
-  const [users, setUsers] = useState([]);
-
-  // variável de estado para armazenar os dados dos pacientes (users)
   const [idUser, setIdUser] = useState("");
+  const [users, setUsers] = useState([]);
+  const [services, setServices] = useState([]);
+  const { doctors, LoadDoctors } = useDoctors("");
+
   const [idDoctors, setIdDoctors] = useState("");
   const [idService, setIdService] = useState("");
   const [bookingDate, setBookingDate] = useState("");
   const [bookingHour, setBookingHour] = useState("");
+
+
 
   const LoadUsers = useCallback(
     async function LoadUsers() {
@@ -45,35 +48,57 @@ function AppointmentAdd() {
     [navigate]
   );
 
-  const LoadDoctors = useCallback(
-    async function LoadUsers() {
-      console.log("LoadDoctors...");
-      try {
-        const response = await api.get("/doctors");
+  async function SaveAppointment() {
 
-        if (response.data) {
-          console.log("LoadDoctors...");
-          console.log(response.data);
-          setUsers(response.data);
-        }
-      } catch (error) {
-        if (error.response?.data.error)
-          if (error.response.status === 401) {
-            return navigate("/");
-          } else alert("Erro ao listar os médicos.");
+    const json = {
+      id_doctor: idDoctors,
+      id_service: idService,
+      id_user: idUser,
+      booking_date: bookingDate,
+      booking_hour: bookingHour,
+    };
+    console.log("idDoctor: " + idDoctors, " idService: " +idService, " idUser: " + idUser, " bookingDate: " + bookingDate, " bookingHour: " + bookingHour );
+    try {
+      const response = await api.post("/admin/appointments", json);
+      if (response.data) {
+        navigate("/appointments");
       }
-    },
-    [navigate]
-  );
-  
-  function SaveAppointment() {
-    console.log(idUser, idDoctors, idService, bookingDate, bookingHour);
+    } catch (error) {
+      if (error.response?.data.error)
+        if (error.response.status === 401) {
+          return navigate("/");
+        } else alert("Erro ao sarvar dados.");
+    }
+  }
+
+  async function LoadServices(id) {
+    if (!id) {
+      return;
+    }
+    try {
+      const response = await api.get("/doctors/" + id + "/services");
+      console.log(response + " " + " " + response.data + " id: " + id);
+      if (response.data) {
+        setServices(response.data);
+      }
+    } catch (error) {
+      if (error.response?.data.error)
+        if (error.response.status === 401) {
+          return navigate("/");
+        } else alert("Erro ao listar serviços.");
+    }
   }
 
   useEffect(() => {
     LoadUsers();
-    LoadDoctors
+    LoadDoctors();
   }, [LoadUsers, LoadDoctors]);
+
+  useEffect(() => {
+    LoadServices(idDoctors);
+    console.log(idDoctors);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idDoctors]);
 
   return (
     <div>
@@ -146,10 +171,10 @@ function AppointmentAdd() {
                 onChange={(e) => setIdService(e.target.value)}
               >
                 <option value="0">Selecione o serviço</option>
-                {doctors_services.map((d) => {
+                {services.map((s) => {
                   return (
-                    <option key={d.id_service} value={d.id_service}>
-                      {d.description}
+                    <option key={s.id_service} value={s.id_service}>
+                      {s.description}
                     </option>
                   );
                 })}
@@ -196,7 +221,13 @@ function AppointmentAdd() {
               <Link to="/appointments" className="btn btn-outline-primary me-2">
                 Cancelar
               </Link>
-              <button onClick={SaveAppointment} className="btn btn-primary" type="button" >Salvar dados</button>
+              <button
+                onClick={SaveAppointment}
+                className="btn btn-primary"
+                type="button"
+              >
+                Salvar dados
+              </button>
             </div>
           </div>
         </div>
