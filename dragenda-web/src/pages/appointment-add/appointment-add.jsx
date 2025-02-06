@@ -2,24 +2,21 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../components/navbar/navbar.jsx";
 import { useCallback, useEffect, useState } from "react";
 import api from "../../constants/api.js";
-import { useDoctors } from "../../hooks/useDoctors.js";
 
 function AppointmentAdd() {
   const navigate = useNavigate();
   const { id_appointment } = useParams(); // id_appointment is a parameter
   // Example of URL: http://localhost:3000/appointments/edit/1
   // In this case, id_appointment is 1
-  const [idUser, setIdUser] = useState("");
   const [users, setUsers] = useState([]);
   const [services, setServices] = useState([]);
-  const { doctors, LoadDoctors } = useDoctors("");
+  const [doctors, setDoctors] = useState([]);
 
+  const [idUser, setIdUser] = useState("");
   const [idDoctors, setIdDoctors] = useState("");
   const [idService, setIdService] = useState("");
   const [bookingDate, setBookingDate] = useState("");
   const [bookingHour, setBookingHour] = useState("");
-
-
 
   const LoadUsers = useCallback(
     async function LoadUsers() {
@@ -42,8 +39,51 @@ function AppointmentAdd() {
     [navigate]
   );
 
-  async function SaveAppointment() {
+  const LoadAppointment = useCallback(async (id) => {
+    console.log("LoadEditAppointment...");
+    try {
+      const response = await api.get("/admin/appointments/" + id);
+      console.log("Dados do agendamento:", response.data); // Debug
+      if (response.data) {
+        console.log("carregar o usuario: ");
+        setIdUser(response.data.id_user);
+        setIdDoctors(response.data.id_doctor);
+        setIdService(response.data.id_service);
+        setBookingDate(response.data.booking_date);
+        setBookingHour(response.data.booking_hour);
+        console.log("Dados carregados:", {
+          idUser: (response.data.id_user),
+          idDoctors: (response.data.id_doctor),
+          idService: (response.data.id_service),
+        });
+      }
+    } catch (error) {
+      if (error.response?.data.error)
+        if (error.response.status === 401) {
+          return navigate("/");
+        } else alert("Erro ao listar serviços.");
+    }
+  },
+  [navigate]
+);
+  
+  const LoadDoctors = useCallback(async () => {
+    console.log("LoadDoctors...");
+    try {
+      const response = await api.get("/doctors");
+      setDoctors(response.data);
+      if (id_appointment > 0) {
+        LoadAppointment(id_appointment);
+      }
+    } catch (error) {
+      if (error.response?.data.error)
+        if (error.response.status === 401) {
+          return navigate("/");
+        } else alert("Erro ao carregar médicos");
+    }
+  }, [navigate, LoadAppointment, id_appointment]);
 
+  async function SaveAppointment() {
     const json = {
       id_doctor: idDoctors,
       id_service: idService,
@@ -51,7 +91,23 @@ function AppointmentAdd() {
       booking_date: bookingDate,
       booking_hour: bookingHour,
     };
-    console.log("idDoctor: " + idDoctors, " idService: " +idService, " idUser: " + idUser, " bookingDate: " + bookingDate, " bookingHour: " + bookingHour );
+
+    if (
+      idDoctors === "0" ||
+      idService === "0" ||
+      idUser === "0" ||
+      bookingDate === "" ||
+      bookingHour === "0"
+    ) {
+      return alert("Por favor, preencha todos os campos.");
+    }
+    console.log(
+      "idDoctor: " + idDoctors,
+      " idService: " + idService,
+      " idUser: " + idUser,
+      " bookingDate: " + bookingDate,
+      " bookingHour: " + bookingHour
+    );
     try {
       const response = await api.post("/admin/appointments", json);
       if (response.data) {
@@ -84,14 +140,19 @@ function AppointmentAdd() {
   }
 
   useEffect(() => {
-    LoadUsers();
-    LoadDoctors();
-  }, [LoadUsers, LoadDoctors]);
+    const loadData = async () => {
+    await LoadUsers();
+    await LoadDoctors();
+    };
+    loadData();
+  }, [LoadUsers, LoadDoctors, LoadAppointment]);
 
   useEffect(() => {
+    if (idDoctors){
     LoadServices(idDoctors);
     console.log(idDoctors);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idDoctors]);
 
   return (

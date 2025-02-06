@@ -9,10 +9,11 @@ import { useDoctors } from "../../hooks/useDoctors.js";
 function Appointments() {
   const navigate = useNavigate();
   const [appointments, setAppointments] = useState([]);
-  const { doctors, LoadDoctors } = useDoctors();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [idDoctors, setIdDoctors] = useState("");
+
+  const { doctors, LoadDoctors } = useDoctors();
 
   function ClickEdit(id_appointment) {
     navigate("/appointments/edit/" + id_appointment);
