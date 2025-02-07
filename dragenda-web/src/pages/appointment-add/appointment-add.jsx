@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../components/navbar/navbar.jsx";
 import { useCallback, useEffect, useState } from "react";
 import api from "../../constants/api.js";
+import { useDoctors } from "../../hooks/useDoctors.js";
 
 function AppointmentAdd() {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ function AppointmentAdd() {
   // In this case, id_appointment is 1
   const [users, setUsers] = useState([]);
   const [services, setServices] = useState([]);
-  const [doctors, setDoctors] = useState([]);
+  const { doctors, LoadDoctors } = useDoctors([]);
 
   const [idUser, setIdUser] = useState("");
   const [idDoctors, setIdDoctors] = useState("");
@@ -39,49 +40,34 @@ function AppointmentAdd() {
     [navigate]
   );
 
-  const LoadAppointment = useCallback(async (id) => {
-    console.log("LoadEditAppointment...");
-    try {
-      const response = await api.get("/admin/appointments/" + id);
-      console.log("Dados do agendamento:", response.data); // Debug
-      if (response.data) {
-        console.log("carregar o usuario: ");
-        setIdUser(response.data.id_user);
-        setIdDoctors(response.data.id_doctor);
-        setIdService(response.data.id_service);
-        setBookingDate(response.data.booking_date);
-        setBookingHour(response.data.booking_hour);
-        console.log("Dados carregados:", {
-          idUser: (response.data.id_user),
-          idDoctors: (response.data.id_doctor),
-          idService: (response.data.id_service),
-        });
+  const LoadAppointment = useCallback(
+    async (id) => {
+      console.log("LoadEditAppointment...");
+      try {
+        const response = await api.get("/admin/appointments/" + id);
+        console.log("Dados do agendamento:", response.data);
+        if (response.data) {
+          console.log("carregar o usuario: ");
+          setIdUser(response.data.id_user);
+          setIdDoctors(response.data.id_doctor);
+          setIdService(response.data.id_service);
+          setBookingDate(response.data.booking_date);
+          setBookingHour(response.data.booking_hour);
+          console.log("Dados carregados:", {
+            idUser: response.data.id_user,
+            idDoctors: response.data.id_doctor,
+            idService: response.data.id_service,
+          });
+        }
+      } catch (error) {
+        if (error.response?.data.error)
+          if (error.response.status === 401) {
+            return navigate("/");
+          } else alert("Erro ao listar serviços.");
       }
-    } catch (error) {
-      if (error.response?.data.error)
-        if (error.response.status === 401) {
-          return navigate("/");
-        } else alert("Erro ao listar serviços.");
-    }
-  },
-  [navigate]
-);
-  
-  const LoadDoctors = useCallback(async () => {
-    console.log("LoadDoctors...");
-    try {
-      const response = await api.get("/doctors");
-      setDoctors(response.data);
-      if (id_appointment > 0) {
-        LoadAppointment(id_appointment);
-      }
-    } catch (error) {
-      if (error.response?.data.error)
-        if (error.response.status === 401) {
-          return navigate("/");
-        } else alert("Erro ao carregar médicos");
-    }
-  }, [navigate, LoadAppointment, id_appointment]);
+    },
+    [navigate]
+  );
 
   async function SaveAppointment() {
     const json = {
@@ -109,7 +95,10 @@ function AppointmentAdd() {
       " bookingHour: " + bookingHour
     );
     try {
-      const response = await api.post("/admin/appointments", json);
+      const response = id_appointment > 0 ? await api.put("/admin/appointments/" + id_appointment, json) 
+      :
+      await api.post("/admin/appointments", json);
+
       if (response.data) {
         navigate("/appointments");
       }
@@ -141,17 +130,20 @@ function AppointmentAdd() {
 
   useEffect(() => {
     const loadData = async () => {
-    await LoadUsers();
-    await LoadDoctors();
+      await LoadUsers();
+      await LoadDoctors();
+      if (id_appointment > 0) {
+        LoadAppointment(id_appointment);
+      }
     };
     loadData();
-  }, [LoadUsers, LoadDoctors, LoadAppointment]);
+  }, [LoadUsers, LoadDoctors, LoadAppointment, id_appointment]);
 
   useEffect(() => {
-    if (idDoctors){
-    LoadServices(idDoctors);
-    console.log(idDoctors);
-  };
+    if (idDoctors) {
+      LoadServices(idDoctors);
+      console.log(idDoctors);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idDoctors]);
 
