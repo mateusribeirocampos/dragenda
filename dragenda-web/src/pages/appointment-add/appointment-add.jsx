@@ -95,7 +95,7 @@ function AppointmentAdd() {
       " bookingHour: " + bookingHour
     );
     try {
-      const response = id_appointment > 0 ? await api.put("/admin/appointments/" + id_appointment, json) 
+      const response = id_appointment > 0 ? await api.put("/admin/appointments/" + id_appointment, json)
       :
       await api.post("/admin/appointments", json);
 

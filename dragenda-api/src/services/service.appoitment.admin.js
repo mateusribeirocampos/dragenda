@@ -27,4 +27,11 @@ async function EditarAdmin(id_appointment, id_user, id_doctor, id_service, booki
   return appointment;
 }
 
-export default { Listar, ListarId, InserirAdmin, EditarAdmin };
+async function ExcluirAdmin(id_appointment) {
+
+  const appointment = await repoAppointmentAdmin.ExcluirAdmin(id_appointment);
+
+  return appointment;
+}
+
+export default { Listar, ListarId, InserirAdmin, EditarAdmin, ExcluirAdmin };
