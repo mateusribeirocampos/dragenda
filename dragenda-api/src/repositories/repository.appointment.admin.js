@@ -71,4 +71,13 @@ async function EditarAdmin(id_appointment, id_user, id_doctor, id_service, booki
   return { id_appointment };
 }
 
-export default { Listar, ListarId, InserirAdmin, EditarAdmin };
+async function ExcluirAdmin(id_appointment) {
+  let sql = `delete from appointments 
+  where id_appointment = ?`;
+
+  await query(sql, [id_appointment]);
+
+  return { id_appointment };
+}
+
+export default { Listar, ListarId, InserirAdmin, EditarAdmin, ExcluirAdmin };

@@ -5,48 +5,82 @@ import Appointment from "../../components/appointment/appoitment.jsx";
 import { useCallback, useEffect, useState } from "react";
 import api from "../../constants/api.js";
 import { useDoctors } from "../../hooks/useDoctors.js";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 function Appointments() {
   const navigate = useNavigate();
   const [appointments, setAppointments] = useState([]);
-  const { doctors, LoadDoctors } = useDoctors();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [idDoctors, setIdDoctors] = useState("");
+
+  const { doctors, LoadDoctors } = useDoctors();
 
   function ClickEdit(id_appointment) {
     navigate("/appointments/edit/" + id_appointment);
   }
 
   function ClickDelete(id_appointment) {
-    console.log("/appointments/delete/" + id_appointment);
+    confirmAlert({
+      title: "Exclusão",
+      message: "Confirme exlusão desse agendamento?",
+      buttons: [
+        {
+          label: "Sim",
+          onClick: () => DeleteAppointment(id_appointment),
+        },
+        {
+          label: "Não",
+          onClick: () => {},
+        },
+      ],
+    });
+    console.log(id_appointment);
   }
 
-  const LoadAppointment = useCallback(
-    async () => {
-      console.log("LoadAppointment...");
-      try {
-        const response = await api.get("/admin/appointments", {
-          params: {
-            id_doctor: idDoctors,
-            startDate: startDate,
-            endDate: endDate,
-          },
-        });
-
-        if (response.data) {
-          console.log(response.data);
-          setAppointments(response.data);
-        }
-      } catch (error) {
-        if (error.response?.data.error)
-          if (error.response.status === 401) {
-            return navigate("/");
-          } else alert("Erro ao listar os agendamentos.");
+  async function DeleteAppointment(id) {
+    console.log(id);
+    try {
+      const response = await api.delete("/admin/appointments/" + id);
+      console.log("/admin/appointments/" + id)
+      if (response.data) {
+        LoadAppointment();
       }
-    },
-    [navigate, endDate, idDoctors, startDate]
-  );
+    } catch (error) {
+      if (error.response?.data.error) {
+        if (error.response.status == 401) {
+          return navigate("/");
+        }
+        alert(error.response?.data.error);
+      } else {
+        alert("Erro ao excluir agendamento.");
+      }
+    }
+  }
+
+  const LoadAppointment = useCallback(async () => {
+    console.log("LoadAppointment...");
+    try {
+      const response = await api.get("/admin/appointments", {
+        params: {
+          id_doctor: idDoctors,
+          startDate: startDate,
+          endDate: endDate,
+        },
+      });
+
+      if (response.data) {
+        console.log(response.data);
+        setAppointments(response.data);
+      }
+    } catch (error) {
+      if (error.response?.data.error)
+        if (error.response.status === 401) {
+          return navigate("/");
+        } else alert("Erro ao listar os agendamentos.");
+    }
+  }, [navigate, endDate, idDoctors, startDate]);
 
   function ChangeDoctor(e) {
     console.log(e.target.value);
