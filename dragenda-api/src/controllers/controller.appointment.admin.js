@@ -11,7 +11,7 @@ async function Listar(req, res) {
 
 async function ListarId(req, res) {
 
-  const { id_appointment } = req.body;
+  const id_appointment = req.params.id_appointment;
   const appointments = await serviceAppointmentAdmin.ListarId(id_appointment);
 
   res.status(200).json(appointments);
@@ -37,4 +37,14 @@ async function EditarAdmin(req, res) {
   res.status(200).json(appointment);
 
 }
-export default { Listar, ListarId, InserirAdmin, EditarAdmin };
+
+async function ExcluirAdmin(req, res) {
+
+  const id_appointment = req.params.id_appointment;
+
+  const appointment = await serviceAppointmentAdmin.ExcluirAdmin(id_appointment);
+
+  res.status(200).json(appointment);
+
+}
+export default { Listar, ListarId, InserirAdmin, EditarAdmin, ExcluirAdmin };

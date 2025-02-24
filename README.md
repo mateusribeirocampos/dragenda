@@ -1,6 +1,6 @@
-# Dragenda - Doctor agenda - Medical Appointment Management 
+# Dragenda - Doctor agenda - Medical Appointment Management
 
-Digital healthcare revolutionizes the way we deliver and experience healthcare with a paradigm shift to more accessible, personalized and efficient approaches for all. **Dragenda** is an online version of the medical appointment management system, allowing patients to schedule, modify or cancel medical appointments effortlessly. By eliminating the need for in-person visits to schedule appointments, these patient appointment system platforms enable patients to conveniently book and manage their appointments online. 
+Digital healthcare revolutionizes the way we deliver and experience healthcare with a paradigm shift to more accessible, personalized and efficient approaches for all. **Dragenda** is an online version of the medical appointment management system, allowing patients to schedule, modify or cancel medical appointments effortlessly. By eliminating the need for in-person visits to schedule appointments, these patient appointment system platforms enable patients to conveniently book and manage their appointments online.
 
 [![React](https://img.shields.io/badge/React-18.3.1-blue)](https://react.dev/)
 [![React Native](https://img.shields.io/badge/React%20Native-0.76.6-blue)](https://reactnative.dev/)
@@ -66,6 +66,43 @@ flowchart TD
 | API Server       | Node.js/Express  | bcrypt, jsonwebtoken, sqlite3  |
 | Database         | SQLite           | express-rate-limit, cors       |
 | Authentication   | JWT              | dotenv                         |
+
+## App flow to user
+
+```mermaid
+
+flowchart TD
+  A[Mobile App] --> B{Alredy a 
+  register}
+  B -- Yes --> C[Enter email 
+  and password]
+  C --> b{Valid user 
+  credentilas ?}
+  B -- No --> G[Register]
+  b -- Yes --> H[user logged
+  sucessfully]
+  H --> D[Doctors list]
+  H --> E[Calendar]
+  H --> F[Profile]
+  b -- No --> I[Login failed]
+  I --> l{Forgot
+  password ?}
+  l -- Yes --> J[Reset
+  password]
+  l -- No --> C
+  G --> H
+  F --> Exit
+
+classDef red fill:#963946,stroke:#963946,stroke-width:4px;
+
+classDef blue fill:#395d96,stroke:#395d96,stroke-width:4px;
+
+classDef cyan fill:#326363,stroke:#326363,stroke-width:4px;
+
+  class b,l,B red
+  class C,D,E,F,G,H,J,I blue
+  class A,Exit cyan
+```
 
 ## 🚀 Getting Started
 

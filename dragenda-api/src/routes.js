@@ -68,5 +68,6 @@ router.get("/admin/users", jwt.ValidateToken, controllerUserAdmin.Listar);
 router.get("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointmentAdmin.ListarId);
 router.post("/admin/appointments/", jwt.ValidateToken, controllerAppointmentAdmin.InserirAdmin);
 router.put("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointmentAdmin.EditarAdmin);
+router.delete("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointmentAdmin.ExcluirAdmin);
 
 export default router;

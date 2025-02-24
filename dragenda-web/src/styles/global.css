@@ -16,3 +16,53 @@ select {
   cursor: pointer;
   width: 100%;
 }
+/* Customização do Confirm Alert */
+.react-confirm-alert-overlay {
+  background: rgba(160, 160, 160, 0.8) !important;
+  backdrop-filter: blur(5px);
+}
+
+.react-confirm-alert-body {
+  width: 100% !important;
+  max-width: 600px !important;
+  background: #ffffff !important;
+  border-radius: 15px !important;
+  padding: 2rem !important;
+  font-family: "Poppins" !important;
+}
+
+.react-confirm-alert-body h1 {
+  color: rgb(78, 77, 77) !important;
+  font-size: 1.5rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.react-confirm-alert-body > div:not(.react-confirm-alert-button-group) {
+  color: rgb(78, 77, 77) !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+.react-confirm-alert-button-group {
+  justify-content: flex-end !important;
+  gap: 1rem !important;
+  margin-top: 2rem !important;
+}
+
+.react-confirm-alert-button-group button {
+  border: none !important;
+  padding: 0.5rem 1.5rem !important;
+  border-radius: 5px !important;
+  font-family: "Poppins" !important;
+  transition: all 0.3s !important;
+}
+
+.react-confirm-alert-button-group button:first-child {
+  background: #303030 !important;
+  color: #ffffff !important;
+}
+
+.react-confirm-alert-button-group button:last-child {
+  background: #303030 !important;
+  color: #ffffff !important;
+}
