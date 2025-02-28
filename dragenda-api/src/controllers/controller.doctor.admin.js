@@ -8,4 +8,13 @@ async function Listar(req, res) {
   res.status(200).json(doctors);
 }
 
-export default { Listar };
+async function InserirDoctor(req, res) {
+
+  const {name, specialty, icon, crm, telefone, ativo} = req.body;
+
+  const doctor = await serviceDoctorAdmin.InserirDoctor(name, specialty, icon, crm, telefone, ativo);
+
+  res.status(201).json(doctor);
+}
+
+export default { Listar, InserirDoctor };

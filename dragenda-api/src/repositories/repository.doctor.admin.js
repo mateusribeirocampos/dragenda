@@ -23,4 +23,13 @@ async function Listar(name) {
   return doctors;
 }
 
-export default { Listar };
+async function InserirDoctor(name, specialty, icon, crm, telefone, ativo) {
+  let sql = `insert into doctors(name, specialty, icon, crm, telefone, ativo) values(?, ?, ?, ?, ?, ?)
+  returning id_doctor`;
+
+  const doctor = await query(sql, [name, specialty, icon, crm, telefone, ativo]);
+
+  return doctor[0];
+}
+
+export default { Listar, InserirDoctor };

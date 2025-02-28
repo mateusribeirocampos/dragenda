@@ -7,7 +7,7 @@ function Doctor(props) {
       <td>{props.specialty}</td>
       <td>{props.crm}</td>
       <td>{props.telefone}</td>
-      <td>{props.ativo}</td>
+      <td>{props.ativo ? "Sim" : "Não"}</td>
       <td className='text-end'>
         <div className='d-inline me-3'>
           <button onClick={() => props.clickEdit(props.id_doctor)}
@@ -31,7 +31,7 @@ Doctor.propTypes = {
   specialty: PropTypes.string.isRequired,
   crm: PropTypes.string.isRequired,
   telefone: PropTypes.string.isRequired,
-  ativo: PropTypes.bool.isRequired,
+  ativo: PropTypes.number.isRequired,
   id_doctor: PropTypes.number.isRequired,
   clickEdit: PropTypes.func.isRequired,
   clickDelete: PropTypes.func.isRequired

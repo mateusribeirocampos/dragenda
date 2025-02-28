@@ -85,11 +85,11 @@ function AppointmentAdd() {
     };
 
     if (
-      idDoctors === "0" ||
-      idService === "0" ||
-      idUser === "0" ||
-      bookingDate === "" ||
-      bookingHour === "0"
+      !idDoctors.trim() ||
+      !idService.trim() ||
+      !idUser.trim() ||
+      !bookingDate.trim() ||
+      !bookingHour.trim()
     ) {
       return alert("Por favor, preencha todos os campos.");
     }
@@ -110,9 +110,9 @@ function AppointmentAdd() {
       }
     } catch (error) {
       if (error.response?.data.error)
-        if (error.response.status === 401) {
+        if (error.response.status === 400) {
           return navigate("/");
-        } else alert("Erro ao sarvar dados.");
+        } else alert("Erro ao salvar dados.");
     }
   }
 
