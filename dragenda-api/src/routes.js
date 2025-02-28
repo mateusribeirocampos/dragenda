@@ -59,10 +59,19 @@ router.delete("/appointments/:id_appointment", jwt.ValidateToken, controllerAppo
 // Rotas do Admin
 router.post("/admin/register", controllerAdmin.InserirAdmin);
 router.post("/admin/login", loginLimiter, resetLoginAttempts, trackLoginAttempts, controllerAdmin.LoginAdmin);
-router.get("/admin/appointments", jwt.ValidateToken, controllerAppointmentAdmin.Listar);
-router.get("/admin/doctors", jwt.ValidateToken, controllerDoctorAdmin.Listar);
+
+// rotas do admin para users
 router.get("/admin/users", jwt.ValidateToken, controllerUserAdmin.Listar);
+
+// rotas do admin para doctors
+router.get("/admin/doctors", jwt.ValidateToken, controllerDoctorAdmin.Listar);
+router.post("/admin/doctors", jwt.ValidateToken, controllerDoctorAdmin.InserirDoctor);
+
+// rotas admin appointment get
+router.get("/admin/appointments", jwt.ValidateToken, controllerAppointmentAdmin.Listar);
 router.get("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointmentAdmin.ListarId);
+
+// rotas admin appointments post / put / delete
 router.post("/admin/appointments/", jwt.ValidateToken, controllerAppointmentAdmin.InserirAdmin);
 router.put("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointmentAdmin.EditarAdmin);
 router.delete("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointmentAdmin.ExcluirAdmin);

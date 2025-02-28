@@ -4,8 +4,7 @@ import Register from "./pages/register/register.jsx";
 import Appointments from "./pages/appointments/appointments.jsx";
 import AppointmentAdd from "./pages/appointment-add/appointment-add.jsx";
 import Doctors from "./pages/doctors/doctors.jsx"
-import DoctorNew from "./pages/doctor-new/doctor-new.jsx";
-import DoctorEdit from "./pages/doctor-edit/doctor-edit.jsx";
+import DoctorAdd from "./pages/doctor-add/doctor-add.jsx";
 
 
 function Rotas() {
@@ -19,9 +18,7 @@ function Rotas() {
         <Route path="/appointments/edit/:id_appointment" element={<AppointmentAdd />} />
         <Route path="/appointments/delete/:id_appointment" element={<AppointmentAdd />} />
         <Route path="/doctors" element={<Doctors />} />
-        <Route path="/doctors/edit/:id_doctor" element={<DoctorEdit/>} />
-        <Route path="/doctors/delete/:id_doctor" element={<Doctors/>} />
-        <Route path="/doctors/add" element={<DoctorNew />} />
+        <Route path="/doctors/add" element={<DoctorAdd />} />
       </Routes>
     </BrowserRouter>
   );

@@ -131,11 +131,12 @@ function Doctors() {
                 return (
                   <Doctor
                     key={doc.id_doctor}
+                    id_doctor={doc.id_doctor}
                     doctor={doc.name}
                     specialty={doc.specialty}
                     crm={doc.crm}
                     telefone={doc.telefone}
-                    ativo={doc.ativo ? "Sim" : "Não"}
+                    ativo={doc.ativo}
                     clickEdit={ClickEdit}
                     clickDelete={ClickDelete}/>
                 );
