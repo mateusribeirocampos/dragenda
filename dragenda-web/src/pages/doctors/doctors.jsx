@@ -135,8 +135,8 @@ function Doctors() {
                     doctor={doc.name}
                     specialty={doc.specialty}
                     crm={doc.crm}
-                    telefone={doc.telefone}
-                    ativo={doc.ativo}
+                    telefone={doc.phone}
+                    ativo={doc.active}
                     clickEdit={ClickEdit}
                     clickDelete={ClickDelete}/>
                 );

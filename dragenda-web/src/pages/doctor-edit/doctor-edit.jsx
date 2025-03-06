@@ -1,99 +1,93 @@
-import { Link, useNavigate } from "react-router-dom";
+import "./doctor-edit.css";
 import Navbar from "../../components/navbar/navbar.jsx";
-import { useState } from "react";
-import api from "../../constants/api.js";
-import { specialties } from "../../constants/specialties.js";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDoctors } from "../../hooks/useDoctors.js";
+//import Doctor from "../../components/doctor/doctor.jsx";
+//import api from "../../constants/api.js";
 
-function DoctorAdd() {
-  const navigate = useNavigate();
+
+export default function DoctorEdit() {
+  //const navigate = useNavigate("");
+
+  const { doctors, LoadDoctors } = useDoctors([]);
   
-  const [nameDoctor, setDoctorName] = useState("");
+  const [idDoctor, setIdDoctors] = useState("");
+  //const [nameDoctor, setDoctorName] = useState("");
   const [gender, setGender] = useState("");
   const [specialty, setSpecialty] = useState("");
   const [crm, setCrm] = useState("");
   const [phone, setPhone] = useState("");
   const [active, setActive] = useState("1");
 
+
   async function SaveDoctor() {
-    console.log("seving doctor...");
-    if (!/^\d{4,6}$/.test(crm)) {
-      return alert("CRM inválido! Use apenas números (4 a 6 dígitos)");
-    }
-
-    if (!gender) {
-      return alert("Por favor, selecione um gênero.");
-    }
-    const json = {
-      name: nameDoctor,
-      specialty: specialty,
-      crm: crm,
-      phone: phone,
-      icon: gender,
-      active: active === "1" ? true : false,
-    };
-    if (!nameDoctor.trim() || !specialty.trim() || !crm.trim() || !phone.trim() || !active) {
-      return alert("Por favor, preencha todos os campos.");
-    }
-    console.log(
-      "nameDoctor: " + nameDoctor,
-      "idService: " + specialty,
-      "CRM: " + crm,
-      "Phone: " + phone,
-      "icon: " + gender,
-      "Active: " + active
-    );
-
-    try {
-      const response = await api.post("/admin/doctors/", json);
-      if (response.data) {
-        navigate("/doctors");
-      }
-    } catch (error) {
-      if (error.response?.data.error) {
-        if (error.response.status === 400) {
-          return navigate("/");
-        } else alert("erro ao salvar médico: ");
-      }
-    }
+    
   }
+
+
+
+  useEffect(() => {
+    const loadData = async () => {
+      await LoadDoctors();
+    };
+    loadData();
+  },[LoadDoctors]);
 
   return (
     <div>
       <Navbar />
+
       <div className="container-fluid mt-page">
         <div className="row col-lg-4 offset-lg-4">
           <div className="col-12 mt-2">
-            <h2>Adicionar médico</h2>
+            <h2>Editar médico</h2>
           </div>
 
           <div className="col-12 mt-4">
             <label htmlFor="doctors" className="form-label">
               Nome do Médicos
             </label>
-            <input
-              type="text"
-              id="doctors"
-              className="form-control"
-              placeholder="Nome do novo médico completo"
-              value={nameDoctor}
-              onChange={(e) => setDoctorName(e.target.value)}
-            />
+            <div className="form-control mb-2">
+              <select 
+              name="doctor" 
+              id="doctor"
+              value={idDoctor}
+              onChange={(e) => setIdDoctors(e.target.value)}
+              >
+              <option value="0">Selecione o médico</option>
+              {doctors.map((doc) => {
+                return (
+                  <option key={doc.id_doctor}  value={doc.id_doctor}>
+                    {doc.name}
+                  </option>
+                );
+              })}
+              </select>
+            </div>
           </div>
 
           <div className="col-12 mt-4">
             <label htmlFor="gender" className="form-label">
               Sexo 
             </label>
-            <select
-              id="gender"
-              className="form-control"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            >
-              <option value="">Selecione...</option>
-              <option value="F">Feminino</option>
-              <option value="M">Masculino</option>
-            </select>
+              <div className="form-control mb-2">
+                <select 
+                name="icon" 
+                id="icon"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+                >
+                <option value="0">Selecione o sexo</option>
+                {gender.map((ge) => {
+                  return (
+                    <option key={ge.gender} value={ge.gender}>
+                      {ge.gender}
+                    </option>
+                  )
+                })}
+                </select>
+              </div>
           </div>
 
           <div className="col-12 mt-4">
@@ -101,15 +95,20 @@ function DoctorAdd() {
               Especialidade
             </label>
             <select
+              name="specialty"
               id="specialty"
               className="form-control"
               value={specialty}
               onChange={(e) => setSpecialty(e.target.value)}
             >
               <option value="">Selecione uma especialidade</option>
-              {specialties.map((spec, index) => (
-                <option key={index} value={spec}>{spec}</option>
-              ))}
+              {specialty.map((spec) =>{
+                return (
+                  <option key={spec.specialty} value={spec.specialty}>
+                    {spec.specialty}
+                  </option>
+                )
+              })}
             </select>
           </div>
 
@@ -179,5 +178,3 @@ function DoctorAdd() {
     </div>
   );
 }
-
-export default DoctorAdd;

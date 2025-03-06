@@ -11,7 +11,7 @@ import jwt from "./token.js";
 import dotenv from 'dotenv';
 import { loginLimiter, trackLoginAttempts, resetLoginAttempts } from "./middlewares/rateLimit.js";
 
-dotenv.config({ path: "./src/.env" });
+dotenv.config ({ path: "./src/.env" });
 const router = Router();
 
 const generalLimiter = rateLimit ({
@@ -64,8 +64,8 @@ router.post("/admin/login", loginLimiter, resetLoginAttempts, trackLoginAttempts
 router.get("/admin/users", jwt.ValidateToken, controllerUserAdmin.Listar);
 
 // rotas do admin para doctors
-router.get("/admin/doctors", jwt.ValidateToken, controllerDoctorAdmin.Listar);
-router.post("/admin/doctors", jwt.ValidateToken, controllerDoctorAdmin.InserirDoctor);
+router.get("/admin/doctors", jwt.ValidateToken, controllerDoctorAdmin.List);
+router.post("/admin/doctors", jwt.ValidateToken, controllerDoctorAdmin.InsertDoctor);
 
 // rotas admin appointment get
 router.get("/admin/appointments", jwt.ValidateToken, controllerAppointmentAdmin.Listar);
