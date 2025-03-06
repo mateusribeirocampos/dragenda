@@ -4,6 +4,7 @@ export const specialties = [
 "Anestesiologia",
 "Angiologia",
 "Cardiologia",
+"Consulta",
 "Cirurgia cardiovascular",
 "Cirurgia da mão",
 "Cirurgia de cabeça e pescoço",

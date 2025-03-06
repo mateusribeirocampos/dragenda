@@ -7,6 +7,7 @@ import Appointments from "./pages/appointments/appointments.jsx";
 import AppointmentAdd from "./pages/appointment-add/appointment-add.jsx";
 import Doctors from "./pages/doctors/doctors.jsx"
 import DoctorAdd from "./pages/doctor-add/doctor-add.jsx";
+import DoctorEdit from "./pages/doctor-edit/doctor-edit.jsx";
 
 
 function Rotas() {
@@ -21,6 +22,7 @@ function Rotas() {
         <Route path="/appointments/delete/:id_appointment" element={<AppointmentAdd />} />
         <Route path="/doctors" element={<Doctors />} />
         <Route path="/doctors/add" element={<DoctorAdd />} />
+        <Route path="/doctors/edit/:id" element={<DoctorEdit />} />
       </Routes>
     </BrowserRouter>
   );

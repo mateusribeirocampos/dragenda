@@ -1,17 +1,17 @@
 import repoDoctorAdmin from "../repositories/repository.doctor.admin.js";
 
-async function Listar(name) {
+async function List(name) {
 
-  const doctors = await repoDoctorAdmin.Listar(name);
+  const doctors = await repoDoctorAdmin.List(name);
 
   return doctors;
 }
 
-async function InserirDoctor(name, specialty, icon, crm, telefone, ativo) {
+async function InsertDoctor(name, specialty, icon, crm, phone, active) {
 
-  const doctor = await repoDoctorAdmin.InserirDoctor(name, specialty, icon, crm, telefone, ativo);
+  const doctor = await repoDoctorAdmin.InsertDoctor(name, specialty, icon, crm, phone, active);
 
   return doctor;
 }
 
-export default { Listar, InserirDoctor };
+export default { List, InsertDoctor };
