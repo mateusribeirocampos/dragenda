@@ -65,6 +65,7 @@ router.get("/admin/users", jwt.ValidateToken, controllerUserAdmin.Listar);
 
 // rotas do admin para doctors
 router.get("/admin/doctors", jwt.ValidateToken, controllerDoctorAdmin.List);
+router.get("/admin/doctors/:id_doctor", jwt.ValidateToken, controllerDoctorAdmin.ListId);
 router.post("/admin/doctors", jwt.ValidateToken, controllerDoctorAdmin.InsertDoctor);
 
 // rotas admin appointment get

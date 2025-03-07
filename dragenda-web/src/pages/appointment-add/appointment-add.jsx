@@ -43,6 +43,7 @@ function AppointmentAdd() {
   const LoadAppointment = useCallback(
     async (id) => {
       console.log("LoadEditAppointment...");
+      console.log("id do appointment: " + id);
       try {
         const response = await api.get("/admin/appointments/" + id);
         console.log("Dados do agendamento:", response.data);
@@ -142,7 +143,7 @@ function AppointmentAdd() {
   useEffect(() => {
     if (idDoctors) {
       LoadServices(idDoctors);
-      console.log(idDoctors);
+      console.log("IdDoctors: " + idDoctors);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idDoctors]);

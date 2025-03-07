@@ -32,4 +32,15 @@ async function InsertDoctor(name, specialty, icon, crm, phone, active) {
   return doctor[0];
 }
 
-export default { List, InsertDoctor };
+async function ListId(id_doctor) {
+  let filtro = [id_doctor];
+
+  let sql = `select * from doctors
+              where id_doctor = ? `;
+
+  const doctors = await query(sql, filtro);
+
+  return doctors[0];
+}
+
+export default { List, InsertDoctor, ListId };
