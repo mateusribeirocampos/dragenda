@@ -11,6 +11,8 @@ export const useDoctors = () => {
     try {
         const response = await api.get("/doctors");
         setDoctors(response.data);
+        console.log(response.data);
+
       } catch (error) {
         if (error.response?.data.error)
           if (error.response.status === 401) {
@@ -21,5 +23,5 @@ export const useDoctors = () => {
   [navigate]
 );
 
-  return { doctors, LoadDoctors };
+  return { doctors,  LoadDoctors };
 };

@@ -20,7 +20,7 @@ function Rotas() {
         <Route path="/appointments/delete/:id_appointment" element={<AppointmentAdd />} />
         <Route path="/doctors" element={<Doctors />} />
         <Route path="/doctors/add" element={<DoctorAdd />} />
-        <Route path="/doctors/edit/:id" element={<DoctorEdit />} />
+        <Route path="/doctors/edit/:id_doctor" element={<DoctorEdit />} />
       </Routes>
     </BrowserRouter>
   );

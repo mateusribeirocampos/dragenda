@@ -17,4 +17,13 @@ async function InsertDoctor(req, res) {
   res.status(201).json(doctor);
 }
 
-export default { List, InsertDoctor };
+async function ListId(req, res) {
+
+  const id_doctor = req.params.id_doctor;
+  const doctor = await serviceDoctorAdmin.ListId(id_doctor);
+
+  res.status(200).json(doctor);
+
+}
+
+export default { List, InsertDoctor, ListId };

@@ -14,4 +14,11 @@ async function InsertDoctor(name, specialty, icon, crm, phone, active) {
   return doctor;
 }
 
-export default { List, InsertDoctor };
+async function ListId(id_doctor) {
+
+  const doctor = await repoDoctorAdmin.ListId(id_doctor);
+
+  return doctor;
+}
+
+export default { List, InsertDoctor, ListId };
