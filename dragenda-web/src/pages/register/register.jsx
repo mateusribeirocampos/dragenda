@@ -71,11 +71,7 @@ function Register() {
             <input
               name="name"
               type="text"
-<<<<<<< HEAD
-              placeholder="name"
-=======
               placeholder="Nome e sobrenome"
->>>>>>> main
               className="form-control"
               autoComplete="username"
               onChange={(e) => setName(e.target.value)}
