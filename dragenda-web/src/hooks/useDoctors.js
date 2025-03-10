@@ -17,7 +17,7 @@ export const useDoctors = () => {
         if (error.response?.data.error)
           if (error.response.status === 401) {
             return navigate("/");
-        } else alert("Erro ao listar serviços.");
+        } else alert("Erro ao listar médicos.");
     }
   },
   [navigate]

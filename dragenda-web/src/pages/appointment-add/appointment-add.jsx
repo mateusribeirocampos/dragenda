@@ -9,6 +9,8 @@ import Navbar from "../../components/navbar/navbar.jsx";
 import { useCallback, useEffect, useState } from "react";
 import api from "../../constants/api.js";
 import { useDoctors } from "../../hooks/useDoctors.js";
+import ErrorMessage from "../../components/error/errorMessage";
+import SucessMessage from "../../components/sucess/sucessMessage";
 
 function AppointmentAdd() {
   const navigate = useNavigate();
@@ -25,6 +27,9 @@ function AppointmentAdd() {
   const [bookingDate, setBookingDate] = useState("");
   const [bookingHour, setBookingHour] = useState("");
 
+  const [msg, setMsg] = useState("");
+  const [sucessMsg, setSucessMsg] = useState();
+
   const LoadUsers = useCallback(
     async function LoadUsers() {
       console.log("LoadUsers...");
@@ -40,7 +45,7 @@ function AppointmentAdd() {
         if (error.response?.data.error)
           if (error.response.status === 401) {
             return navigate("/");
-          } else alert("Erro ao listar os pacientes.");
+          } else setMsg("Erro ao listar os pacientes.");
       }
     },
     [navigate]
@@ -70,7 +75,7 @@ function AppointmentAdd() {
         if (error.response?.data.error)
           if (error.response.status === 401) {
             return navigate("/");
-          } else alert("Erro ao listar serviços.");
+          } else setMsg("Erro ao listar serviços.");
       }
     },
     [navigate]
@@ -88,7 +93,6 @@ function AppointmentAdd() {
     if (
       !idDoctors.trim() ||
       !idService.trim() ||
-      !idUser.trim() ||
       !bookingDate.trim() ||
       !bookingHour.trim()
     ) {
@@ -102,18 +106,23 @@ function AppointmentAdd() {
       " bookingHour: " + bookingHour
     );
     try {
-      const response = id_appointment > 0 ? await api.put("/admin/appointments/" + id_appointment, json)
-      :
-      await api.post("/admin/appointments", json);
+      const response =
+        id_appointment > 0
+          ? await api.put("/admin/appointments/" + id_appointment, json)
+          : await api.post("/admin/appointments", json);
 
       if (response.data) {
-        navigate("/appointments");
+        setSucessMsg("Agendamento atualizado com sucesso!");
+        setTimeout(() => {
+          navigate("/appointments");
+
+        }, 2000);
       }
     } catch (error) {
       if (error.response?.data.error)
         if (error.response.status === 400) {
           return navigate("/");
-        } else alert("Erro ao salvar dados.");
+        } else setMsg("Erro ao salvar dados.");
     }
   }
 
@@ -131,7 +140,7 @@ function AppointmentAdd() {
       if (error.response?.data.error)
         if (error.response.status === 401) {
           return navigate("/");
-        } else alert("Erro ao listar serviços.");
+        } else setMsg("Erro ao listar serviços.");
     }
   }
 
@@ -166,6 +175,9 @@ function AppointmentAdd() {
               {/*// If id_appointment is greater than 0, it will be displayed "Edit Appointment", otherwise "New Appointment" */}
             </h2>
           </div>
+
+          {msg && <ErrorMessage message={msg} />}
+          {sucessMsg && <SucessMessage message={sucessMsg} />}
 
           <div className="col-12 mt-4">
             <label htmlFor="user" className="form-label">
