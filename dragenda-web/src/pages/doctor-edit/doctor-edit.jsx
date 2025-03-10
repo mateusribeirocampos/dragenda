@@ -4,13 +4,16 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import api from "../../constants/api.js";
 import { specialties } from "../../constants/specialties.js";
+import { useDoctors } from "../../hooks/useDoctors.js";
+import ErrorMessage from "../../components/error/errorMessage";
+import SucessMessage from "../../components/sucess/sucessMessage";
 
 export default function DoctorEdit() {
   const navigate = useNavigate();
   const { id_doctor } = useParams();
   
   // Estados para armazenar os dados
-  const [doctors, setDoctors] = useState([]);
+  //const [doctors, setDoctors] = useState([]);
   const [selectedDoctorId, setSelectedDoctorId] = useState("");
   const [doctorName, setDoctorName] = useState("");
   const [gender, setGender] = useState("");
@@ -18,6 +21,10 @@ export default function DoctorEdit() {
   const [crm, setCrm] = useState("");
   const [phone, setPhone] = useState("");
   const [active, setActive] = useState("1");
+  const { doctors, LoadDoctors } = useDoctors([]);
+
+  const [msg, setMsg] = useState("");
+  const [sucessMsg, setSucessMsg] = useState();
 
   // Opções de gênero
   const genderOptions = [
@@ -46,41 +53,17 @@ export default function DoctorEdit() {
       if (error.response?.data.error)
         if (error.response.status === 401) {
           return navigate("/");
-        } else alert("Erro ao carregar detalhes do médico.");
+        } else setMsg("Erro ao carregar detalhes do médico.");
     }
   }, [navigate]);
 
-   // Carregar todos os médicos
-   const LoadDoctors = useCallback(async () => {
-    console.log("LoadDoctors...");
-    try {
-      const response = await api.get("/doctors");
-      if (response.data) {
-        setDoctors(response.data);
-        console.log("Médicos carregados:", response.data);
-        
-        // Se temos um id_doctor na URL, selecionamos esse médico
-        if (id_doctor) {
-          setSelectedDoctorId(id_doctor);
-          await LoadDoctorDetails(id_doctor);
-        }
-      }
-    } catch (error) {
-      if (error.response?.data.error)
-        if (error.response.status === 401) {
-          return navigate("/");
-        } else alert("Erro ao listar médicos.");
-    }
-  }, [navigate, id_doctor, LoadDoctorDetails]);
-
-  // Função para salvar edições
   async function SaveDoctor() {
     if (!selectedDoctorId) {
-      return alert("Por favor, selecione um médico.");
+      return setMsg("Por favor, selecione um médico.");
     }
 
     if (!doctorName.trim() || !gender || !specialty.trim() || !crm.trim() || !phone.trim()) {
-      return alert("Por favor, preencha todos os campos.");
+      return setMsg("Por favor, preencha todos os campos.");
     }
 
     const json = {
@@ -97,16 +80,18 @@ export default function DoctorEdit() {
     try {
       const response = await api.put("/admin/doctors/" + selectedDoctorId, json);
       if (response.data) {
-        alert("Médico atualizado com sucesso!");
-        navigate("/doctors");
+        setSucessMsg("Médico atualizado com sucesso!");
+        setTimeout(() => {
+          navigate("/doctors");
+        }, 2000);
       }
     } catch (error) {
       if (error.response?.data.error) {
         if (error.response.status === 401) {
           return navigate("/");
-        } else alert("Erro ao atualizar médico: " + error.response.data.error);
+        } else setMsg("Erro ao atualizar médico: " + error.response.data.error);
       } else {
-        alert("Erro ao atualizar médico.");
+        setMsg("Erro ao atualizar médico.");
       }
     }
   }
@@ -131,8 +116,15 @@ export default function DoctorEdit() {
 
   // Carregar dados iniciais
   useEffect(() => {
+    const loadData = async () => {
     LoadDoctors();
-  }, [LoadDoctors]);
+    if (id_doctor) {
+      setSelectedDoctorId(id_doctor);
+      await LoadDoctorDetails(id_doctor);
+    }
+  }; 
+  loadData();
+  }, [LoadDoctors, setSelectedDoctorId, LoadDoctorDetails, id_doctor]);
 
   return (
     <div>
@@ -143,6 +135,9 @@ export default function DoctorEdit() {
           <div className="col-12 mt-2">
             <h2>Editar médico</h2>
           </div>
+
+          {msg && <ErrorMessage message={msg} />}
+          {sucessMsg && <SucessMessage message={sucessMsg} />}
 
           <div className="col-12 mt-4">
             <label htmlFor="doctors" className="form-label">
