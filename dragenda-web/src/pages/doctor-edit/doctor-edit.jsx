@@ -11,7 +11,7 @@ import SucessMessage from "../../components/sucess/sucessMessage";
 export default function DoctorEdit() {
   const navigate = useNavigate();
   const { id_doctor } = useParams();
-  
+
   // Estados para armazenar os dados
   //const [doctors, setDoctors] = useState([]);
   const [selectedDoctorId, setSelectedDoctorId] = useState("");
@@ -29,40 +29,49 @@ export default function DoctorEdit() {
   // Opções de gênero
   const genderOptions = [
     { value: "M", label: "Masculino" },
-    { value: "F", label: "Feminino" }
+    { value: "F", label: "Feminino" },
   ];
 
-   // Carregar detalhes de um médico específico
-  const LoadDoctorDetails = useCallback(async (id) => {
-    if (!id) return;
-    
-    console.log("LoadDoctorDetails:", id);
-    try {
-      const response = await api.get("/admin/doctors/" + id);
-      if (response.data) {
-        console.log("Detalhes do médico:", response.data);
-        setDoctorName(response.data.name || "");
-        setGender(response.data.icon || "");
-        setSpecialty(response.data.specialty || "");
-        setCrm(response.data.crm || "");
-        setPhone(response.data.telefone || response.data.phone || "");
-        setActive(response.data.ativo ? "1" : "0");
+  // Carregar detalhes de um médico específico
+  const LoadDoctorDetails = useCallback(
+    async (id) => {
+      if (!id) return;
+
+      console.log("LoadDoctorDetails:", id);
+      try {
+        const response = await api.get("/admin/doctors/" + id);
+        if (response.data) {
+          console.log("Detalhes do médico:", response.data);
+          setDoctorName(response.data.name || "");
+          setGender(response.data.icon || "");
+          setSpecialty(response.data.specialty || "");
+          setCrm(response.data.crm || "");
+          setPhone(response.data.phone || "");
+          setActive(response.data.active ? "1" : "0");
+        }
+      } catch (error) {
+        console.error("Erro ao carregar detalhes:", error);
+        if (error.response?.data.error)
+          if (error.response.status === 401) {
+            return navigate("/");
+          } else setMsg("Erro ao carregar detalhes do médico.");
       }
-    } catch (error) {
-      console.error("Erro ao carregar detalhes:", error);
-      if (error.response?.data.error)
-        if (error.response.status === 401) {
-          return navigate("/");
-        } else setMsg("Erro ao carregar detalhes do médico.");
-    }
-  }, [navigate]);
+    },
+    [navigate]
+  );
 
   async function SaveDoctor() {
     if (!selectedDoctorId) {
       return setMsg("Por favor, selecione um médico.");
     }
 
-    if (!doctorName.trim() || !gender || !specialty.trim() || !crm.trim() || !phone.trim()) {
+    if (
+      !doctorName.trim() ||
+      !gender ||
+      !specialty.trim() ||
+      !crm.trim() ||
+      !phone.trim()
+    ) {
       return setMsg("Por favor, preencha todos os campos.");
     }
 
@@ -70,15 +79,18 @@ export default function DoctorEdit() {
       name: doctorName,
       specialty: specialty,
       crm: crm,
-      telefone: phone,
+      phone: phone,
       icon: gender,
-      ativo: active === "1"
+      active: active === "1",
     };
 
     console.log("Dados a salvar:", json);
 
     try {
-      const response = await api.put("/admin/doctors/" + selectedDoctorId, json);
+      const response = await api.put(
+        "/admin/doctors/" + selectedDoctorId,
+        json
+      );
       if (response.data) {
         setSucessMsg("Médico atualizado com sucesso!");
         setTimeout(() => {
@@ -100,7 +112,7 @@ export default function DoctorEdit() {
   const handleDoctorChange = async (e) => {
     const doctorId = e.target.value;
     setSelectedDoctorId(doctorId);
-    
+
     if (doctorId && doctorId !== "0") {
       await LoadDoctorDetails(doctorId);
     } else {
@@ -117,13 +129,13 @@ export default function DoctorEdit() {
   // Carregar dados iniciais
   useEffect(() => {
     const loadData = async () => {
-    LoadDoctors();
-    if (id_doctor) {
-      setSelectedDoctorId(id_doctor);
-      await LoadDoctorDetails(id_doctor);
-    }
-  }; 
-  loadData();
+      LoadDoctors();
+      if (id_doctor) {
+        setSelectedDoctorId(id_doctor);
+        await LoadDoctorDetails(id_doctor);
+      }
+    };
+    loadData();
   }, [LoadDoctors, setSelectedDoctorId, LoadDoctorDetails, id_doctor]);
 
   return (
@@ -164,7 +176,9 @@ export default function DoctorEdit() {
           {selectedDoctorId && selectedDoctorId !== "0" && (
             <>
               <div className="col-12 mt-4">
-                <label htmlFor="doctorName" className="form-label">Nome do Médico</label>
+                <label htmlFor="doctorName" className="form-label">
+                  Nome do Médico
+                </label>
                 <input
                   type="text"
                   className="form-control"
@@ -175,9 +189,11 @@ export default function DoctorEdit() {
               </div>
 
               <div className="col-12 mt-4">
-                <label htmlFor="gender" className="form-label">Sexo</label>
-                <select 
-                  name="gender" 
+                <label htmlFor="gender" className="form-label">
+                  Sexo
+                </label>
+                <select
+                  name="gender"
                   id="gender"
                   className="form-control"
                   value={gender}
@@ -193,7 +209,9 @@ export default function DoctorEdit() {
               </div>
 
               <div className="col-12 mt-4">
-                <label htmlFor="specialty" className="form-label">Especialidade</label>
+                <label htmlFor="specialty" className="form-label">
+                  Especialidade
+                </label>
                 <select
                   name="specialty"
                   id="specialty"
@@ -211,7 +229,9 @@ export default function DoctorEdit() {
               </div>
 
               <div className="col-12 mt-4">
-                <label htmlFor="crm" className="form-label">CRM</label>
+                <label htmlFor="crm" className="form-label">
+                  CRM
+                </label>
                 <input
                   type="text"
                   className="form-control"
@@ -222,7 +242,9 @@ export default function DoctorEdit() {
               </div>
 
               <div className="col-12 mt-4">
-                <label htmlFor="phone" className="form-label">Telefone</label>
+                <label htmlFor="phone" className="form-label">
+                  Telefone
+                </label>
                 <input
                   type="text"
                   className="form-control"
@@ -233,7 +255,9 @@ export default function DoctorEdit() {
               </div>
 
               <div className="col-12 mt-4">
-                <label htmlFor="active" className="form-label">Ativo</label>
+                <label htmlFor="active" className="form-label">
+                  Ativo
+                </label>
                 <select
                   id="active"
                   className="form-control"

@@ -43,4 +43,21 @@ async function ListId(id_doctor) {
   return doctors[0];
 }
 
-export default { List, InsertDoctor, ListId };
+async function EditDoctor(id_doctor, name, specialty, icon, crm, phone, active) {
+  let sql = `update doctors set name=?, specialty=?, icon=?, crm=?, phone=?, active=?
+where id_doctor = ?`;
+
+  await query(sql, [name, specialty, icon, crm, phone, active, id_doctor]);
+
+  return { id_doctor };
+}
+
+async function DeleteDoctor(id_doctor) {
+  let sql = `delete from doctors where id_doctor = ?`;
+
+  await query(sql, [id_doctor]);
+
+  return { id_doctor };
+}
+
+export default { List, InsertDoctor, ListId, EditDoctor, DeleteDoctor };

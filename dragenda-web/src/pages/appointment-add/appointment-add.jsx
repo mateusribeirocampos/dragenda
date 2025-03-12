@@ -85,8 +85,8 @@ function AppointmentAdd() {
     };
 
     if (
-      !idDoctors.trim() ||
-      !idService.trim() ||
+      !idDoctors ||
+      !idService ||
       !bookingDate.trim() ||
       !bookingHour.trim()
     ) {
