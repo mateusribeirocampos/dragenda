@@ -9,9 +9,9 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  origin: ['https://dragenda.vercel.app', 'http://localhost:3000'],
+  origin: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Accept-Version', 'Content-Length', 'Content-MD5', 'Date', 'X-Api-Version'],
   credentials: true
 }));
 app.use(routes);
