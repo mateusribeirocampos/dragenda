@@ -2,6 +2,7 @@ services:
   - type: web
     name: dragenda-api
     runtime: node
+    rootDir: dragenda-api
     buildCommand: npm install
     startCommand: node src/index.js
     envVars:
@@ -23,6 +24,7 @@ services:
   - type: web
     name: dragenda-web
     runtime: node
+    rootDir: dragenda-web
     buildCommand: npm install && npm run build
     startCommand: npm run preview
     envVars:
