@@ -14,6 +14,11 @@ import { loginLimiter, trackLoginAttempts, resetLoginAttempts } from "./middlewa
 dotenv.config ({ path: "./src/.env" });
 const router = Router();
 
+// Health check endpoint
+router.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 const generalLimiter = rateLimit ({
   windowMs: Number(process.env.RATE_LIMIT_WINDOW),
   max: Number(process.env.GENERAL_RATE_LIMIT_MAX),

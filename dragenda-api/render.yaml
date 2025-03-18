@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: dragenda-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: EXPO_PUBLIC_PORT
+        value: 10000
+      - key: EXPO_PUBLIC_API_KEY
+        value: BioAssay123458@
+      - key: RATE_LIMIT_WINDOW
+        value: 900000
+      - key: GENERAL_RATE_LIMIT_MAX
+        value: 100
+    healthCheckPath: /health
+    autoDeploy: true
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
+
+  - type: web
+    name: dragenda-web
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run preview
+    envVars:
+      - key: VITE_API_URL
+        value: https://dragenda-api.onrender.com
+    healthCheckPath: /
+    autoDeploy: true 
