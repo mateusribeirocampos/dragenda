@@ -8,6 +8,74 @@ Digital healthcare revolutionizes the way we deliver and experience healthcare w
 [![SQLite](https://img.shields.io/badge/SQLite-3.44.2-blue)](https://www.sqlite.org/)
 [![Expo](https://img.shields.io/badge/Expo-52.0.25-lightgrey)](https://expo.dev/)
 
+## Estrutura do Projeto
+
+O projeto está dividido em duas partes:
+
+### Frontend (dragenda-web)
+- Desenvolvido com React + Vite
+- Deploy no Vercel: https://dragenda.vercel.app
+- Configurações específicas no `vercel.json` para CORS e cache
+
+### Backend (dragenda-api)
+- Desenvolvido com Node.js + Express
+- Deploy no Render: https://dragenda-api.onrender.com
+- Configurações específicas no `render.yaml`
+
+## Configuração de Deploy
+
+### Frontend (Vercel)
+1. Conecte seu repositório ao Vercel
+2. Configure a variável de ambiente:
+   - `VITE_API_URL`: https://dragenda-api.onrender.com
+
+### Backend (Render)
+1. Conecte seu repositório ao Render
+2. Configure as variáveis de ambiente:
+   - `EXPO_PUBLIC_PORT`: 10000
+   - `EXPO_PUBLIC_API_KEY`: sua_chave_secreta
+   - `RATE_LIMIT_WINDOW`: 900000
+   - `GENERAL_RATE_LIMIT_MAX`: 100
+
+## Desenvolvimento Local
+
+1. Clone o repositório
+```bash
+git clone https://github.com/mateusribeirocampos/dragenda.git
+cd dragenda
+```
+
+2. Instale as dependências do frontend
+```bash
+cd dragenda-web
+npm install
+```
+
+3. Instale as dependências do backend
+```bash
+cd dragenda-api
+npm install
+```
+
+4. Configure as variáveis de ambiente (veja `.env.example`)
+
+5. Inicie o frontend
+```bash
+cd dragenda-web
+npm run dev
+```
+
+6. Inicie o backend
+```bash
+cd dragenda-api
+npm start
+```
+
+## Branches
+
+- `main`: branch principal com todo o código
+- `deploy/render`: branch específica para deploy no Render
+
 ## Architecture
 
 ```mermaid
