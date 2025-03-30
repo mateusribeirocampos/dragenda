@@ -13,59 +13,49 @@ Digital healthcare revolutionizes the way we deliver and experience healthcare w
 O projeto está dividido em duas partes:
 
 ### Frontend (dragenda-web)
+
 - Desenvolvido com React + Vite
-- Deploy no Vercel: https://dragenda.vercel.app
-- Configurações específicas no `vercel.json` para CORS e cache
+- Deploy no Vercel: [https://dragenda.vercel.app](https://dragenda.vercel.app)
 
 ### Backend (dragenda-api)
+
 - Desenvolvido com Node.js + Express
-- Deploy no Render: https://dragenda-api.onrender.com
-- Configurações específicas no `render.yaml`
-
-## Configuração de Deploy
-
-### Frontend (Vercel)
-1. Conecte seu repositório ao Vercel
-2. Configure a variável de ambiente:
-   - `VITE_API_URL`: https://dragenda-api.onrender.com
-
-### Backend (Render)
-1. Conecte seu repositório ao Render
-2. Configure as variáveis de ambiente:
-   - `EXPO_PUBLIC_PORT`: 10000
-   - `EXPO_PUBLIC_API_KEY`: sua_chave_secreta
-   - `RATE_LIMIT_WINDOW`: 900000
-   - `GENERAL_RATE_LIMIT_MAX`: 100
+- Deploy no Render: [https://dragenda-api.onrender.com](https://dragenda-api.onrender.com)
 
 ## Desenvolvimento Local
 
 1. Clone o repositório
+
 ```bash
 git clone https://github.com/mateusribeirocampos/dragenda.git
 cd dragenda
 ```
 
-2. Instale as dependências do frontend
+1. Instale as dependências do frontend
+
 ```bash
 cd dragenda-web
 npm install
 ```
 
-3. Instale as dependências do backend
+1. Instale as dependências do backend
+
 ```bash
 cd dragenda-api
 npm install
 ```
 
-4. Configure as variáveis de ambiente (veja `.env.example`)
+1. Configure as variáveis de ambiente (veja `.env.example`)
 
-5. Inicie o frontend
+1. Inicie o frontend
+
 ```bash
 cd dragenda-web
 npm run dev
 ```
 
-6. Inicie o backend
+1. Inicie o backend
+
 ```bash
 cd dragenda-api
 npm start
