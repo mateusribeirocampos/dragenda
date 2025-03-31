@@ -1,4 +1,4 @@
-# Dragenda - Doctor agenda - Medical Appointment Management
+# Dragenda - Doctor Agenda - Medical Appointment Management
 
 Digital healthcare revolutionizes the way we deliver and experience healthcare with a paradigm shift to more accessible, personalized and efficient approaches for all. **Dragenda** is an online version of the medical appointment management system, allowing patients to schedule, modify or cancel medical appointments effortlessly. By eliminating the need for in-person visits to schedule appointments, these patient appointment system platforms enable patients to conveniently book and manage their appointments online.
 
@@ -8,53 +8,53 @@ Digital healthcare revolutionizes the way we deliver and experience healthcare w
 [![SQLite](https://img.shields.io/badge/SQLite-3.44.2-blue)](https://www.sqlite.org/)
 [![Expo](https://img.shields.io/badge/Expo-52.0.25-lightgrey)](https://expo.dev/)
 
-## Estrutura do Projeto
+## Project Structure
 
-O projeto está dividido em duas partes:
+The project is divided into two parts:
 
 ### Frontend (dragenda-web)
 
-- Desenvolvido com React + Vite
-- Deploy no Vercel: [https://dragenda.vercel.app](https://dragenda.vercel.app)
+- Developed with React + Vite
+- Deployed on Vercel: [https://dragenda.vercel.app](https://dragenda.vercel.app)
 
 ### Backend (dragenda-api)
 
-- Desenvolvido com Node.js + Express
-- Deploy no Render: [https://dragenda-api.onrender.com](https://dragenda-api.onrender.com)
+- Developed with Node.js + Express
+- Deployed on Render: [https://dragenda-api.onrender.com](https://dragenda-api.onrender.com)
 
-## Desenvolvimento Local
+## Local Development
 
-1. Clone o repositório
+1. Clone the repository
 
 ```bash
 git clone https://github.com/mateusribeirocampos/dragenda.git
 cd dragenda
 ```
 
-1. Instale as dependências do frontend
+2. Install frontend dependencies
 
 ```bash
 cd dragenda-web
 npm install
 ```
 
-1. Instale as dependências do backend
+3. Install backend dependencies
 
 ```bash
 cd dragenda-api
 npm install
 ```
 
-1. Configure as variáveis de ambiente (veja `.env.example`)
+4. Configure environment variables (see `.env.example`)
 
-1. Inicie o frontend
+5. Start the frontend
 
 ```bash
 cd dragenda-web
 npm run dev
 ```
 
-1. Inicie o backend
+6. Start the backend
 
 ```bash
 cd dragenda-api
@@ -63,8 +63,8 @@ npm start
 
 ## Branches
 
-- `main`: branch principal com todo o código
-- `deploy/render`: branch específica para deploy no Render
+- `main`: main branch with all code
+- `deploy/render`: specific branch for deployment on Render
 
 ## Architecture
 
@@ -98,7 +98,6 @@ A modern cross-platform application for managing medical appointments, built wit
 ## Components
 
 ```mermaid
-
 flowchart TD
     A[Frontend Web] -->|Axios| B[API]
     C[Mobile App] -->|HTTP| B
@@ -125,26 +124,25 @@ flowchart TD
 | Database         | SQLite           | express-rate-limit, cors       |
 | Authentication   | JWT              | dotenv                         |
 
-## App flow to user
+## App Flow
 
 ```mermaid
-
 flowchart TD
-  A[Mobile App] --> B{Alredy a 
-  register}
+  A[Mobile App] --> B{Already 
+  registered?}
   B -- Yes --> C[Enter email 
   and password]
   C --> b{Valid user 
-  credentilas ?}
+  credentials?}
   B -- No --> G[Register]
-  b -- Yes --> H[user logged
-  sucessfully]
+  b -- Yes --> H[User logged in
+  successfully]
   H --> D[Doctors list]
   H --> E[Calendar]
   H --> F[Profile]
   b -- No --> I[Login failed]
   I --> l{Forgot
-  password ?}
+  password?}
   l -- Yes --> J[Reset
   password]
   l -- No --> C
@@ -152,9 +150,7 @@ flowchart TD
   F --> Exit
 
 classDef red fill:#963946,stroke:#963946,stroke-width:4px;
-
 classDef blue fill:#395d96,stroke:#395d96,stroke-width:4px;
-
 classDef cyan fill:#326363,stroke:#326363,stroke-width:4px;
 
   class b,l,B red
@@ -197,22 +193,22 @@ cd ../dragenda-mobile && npm install
 
 ### Configuration
 
-API(.env)
+API (.env)
 
 ```env
 JWT_SECRET=your_secure_secret
 PORT=0000
 ```
 
-Web Client(.env)
+Web Client (.env)
 
 ```env
 REACT_APP_API_URL=http://localhost:0000
 ```
 
-Mobile Clinet(app.config.js)
+Mobile Client (app.config.js)
 
-```javascrit
+```javascript
 extra: {
   API_URL: process.env.API_URL || 'http://localhost:3001',
 }
@@ -300,18 +296,21 @@ erDiagram
 
 ```bash
 git checkout -b feature/amazing-feature
-Commit changes:
-````
+```
+
+#### Commit changes:
 
 ```bash
 git commit -m "feat: add amazing feature"
-Push to branch:
-````
+```
+
+#### Push to branch:
 
 ```bash
 git push origin feature/amazing-feature
-Open Pull Request
 ```
+
+Open Pull Request
 
 ## 📄 License
 
