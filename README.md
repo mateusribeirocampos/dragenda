@@ -298,13 +298,21 @@ erDiagram
 git checkout -b feature/amazing-feature
 ```
 
+<<<<<<< HEAD
 #### Commit changes
+=======
+#### Commit changes:
+>>>>>>> main
 
 ```bash
 git commit -m "feat: add amazing feature"
 ```
 
+<<<<<<< HEAD
 #### Push to branch
+=======
+#### Push to branch:
+>>>>>>> main
 
 ```bash
 git push origin feature/amazing-feature
