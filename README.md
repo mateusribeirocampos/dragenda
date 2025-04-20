@@ -31,30 +31,30 @@ git clone https://github.com/mateusribeirocampos/dragenda.git
 cd dragenda
 ```
 
-2. Install frontend dependencies
+2.Install frontend dependencies
 
 ```bash
 cd dragenda-web
 npm install
 ```
 
-3. Install backend dependencies
+3.Install backend dependencies
 
 ```bash
 cd dragenda-api
 npm install
 ```
 
-4. Configure environment variables (see `.env.example`)
+4.Configure environment variables (see `.env.example`)
 
-5. Start the frontend
+5.Start the frontend
 
 ```bash
 cd dragenda-web
 npm run dev
 ```
 
-6. Start the backend
+6.Start the backend
 
 ```bash
 cd dragenda-api
@@ -298,21 +298,13 @@ erDiagram
 git checkout -b feature/amazing-feature
 ```
 
-<<<<<<< HEAD
 #### Commit changes
-=======
-#### Commit changes:
->>>>>>> main
 
 ```bash
 git commit -m "feat: add amazing feature"
 ```
 
-<<<<<<< HEAD
 #### Push to branch
-=======
-#### Push to branch:
->>>>>>> main
 
 ```bash
 git push origin feature/amazing-feature
