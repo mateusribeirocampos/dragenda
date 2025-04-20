@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Doctor from "../../components/doctor/doctor.jsx";
 import api from "../../constants/api.js";
+import { confirmAlert } from "react-confirm-alert";
 
 
 function Doctors() {
@@ -17,6 +18,37 @@ function Doctors() {
 
   function ClickDelete(id_doctor) {
     console.log("/doctors/delete/" + id_doctor);
+    confirmAlert({
+      title: "Exclusão",
+      message: "Confirme exclusão desse médico?",
+      buttons: [
+        {
+          label: "Sim",
+          onClick: () => DeleteDoctor(id_doctor),
+        },
+        {
+          label: "Não",
+          onClick: () => {},
+        },
+      ],
+    });
+  }
+
+  async function DeleteDoctor(id) {
+    console.log("ID para ser excluído: ", id);
+    try {
+      const response = await api.delete("/admin/doctors/" + id);
+      if (response.data) {
+        LoadDoctors();
+      }
+    } catch (error) {
+      if (error.response?.data.error) {
+        if(error.response.status == 401) {
+          return navigate("/");
+        }
+        alert(error.response?.data.error);
+      } else alert("Erro ao excluir médico.");
+    }
   }
 
   async function LoadDoctors() {

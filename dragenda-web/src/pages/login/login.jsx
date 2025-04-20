@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import "./login.css";
 import logo from "../../assets/logo.png";
 import fundo from "../../assets/fundo.png";
@@ -98,4 +96,3 @@ function Login() {
 }
 
 export default Login;
->>>>>>> main

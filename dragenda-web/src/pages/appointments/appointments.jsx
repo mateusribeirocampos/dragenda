@@ -1,14 +1,6 @@
 import "./appointments.css";
-<<<<<<< HEAD
-import { Link } from "react-router-dom";
-=======
 import { Link, useNavigate } from "react-router-dom";
-<<<<<<< HEAD
->>>>>>> main
-import Navbar from "../../components/navbar/navbar";
-=======
 import Navbar from "../../components/navbar/navbar.jsx";
->>>>>>> main
 import Appointment from "../../components/appointment/appoitment.jsx";
 import { useCallback, useEffect, useState } from "react";
 import api from "../../constants/api.js";
@@ -17,14 +9,6 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
 function Appointments() {
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-  function ClickEdit(id_appointment) {
-    console.log("Editar " + id_appointment);
-=======
-=======
->>>>>>> main
   const navigate = useNavigate();
   const [appointments, setAppointments] = useState([]);
   const [startDate, setStartDate] = useState("");
@@ -34,12 +18,7 @@ function Appointments() {
   const { doctors, LoadDoctors } = useDoctors();
 
   function ClickEdit(id_appointment) {
-<<<<<<< HEAD
-    navigate('/appointments/edit/' + id_appointment);
->>>>>>> main
-=======
     navigate("/appointments/edit/" + id_appointment);
->>>>>>> main
   }
 
   function ClickDelete(id_appointment) {

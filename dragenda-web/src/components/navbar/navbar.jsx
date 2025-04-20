@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import "./navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo-white.png";
@@ -78,4 +76,3 @@ function Navbar() {
 }
 
 export default Navbar;
->>>>>>> main

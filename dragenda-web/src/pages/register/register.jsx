@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import "./register.css";
 import logo from "../../assets/logo.png";
 import fundo from "../../assets/fundo.png";
@@ -131,4 +129,3 @@ function Register() {
 }
 
 export default Register;
->>>>>>> main

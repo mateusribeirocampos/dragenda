@@ -14,8 +14,11 @@ import { loginLimiter, trackLoginAttempts, resetLoginAttempts } from "./middlewa
 dotenv.config ({ path: "./src/.env" });
 const router = Router();
 
-<<<<<<< HEAD
-=======
+// Health check endpoint
+router.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 const generalLimiter = rateLimit ({
   windowMs: Number(process.env.RATE_LIMIT_WINDOW),
   max: Number(process.env.GENERAL_RATE_LIMIT_MAX),
@@ -38,7 +41,6 @@ router.use((req, res, next) => {
   }
 });
 
->>>>>>> main
 // Doctors
 router.get("/doctors", jwt.ValidateToken, controllerDoctor.Listar);
 router.post("/doctors", jwt.ValidateToken, controllerDoctor.Inserir);
@@ -69,14 +71,16 @@ router.get("/admin/users", jwt.ValidateToken, controllerUserAdmin.Listar);
 // rotas do admin para doctors
 router.get("/admin/doctors", jwt.ValidateToken, controllerDoctorAdmin.List);
 router.get("/admin/doctors/:id_doctor", jwt.ValidateToken, controllerDoctorAdmin.ListId);
+router.put("/admin/doctors/:id_doctor", jwt.ValidateToken, controllerDoctorAdmin.EditDoctor);
 router.post("/admin/doctors", jwt.ValidateToken, controllerDoctorAdmin.InsertDoctor);
+router.delete("/admin/doctors/:id_doctor", jwt.ValidateToken, controllerDoctorAdmin.DeleteDoctor);
 
 // rotas admin appointment get
 router.get("/admin/appointments", jwt.ValidateToken, controllerAppointmentAdmin.Listar);
 router.get("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointmentAdmin.ListarId);
 
 // rotas admin appointments post / put / delete
-router.post("/admin/appointments/", jwt.ValidateToken, controllerAppointmentAdmin.InserirAdmin);
+router.post("/admin/appointments", jwt.ValidateToken, controllerAppointmentAdmin.InserirAdmin);
 router.put("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointmentAdmin.EditarAdmin);
 router.delete("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointmentAdmin.ExcluirAdmin);
 

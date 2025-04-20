@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-import { Link, useParams } from "react-router-dom";
-=======
 import { Link, useNavigate, useParams } from "react-router-dom";
->>>>>>> main
 import Navbar from "../../components/navbar/navbar.jsx";
 import { useCallback, useEffect, useState } from "react";
 import api from "../../constants/api.js";
@@ -91,8 +85,8 @@ function AppointmentAdd() {
     };
 
     if (
-      !idDoctors.trim() ||
-      !idService.trim() ||
+      !idDoctors ||
+      !idService ||
       !bookingDate.trim() ||
       !bookingHour.trim()
     ) {
@@ -303,4 +297,3 @@ function AppointmentAdd() {
 }
 
 export default AppointmentAdd;
->>>>>>> main

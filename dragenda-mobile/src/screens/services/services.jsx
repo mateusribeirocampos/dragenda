@@ -49,11 +49,7 @@ function Services(props) {
 
       <FlatList
         data={doctorsServices}
-<<<<<<< HEAD
-        keyExtractor={(serv) => serv.id_doctor}
-=======
         keyExtractor={(serv) => String(serv.id_service)}
->>>>>>> main
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
           return <Service 
