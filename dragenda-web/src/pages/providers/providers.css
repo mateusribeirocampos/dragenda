@@ -1,0 +1,41 @@
+.provider-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.provider-icon.male {
+  background-color: #e7f5ff;
+  color: #228be6;
+}
+
+.provider-icon.female {
+  background-color: #fff0f6;
+  color: #f06595;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.btn-group .btn {
+  padding: 0.25rem 0.5rem;
+}
+
+/* Estilo para quando não houver prestadores */
+.no-providers {
+  text-align: center;
+  padding: 3rem;
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+}
+
+.no-providers i {
+  font-size: 3rem;
+  color: #adb5bd;
+  margin-bottom: 1rem;
+}

@@ -1,21 +1,37 @@
-import { query } from "../database/sqlite.js";
+import { query, DB_TYPE } from "../database/sqlite.js";
 
 async function InserirAdmin(name, email, password) {
-  let sql = `insert into admins(name, email, password) values(?, ?, ?)
-  returning id_admin`;
+  // Query compatível com PostgreSQL e SQLite
+  let sql;
+  
+  if (DB_TYPE === 'postgres') {
+    sql = `INSERT INTO admins(name, email, password) VALUES($1, $2, $3) RETURNING id_admin`;
+  } else {
+    sql = `INSERT INTO admins(name, email, password) VALUES(?, ?, ?)`;
+  }
 
-  const admin = await query(sql, [name, email, password]);
-
-  return admin[0];
+  const result = await query(sql, [name, email, password]);
+  
+  if (DB_TYPE === 'postgres') {
+    return result[0];
+  } else {
+    // Para SQLite, buscar o ID do admin recém-inserido
+    const adminId = await query(
+      `SELECT id_admin FROM admins WHERE email = ?`,
+      [email],
+      "get"
+    );
+    return adminId;
+  }
 }
 
 async function ListarByEmailAdmin(email) {
-  let sql = `select * from admins where email = ?`;
+  let sql = `SELECT * FROM admins WHERE email = ?`;
 
-  const admin = await query(sql, [email]);
+  const admin = await query(sql, [email], "get");
 
-  if (admin.length == 0) return [];
-  else return admin[0];
+  if (!admin) return [];
+  return admin;
 }
 
 export default { InserirAdmin, ListarByEmailAdmin };

@@ -1,50 +1,65 @@
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
-dotenv.config({ path: "./src/.env" });
+dotenv.config();
 
-// Carrega as variáveis de ambiente do arquivo .env
-const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
+// Chave secreta do JWT (obtida do arquivo .env ou usa um valor padrão)
+const JWT_SECRET = process.env.JWT_SECRET || 'dragenda2025superSecureTokenKeyForDevelopment';
+const JWT_EXPIRATION = process.env.JWT_EXPIRATION || '24h';
 
-// Verifica se a variável de ambiente EXPO_PUBLIC_API_KEY está definida
-if (!API_KEY) {
-  // Lança um erro se EXPO_PUBLIC_API_KEY    não estiver definido
-  throw new Error("API_KEY não definido. Verifique o arquivo .env");
+/**
+ * Gera um token JWT para autenticação
+ * @param {Object} payload - Dados a serem incluídos no token
+ * @returns {string} Token JWT gerado
+ */
+export function generateToken(payload) {
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
 }
 
-// Função para criar um token JWT
-function CreateToken(id_user) {
-  // Cria um token JWT com o ID do usuário e uma data de expiração
-  const token = jwt.sign({ id_user }, API_KEY, {
-    expiresIn: 9999999, // Tempo de expiração do token
-  });
-  // Retorna o token gerado
-  return token;
+/**
+ * Verifica a validade de um token JWT
+ * @param {string} token - Token JWT a ser verificado
+ * @returns {Object|null} - Payload decodificado ou null se inválido
+ */
+export function verifyToken(token) {
+  try {
+    return jwt.verify(token, JWT_SECRET);
+  } catch (error) {
+    console.error("Erro na verificação do token:", error.message);
+    return null;
+  }
 }
 
-// Função middleware para validar o token JWT
-function ValidateToken(req, res, next) {
-  // Obtém o token de autenticação do cabeçalho da requisição
-  const authToken = req.headers.authorization; // "Bearer xxxxxxxx"
-
-  // Verifica se o token foi informado
-  if (!authToken) return res.status(401).json({ error: "Token não informado" });
-
-  // Divide o cabeçalho em "Bearer" e o token
-  const [bearer, token] = authToken.split(" "); // "Bearer" "xxxxxx"
-
-  // Verifica a validade do token
-  jwt.verify(token, API_KEY, (err, tokenDecoded) => {
-    // Se o token for inválido, retorna um erro 401
-    if (err) return res.status(401).json({ error: "Token inválido!" });
-
-    // Se o token for válido, adiciona o ID do usuário à requisição
-    req.id_user = tokenDecoded.id_user;
-
-    // Chama a próxima função middleware
-    next();
-  });
+/**
+ * Middleware para verificação de autenticação
+ * @param {Object} req - Objeto de requisição
+ * @param {Object} res - Objeto de resposta
+ * @param {Function} next - Função de próximo middleware
+ */
+export function authenticateToken(req, res, next) {
+  // Obter o cabeçalho de autorização
+  const authHeader = req.headers["authorization"];
+  
+  // Verificar se o cabeçalho existe e começa com "Bearer "
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ error: "Token de autenticação não fornecido" });
+  }
+  
+  // Extrair o token do cabeçalho
+  const token = authHeader.split(" ")[1];
+  
+  // Verificar a validade do token
+  const user = verifyToken(token);
+  
+  if (!user) {
+    return res.status(401).json({ error: "Token inválido ou expirado" });
+  }
+  
+  // Se o token for válido, armazena os dados do usuário na requisição
+  req.user = user;
+  
+  // Continua para o próximo middleware
+  next();
 }
 
-// Exporta as funções para uso em outros módulos
-export default { CreateToken, ValidateToken };
+export default { generateToken, verifyToken, authenticateToken };

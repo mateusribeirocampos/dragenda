@@ -1,29 +1,45 @@
-import { query } from "../database/sqlite.js";
+import { query, DB_TYPE } from "../database/sqlite.js";
 
 async function Inserir(name, email, password) {
-  let sql = `insert into users(name, email, password) values(?, ?, ?)
-  returning id_user`;
+  // Query compatível com PostgreSQL e SQLite
+  let sql;
+  
+  if (DB_TYPE === 'postgres') {
+    sql = `INSERT INTO users(name, email, password) VALUES($1, $2, $3) RETURNING id_user`;
+  } else {
+    sql = `INSERT INTO users(name, email, password) VALUES(?, ?, ?)`;
+  }
 
-  const user = await query(sql, [name, email, password]);
-
-  return user[0];
+  const result = await query(sql, [name, email, password]);
+  
+  if (DB_TYPE === 'postgres') {
+    return result[0];
+  } else {
+    // Para SQLite, buscar o ID do usuário recém-inserido
+    const userId = await query(
+      `SELECT id_user FROM users WHERE email = ?`,
+      [email],
+      "get"
+    );
+    return userId;
+  }
 }
 
 async function ListarByEmail(email) {
-  let sql = `select * from users where email = ?`;
+  let sql = `SELECT * FROM users WHERE email = ?`;
 
-  const user = await query(sql, [email]);
+  const user = await query(sql, [email], "get");
 
-  if (user.length == 0) return [];
-  else return user[0];
+  if (!user) return [];
+  return user;
 }
 
 async function Profile(id_user) {
-  let sql = `select id_user, name, email from users where id_user = ?`;
+  let sql = `SELECT id_user, name, email FROM users WHERE id_user = ?`;
 
-  const user = await query(sql, [id_user]);
+  const user = await query(sql, [id_user], "get");
 
-  return user[0];
+  return user;
 }
 
 export default { Inserir, ListarByEmail, Profile };

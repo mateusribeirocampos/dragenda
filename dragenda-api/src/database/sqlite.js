@@ -1,35 +1,18 @@
-// Importa o módulo sqlite3, que permite interagir com bancos de dados SQLite
-import sqlite3 from "sqlite3";
+// Importa o módulo de adaptador de banco de dados
+import { query, initDatabase, DB_TYPE } from './database-adapter.js';
 
-// Ativa o modo verbose do sqlite3, que fornece mais informações de depuração
-const SQLite = sqlite3.verbose();
+// Para compatibilidade com código existente
+let db = {};
 
-// Define uma função chamada query que executa comandos SQL no banco de dados
-function query(command, params, method = 'all') {
-  // Retorna uma Promise que será resolvida ou rejeitada com base no resultado da consulta
-  return new Promise(function (resolve, reject) {
-    // Executa o método especificado (por padrão, 'all') no banco de dados
-    db[method](command, params, function (error, result) {
-      // Se ocorrer um erro, rejeita a Promise com o erro
-      if (error)
-        reject(error);
-      else
-        // Caso contrário, resolve a Promise com o resultado da consulta
-        resolve(result);
-    });
+// Inicializa o banco de dados quando este módulo é carregado
+initDatabase()
+  .then(() => {
+    console.log(`Banco de dados ${DB_TYPE} inicializado com sucesso.`);
+  })
+  .catch((error) => {
+    console.error(`Erro ao inicializar o banco de dados ${DB_TYPE}:`, error);
+    process.exit(1); // Encerra a aplicação em caso de erro crítico
   });
-}
 
-// Cria uma nova instância do banco de dados SQLite, conectando-se ao arquivo banco.db
-const db = new SQLite.Database(
-  "./src/database/banco.db", // Caminho para o arquivo do banco de dados
-  sqlite3.OPEN_READWRITE,    // Abre o banco de dados em modo leitura e escrita
-  (err) => {                 // Callback que é chamado após a tentativa de conexão
-    if (err) 
-      // Se ocorrer um erro, exibe uma mensagem no console
-      return console.log("Erro ao conectar com o banco: " + err.message);
-  }
-);
-
-// Exporta os objetos db e query para que possam ser usados em outros módulos
-export { db, query };
+// Exporta os objetos db, query e DB_TYPE para compatibilidade com código existente e novos repositórios
+export { db, query, DB_TYPE };

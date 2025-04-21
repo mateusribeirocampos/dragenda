@@ -52,6 +52,42 @@ function Navbar() {
             <li className="nav-item">
               <Link className="nav-link active" to="/doctors">Médicos</Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/business-types">Tipos de Negócio</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/providers">Prestadores</Link>
+            </li>
+            <li className="nav-item dropdown">
+              <a 
+                className="nav-link dropdown-toggle" 
+                href="#" 
+                id="configDropdown" 
+                role="button" 
+                data-bs-toggle="dropdown" 
+                aria-expanded="false"
+              >
+                Configurações
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="configDropdown">
+                <li>
+                  <Link className="dropdown-item" to="/business-types">
+                    <i className="bi bi-building me-2"></i>Tipos de Negócio
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/providers">
+                    <i className="bi bi-person-badge me-2"></i>Prestadores de Serviço
+                  </Link>
+                </li>
+                <li><hr className="dropdown-divider" /></li>
+                <li>
+                  <Link className="dropdown-item" to="/doctors">
+                    <i className="bi bi-heart-pulse me-2"></i>Médicos (Legado)
+                  </Link>
+                </li>
+              </ul>
+            </li>
           </ul>
 
           <ul className="navbar-nav">

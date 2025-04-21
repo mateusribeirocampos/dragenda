@@ -1,0 +1,29 @@
+.business-type-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.business-type-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.business-type-icon {
+  font-size: 2.5rem;
+  color: #0d6efd;
+  margin-bottom: 1rem;
+}
+
+.business-type-card .card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.business-type-card .card-footer {
+  background-color: transparent;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.mt-page {
+  margin-top: 5rem; /* Ajusta o espaçamento abaixo da barra de navegação */
+}

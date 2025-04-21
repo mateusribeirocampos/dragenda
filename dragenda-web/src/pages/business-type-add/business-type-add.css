@@ -1,0 +1,52 @@
+.icon-selection {
+  margin-top: 0.5rem;
+}
+
+.icon-option {
+  cursor: pointer;
+  padding: 0.75rem 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  transition: all 0.2s ease;
+}
+
+.icon-option:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+}
+
+.icon-option.selected {
+  background-color: #e7f1ff;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+}
+
+.icon-option i {
+  font-size: 1.75rem;
+  display: block;
+  color: #495057;
+}
+
+.icon-option.selected i {
+  color: #0d6efd;
+}
+
+.icon-option small {
+  font-size: 0.7rem;
+  color: #6c757d;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .icon-option {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .icon-option i {
+    font-size: 1.5rem;
+  }
+  
+  .icon-option small {
+    font-size: 0.65rem;
+  }
+}
