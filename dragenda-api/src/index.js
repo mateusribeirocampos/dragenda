@@ -8,9 +8,16 @@ dotenv.config({ path: "./src/.env" });
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: ['https://dragenda.vercel.app', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 app.use(routes);
 
-app.listen(process.env.EXPO_PUBLIC_PORT, () => {
-  console.log("Server is running...");
+const PORT = process.env.PORT || process.env.EXPO_PUBLIC_PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}...`);
 });
