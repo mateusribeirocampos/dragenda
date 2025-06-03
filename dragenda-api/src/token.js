@@ -16,7 +16,7 @@ if (!API_KEY) {
 function CreateToken(id_user) {
   // Cria um token JWT com o ID do usuário e uma data de expiração
   const token = jwt.sign({ id_user }, API_KEY, {
-    expiresIn: 9999999, // Tempo de expiração do token
+    expiresIn: 24 * 60 * 60, // Tempo de expiração do token
   });
   // Retorna o token gerado
   return token;

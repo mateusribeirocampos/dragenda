@@ -27,7 +27,7 @@ function Register() {
       const response = await api.post("/admin/register", {
         name,
         email,
-        password,
+        //password,
       });
       if (response.data) {
         console.log(response.data);
