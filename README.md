@@ -3,15 +3,15 @@
 Digital healthcare revolutionizes the way we deliver and experience healthcare with a paradigm shift to more accessible, personalized and efficient approaches for all. **Dragenda** is an online version of the medical appointment management system, allowing patients to schedule, modify or cancel medical appointments effortlessly. By eliminating the need for in-person visits to schedule appointments, these patient appointment system platforms enable patients to conveniently book and manage their appointments online.
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/mateusribeirocampos/dragenda)
-[![React](https://img.shields.io/badge/React-18.3.1-blue)](https://react.dev/)
-[![React Native](https://img.shields.io/badge/React%20Native-0.76.6-blue)](https://reactnative.dev/)
+[![React](https://img.shields.io/badge/React-19.0.0-blue)](https://react.dev/)
+[![React Native](https://img.shields.io/badge/React%20Native-0.79.5-blue)](https://reactnative.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-18.17.1-green)](https://nodejs.org/)
-[![SQLite](https://img.shields.io/badge/SQLite-3.44.2-blue)](https://www.sqlite.org/)
-[![Expo](https://img.shields.io/badge/Expo-52.0.25-lightgrey)](https://expo.dev/)
+[![SQLite](https://img.shields.io/badge/SQLite-5.1.7-blue)](https://www.sqlite.org/)
+[![Expo](https://img.shields.io/badge/Expo-53.0.18-lightgrey)](https://expo.dev/)
 
 ## Project Structure
 
-The project is divided into two parts:
+The project is divided into three main components:
 
 ### Frontend (dragenda-web)
 
@@ -22,6 +22,11 @@ The project is divided into two parts:
 
 - Developed with Node.js + Express
 - Deployed on Render: [https://dragenda-api.onrender.com](https://dragenda-api.onrender.com)
+
+### Mobile (dragenda-mobile)
+
+- Developed with React Native + Expo
+- Cross-platform iOS and Android support
 
 ## Local Development
 
@@ -46,20 +51,34 @@ cd dragenda-api
 npm install
 ```
 
-4.Configure environment variables (see `.env.example`)
+4.Install mobile dependencies
 
-5.Start the frontend
+```bash
+cd dragenda-mobile
+npm install
+```
+
+5.Configure environment variables (see `.env.example`)
+
+6.Start the frontend
 
 ```bash
 cd dragenda-web
 npm run dev
 ```
 
-6.Start the backend
+7.Start the backend
 
 ```bash
 cd dragenda-api
 npm start
+```
+
+8.Start the mobile app
+
+```bash
+cd dragenda-mobile
+npx expo start
 ```
 
 ## Branches
@@ -111,19 +130,19 @@ flowchart TD
 
 ### Frontend Applications
 
-| Component        | Technology       | Key Dependencies                      |
-|------------------|------------------|---------------------------------------|
-| Web Client       | React 18         | react-router-dom, axios, vite         |
-| Mobile Client    | React Native 0.76| expo, react-navigation, async-storage |
-| State Management | Context API      | react-native-calendars, moment        |
+| Component        | Technology       | Key Dependencies                                    |
+|------------------|------------------|-----------------------------------------------------|
+| Web Client       | React 19.0.0     | react-router-dom, axios, vite, react-bootstrap     |
+| Mobile Client    | React Native 0.79.5| expo, react-navigation, async-storage, calendars |
+| State Management | Context API      | react-native-calendars, moment                     |
 
 ### Backend Services
 
-| Component        | Technology       | Key Dependencies               |
-|------------------|------------------|--------------------------------|
-| API Server       | Node.js/Express  | bcrypt, jsonwebtoken, sqlite3  |
-| Database         | SQLite           | express-rate-limit, cors       |
-| Authentication   | JWT              | dotenv                         |
+| Component        | Technology       | Key Dependencies                        |
+|------------------|------------------|-----------------------------------------|
+| API Server       | Node.js/Express  | bcrypt, jsonwebtoken, sqlite3, cors    |
+| Database         | SQLite 5.1.7     | express-rate-limit, dotenv             |
+| Authentication   | JWT 9.0.2        | bcrypt 5.1.1                           |
 
 ## App Flow
 
