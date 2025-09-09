@@ -3,11 +3,15 @@ import repoAdmin from "../repositories/repository.admin.js";
 import jwt from "../token.js";
 
 async function InserirAdmin(name, email, password) {
+  if (!password || password.trim() === "") {
+    throw new Error("Password é obrigatório");
+  }
+
   const hashPassword = await bcrypt.hash(password, 10);
   const admin = await repoAdmin.InserirAdmin(name, email, hashPassword);
 
   admin.token = jwt.CreateToken(admin.id_admin);
-  
+
   return admin;
 }
 
