@@ -3,11 +3,11 @@
 Digital healthcare revolutionizes the way we deliver and experience healthcare with a paradigm shift to more accessible, personalized and efficient approaches for all. **Dragenda** is an online version of the medical appointment management system, allowing patients to schedule, modify or cancel medical appointments effortlessly. By eliminating the need for in-person visits to schedule appointments, these patient appointment system platforms enable patients to conveniently book and manage their appointments online.
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/mateusribeirocampos/dragenda)
-[![React](https://img.shields.io/badge/React-19.0.0-blue)](https://react.dev/)
-[![React Native](https://img.shields.io/badge/React%20Native-0.79.5-blue)](https://reactnative.dev/)
+[![React](https://img.shields.io/badge/React-19.1.0-blue)](https://react.dev/)
+[![React Native](https://img.shields.io/badge/React%20Native-0.81.4-blue)](https://reactnative.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-18.17.1-green)](https://nodejs.org/)
 [![SQLite](https://img.shields.io/badge/SQLite-5.1.7-blue)](https://www.sqlite.org/)
-[![Expo](https://img.shields.io/badge/Expo-53.0.18-lightgrey)](https://expo.dev/)
+[![Expo SDK](https://img.shields.io/badge/Expo%20SDK-54.0.0-lightgrey)](https://expo.dev/)
 
 ## Project Structure
 
@@ -132,8 +132,8 @@ flowchart TD
 
 | Component        | Technology       | Key Dependencies                                    |
 |------------------|------------------|-----------------------------------------------------|
-| Web Client       | React 19.0.0     | react-router-dom, axios, vite, react-bootstrap     |
-| Mobile Client    | React Native 0.79.5| expo, react-navigation, async-storage, calendars |
+| Web Client       | React 19.1.0     | react-router-dom, axios, vite, react-bootstrap     |
+| Mobile Client    | React Native 0.81.4 + Expo SDK 54 | expo, react-navigation, async-storage, calendars |
 | State Management | Context API      | react-native-calendars, moment                     |
 
 ### Backend Services
@@ -213,26 +213,42 @@ cd ../dragenda-mobile && npm install
 
 ### Configuration
 
-API (.env)
+#### Ports
+
+- **API Backend**: Port 3001
+- **Web Client**: Port 3000 (Vite)
+- **Mobile Client**: Port 8081 (Expo Metro Bundler)
+
+#### API (.env)
 
 ```env
 JWT_SECRET=your_secure_secret
-PORT=0000
+EXPO_PUBLIC_API_KEY=your_api_key
+EXPO_PUBLIC_PORT=3001
+RATE_LIMIT_WINDOW=60000
+GENERAL_RATE_LIMIT_MAX=100
+LOGIN_RATE_LIMIT_MAX=5
 ```
 
-Web Client (.env)
+#### Web Client (.env)
 
 ```env
-REACT_APP_API_URL=http://localhost:0000
+VITE_API_URL=http://localhost:3001
 ```
 
-Mobile Client (app.config.js)
+#### Mobile Client (src/.env)
 
-```javascript
-extra: {
-  API_URL: process.env.API_URL || 'http://localhost:3001',
-}
+```env
+EXPO_PUBLIC_API_URL=http://192.168.3.7:3001
 ```
+
+#### CORS Configuration
+
+The API is configured to accept requests from:
+
+- `https://dragenda.vercel.app` (Production)
+- `http://localhost:8081` (Mobile - Expo Web)
+- `http://localhost:3000` (Web Client - Vite)
 
 ### Running the Application
 
@@ -336,6 +352,23 @@ Open Pull Request
 
 This project is licensed under GNU AFFERO GENERAL PUBLIC LICENSE -
 see [LICENSE](https://github.com/mateusribeirocampos/dragenda/tree/main?tab=AGPL-3.0-1-ov-file) file for details.
+
+## 📦 Recent Updates
+
+### Version 2.0 (2025)
+
+- ⬆️ **Expo SDK Upgrade**: Updated from SDK 53 to SDK 54
+- ⬆️ **React Native**: Upgraded to version 0.81.4 (from 0.79.5)
+- ⬆️ **React**: Updated to version 19.1.0
+- ⬆️ **React DOM**: Updated to version 19.1.0
+- ⬆️ **Dependencies**: All Expo-related packages updated to latest compatible versions
+- 🔧 **CORS Configuration**: Enhanced to support multiple client origins (Web + Mobile)
+- 🐛 **Bug Fixes**: Resolved dependency conflicts and duplicate packages
+
+### Breaking Changes
+
+- Mobile app now requires Expo Go SDK 54 or higher
+- Updated minimum versions for React Native dependencies
 
 ## 🙏 Acknowledgments
 

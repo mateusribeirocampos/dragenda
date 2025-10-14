@@ -9,14 +9,14 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  origin: ['https://dragenda.vercel.app', 'http://localhost:3000'],
+  origin: ['https://dragenda.vercel.app', 'http://localhost:8081', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
 app.use(routes);
 
-const PORT = process.env.PORT || process.env.EXPO_PUBLIC_PORT || 3000;
+const PORT = process.env.PORT || process.env.EXPO_PUBLIC_PORT || 8081;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}...`);
