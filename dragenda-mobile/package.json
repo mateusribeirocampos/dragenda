@@ -33,9 +33,7 @@
   "overrides": {
     "react-native-safe-area-context": "~5.6.0",
     "picomatch": "4.0.4",
-    "yaml": "2.8.3"
-  },
-  "resolutions": {
+    "yaml": "2.8.3",
     "lodash": "^4.17.21"
   },
   "private": true,
