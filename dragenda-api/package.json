@@ -13,7 +13,8 @@
   "license": "ISC",
   "description": "",
   "overrides": {
-    "tar": ">=7.5.9"
+    "tar": ">=7.5.9",
+    "@tootallnate/once": "^2.0.1"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
