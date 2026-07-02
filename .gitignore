@@ -14,10 +14,23 @@ node_modules/
 .DS_Store
 Thumbs.db
 
-# Local AI/LLM instructions
+# Local AI/LLM instructions and artifacts
 .claude/
+.codex/
+.agents/
+.cursor/
+.windsurf/
+.ai/
+.llm/
+llm/
+llm-notes/
+ai-notes/
+.mcp.json
 AGENT.md
 AGENTS.md
 CLAUDE.md
 GEMINI.md
 SKILL.md
+*.prompt.md
+*.prompts.md
+*.llm.md
