@@ -4,7 +4,7 @@ Digital healthcare revolutionizes the way we deliver and experience healthcare w
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/mateusribeirocampos/dragenda)
 [![React](https://img.shields.io/badge/React-19.1.0-blue)](https://react.dev/)
-[![React Native](https://img.shields.io/badge/React%20Native-0.81.4-blue)](https://reactnative.dev/)
+[![React Native](https://img.shields.io/badge/React%20Native-0.81.5-blue)](https://reactnative.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-18.17.1-green)](https://nodejs.org/)
 [![SQLite](https://img.shields.io/badge/SQLite-5.1.7-blue)](https://www.sqlite.org/)
 [![Expo SDK](https://img.shields.io/badge/Expo%20SDK-54.0.0-lightgrey)](https://expo.dev/)
@@ -133,7 +133,7 @@ flowchart TD
 | Component        | Technology       | Key Dependencies                                    |
 |------------------|------------------|-----------------------------------------------------|
 | Web Client       | React 19.1.0     | react-router-dom, axios, vite, react-bootstrap     |
-| Mobile Client    | React Native 0.81.4 + Expo SDK 54 | expo, react-navigation, async-storage, calendars |
+| Mobile Client    | React Native 0.81.5 + Expo SDK 54 | expo, react-navigation, async-storage, calendars |
 | State Management | Context API      | react-native-calendars, moment                     |
 
 ### Backend Services
