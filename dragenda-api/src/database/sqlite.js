@@ -22,7 +22,7 @@ function query(command, params, method = 'all') {
 
 // Cria uma nova instância do banco de dados SQLite, conectando-se ao arquivo banco.db
 const db = new SQLite.Database(
-  "./src/database/banco.db", // Caminho para o arquivo do banco de dados
+  process.env.DB_PATH || "./src/database/banco.db",
   sqlite3.OPEN_READWRITE,    // Abre o banco de dados em modo leitura e escrita
   (err) => {                 // Callback que é chamado após a tentativa de conexão
     if (err) 

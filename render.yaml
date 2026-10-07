@@ -8,7 +8,7 @@ services:
     envVars:
       - key: EXPO_PUBLIC_PORT
         value: 10000
-      - key: EXPO_PUBLIC_API_KEY
+      - key: JWT_SECRET
         sync: false
       - key: RATE_LIMIT_WINDOW
         value: 900000
@@ -31,4 +31,4 @@ services:
       - key: VITE_API_URL
         value: https://dragenda-api.onrender.com
     healthCheckPath: /
-    autoDeploy: true 
+    autoDeploy: true

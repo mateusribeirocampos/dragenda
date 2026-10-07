@@ -5,8 +5,8 @@ dotenv.config({ path: "./src/.env" });
 
 const loginAttempts = new Map(); // Mapa para armazenar tentativas de login
 
-const RATE_LIMIT_WINDOW = Number(process.env.RATE_LIMIT_WINDOW);
-const LOGIN_RATE_LIMIT_MAX = Number(process.env.LOGIN_RATE_LIMIT_MAX);
+const RATE_LIMIT_WINDOW = Number(process.env.RATE_LIMIT_WINDOW) || 15 * 60 * 1000;
+const LOGIN_RATE_LIMIT_MAX = Number(process.env.LOGIN_RATE_LIMIT_MAX) || 5;
 
 const loginLimiter = rateLimit({
   windowMs: RATE_LIMIT_WINDOW,
