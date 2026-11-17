@@ -10,7 +10,7 @@ async function InserirAdmin(name, email, password) {
   const hashPassword = await bcrypt.hash(password, 10);
   const admin = await repoAdmin.InserirAdmin(name, email, hashPassword);
 
-  admin.token = jwt.CreateToken(admin.id_admin);
+  admin.token = jwt.CreateToken(admin.id_admin, 'admin');
 
   return admin;
 }
@@ -24,7 +24,7 @@ async function LoginAdmin(email, password) {
     if (await bcrypt.compare(password, admin.password)) {
       delete admin.password;
 
-      admin.token = jwt.CreateToken(admin.id_admin);
+      admin.token = jwt.CreateToken(admin.id_admin, 'admin');
 
       return admin;
     } else {

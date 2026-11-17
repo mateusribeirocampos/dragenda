@@ -9,7 +9,7 @@ import controllerDoctorAdmin from "./controllers/controller.doctor.admin.js";
 import controllerUserAdmin from "./controllers/controller.user.admin.js";
 import jwt from "./token.js";
 import dotenv from 'dotenv';
-import { loginLimiter, trackLoginAttempts, resetLoginAttempts } from "./middlewares/rateLimit.js";
+import { loginLimiter, trackLoginAttempts } from "./middlewares/rateLimit.js";
 
 dotenv.config ({ path: "./src/.env" });
 const router = Router();
@@ -20,8 +20,8 @@ router.get("/health", (req, res) => {
 });
 
 const generalLimiter = rateLimit ({
-  windowMs: Number(process.env.RATE_LIMIT_WINDOW),
-  max: Number(process.env.GENERAL_RATE_LIMIT_MAX),
+  windowMs: Number(process.env.RATE_LIMIT_WINDOW) || 15 * 60 * 1000,
+  max: Number(process.env.GENERAL_RATE_LIMIT_MAX) || 100,
   message: {error: "Muitas requisições. Tente novamente mais tarde."},
 
 });
@@ -43,9 +43,9 @@ router.use((req, res, next) => {
 
 // Doctors
 router.get("/doctors", jwt.ValidateToken, controllerDoctor.Listar);
-router.post("/doctors", jwt.ValidateToken, controllerDoctor.Inserir);
-router.put("/doctors/:id_doctors", jwt.ValidateToken, controllerDoctor.Editar);
-router.delete("/doctors/:id_doctors", jwt.ValidateToken, controllerDoctor.Excluir);
+router.post("/doctors", jwt.ValidateToken, jwt.RequireAdmin, controllerDoctor.Inserir);
+router.put("/doctors/:id_doctors", jwt.ValidateToken, jwt.RequireAdmin, controllerDoctor.Editar);
+router.delete("/doctors/:id_doctors", jwt.ValidateToken, jwt.RequireAdmin, controllerDoctor.Excluir);
 
 // Services (serviços prestados)...
 router.get("/doctors/:id_doctors/services", jwt.ValidateToken, controllerDoctor.ListarServicos);
@@ -53,35 +53,35 @@ router.get("/doctors/:id_doctors/services", jwt.ValidateToken, controllerDoctor.
 // users
 // register, login e profile
 router.post("/users/register", controllerUser.Inserir);
-router.post("/users/login", loginLimiter, resetLoginAttempts, trackLoginAttempts, controllerUser.Login);
-router.get("/users/profile", jwt.ValidateToken, controllerUser.Profile);
+router.post("/users/login", loginLimiter, trackLoginAttempts, controllerUser.Login);
+router.get("/users/profile", jwt.ValidateToken, jwt.RequireUser, controllerUser.Profile);
 
 // Reservas (appointments)...
-router.get("/appointments", jwt.ValidateToken, controllerAppointment.ListarByUser);
-router.post("/appointments", jwt.ValidateToken, controllerAppointment.Inserir);
-router.delete("/appointments/:id_appointment", jwt.ValidateToken, controllerAppointment.Excluir);
+router.get("/appointments", jwt.ValidateToken, jwt.RequireUser, controllerAppointment.ListarByUser);
+router.post("/appointments", jwt.ValidateToken, jwt.RequireUser, controllerAppointment.Inserir);
+router.delete("/appointments/:id_appointment", jwt.ValidateToken, jwt.RequireUser, controllerAppointment.Excluir);
 
 // Rotas do Admin
-router.post("/admin/register", controllerAdmin.InserirAdmin);
-router.post("/admin/login", loginLimiter, resetLoginAttempts, trackLoginAttempts, controllerAdmin.LoginAdmin);
+router.post("/admin/register", jwt.ValidateToken, jwt.RequireAdmin, controllerAdmin.InserirAdmin);
+router.post("/admin/login", loginLimiter, trackLoginAttempts, controllerAdmin.LoginAdmin);
 
 // rotas do admin para users
-router.get("/admin/users", jwt.ValidateToken, controllerUserAdmin.Listar);
+router.get("/admin/users", jwt.ValidateToken, jwt.RequireAdmin, controllerUserAdmin.Listar);
 
 // rotas do admin para doctors
-router.get("/admin/doctors", jwt.ValidateToken, controllerDoctorAdmin.List);
-router.get("/admin/doctors/:id_doctor", jwt.ValidateToken, controllerDoctorAdmin.ListId);
-router.put("/admin/doctors/:id_doctor", jwt.ValidateToken, controllerDoctorAdmin.EditDoctor);
-router.post("/admin/doctors", jwt.ValidateToken, controllerDoctorAdmin.InsertDoctor);
-router.delete("/admin/doctors/:id_doctor", jwt.ValidateToken, controllerDoctorAdmin.DeleteDoctor);
+router.get("/admin/doctors", jwt.ValidateToken, jwt.RequireAdmin, controllerDoctorAdmin.List);
+router.get("/admin/doctors/:id_doctor", jwt.ValidateToken, jwt.RequireAdmin, controllerDoctorAdmin.ListId);
+router.put("/admin/doctors/:id_doctor", jwt.ValidateToken, jwt.RequireAdmin, controllerDoctorAdmin.EditDoctor);
+router.post("/admin/doctors", jwt.ValidateToken, jwt.RequireAdmin, controllerDoctorAdmin.InsertDoctor);
+router.delete("/admin/doctors/:id_doctor", jwt.ValidateToken, jwt.RequireAdmin, controllerDoctorAdmin.DeleteDoctor);
 
 // rotas admin appointment get
-router.get("/admin/appointments", jwt.ValidateToken, controllerAppointmentAdmin.Listar);
-router.get("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointmentAdmin.ListarId);
+router.get("/admin/appointments", jwt.ValidateToken, jwt.RequireAdmin, controllerAppointmentAdmin.Listar);
+router.get("/admin/appointments/:id_appointment", jwt.ValidateToken, jwt.RequireAdmin, controllerAppointmentAdmin.ListarId);
 
 // rotas admin appointments post / put / delete
-router.post("/admin/appointments", jwt.ValidateToken, controllerAppointmentAdmin.InserirAdmin);
-router.put("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointmentAdmin.EditarAdmin);
-router.delete("/admin/appointments/:id_appointment", jwt.ValidateToken, controllerAppointmentAdmin.ExcluirAdmin);
+router.post("/admin/appointments", jwt.ValidateToken, jwt.RequireAdmin, controllerAppointmentAdmin.InserirAdmin);
+router.put("/admin/appointments/:id_appointment", jwt.ValidateToken, jwt.RequireAdmin, controllerAppointmentAdmin.EditarAdmin);
+router.delete("/admin/appointments/:id_appointment", jwt.ValidateToken, jwt.RequireAdmin, controllerAppointmentAdmin.ExcluirAdmin);
 
 export default router;
